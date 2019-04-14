@@ -1,14 +1,9 @@
 import React, { Component } from 'react'; 
-import Signinup from './routes/signin-up/Signin-up.js';
+import 'antd/dist/antd.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {routes} from './routes'
 
-const routes = [
-    {
-        path: '/',
-        exact: 'true',
-        main: () => <Signinup />
-    }    
-]
+
 class ManageCompo extends Component {
     render() {
         return (
