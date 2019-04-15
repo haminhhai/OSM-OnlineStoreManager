@@ -13,7 +13,8 @@ class Signinup extends React.Component {
         this.state = {
             email: '',
             password: '',
-            redir: false
+            redir: false,
+            loading: false,
         }
     }
     
@@ -52,31 +53,45 @@ class Signinup extends React.Component {
             this.setState({ password: '' })
         }
         else {
-            notify = notification.open({
-                message: types.MESSAGE_SUCCESS,
-                description: types.BD_MESSAGE_SUCCESS,
-                icon: types.ICON_SUCCESS,
-                placement: "topLeft"
-            })
-            this.setState({redir: true})
+           
+            this.setState({ loading: true})
+            setTimeout(() => {
+                notify = notification.open({
+                    message: types.MESSAGE_SUCCESS,
+                    description: types.BD_MESSAGE_SUCCESS,
+                    icon: types.ICON_SUCCESS,
+                    placement: "topLeft"
+                })
+                this.setState({redir: true})
+            }, 2000);
         }
         console.log(notify)
         return notify
     }
     render() {
         if(this.state.redir)
-            return <Redirect to='/dashboard' />
+            return <Redirect to='/123/dashboard' />
         return (
             <div className="form sign-in">
                 <h2>Đăng nhập OSM,</h2>
                 <label>
-                    <Input className='input-in' type="email" value={this.state.email} onChange={this.changeMail} placeholder='Email' />
+                    <Input className='input-in' 
+                    type="email" 
+                    value={this.state.email} 
+                    onChange={this.changeMail} 
+                    placeholder='Email' 
+                    onPressEnter={this.onSubmit}/>
                 </label>
                 <label>
-                    <Input className='input-in' type="password" value={this.state.password} onChange={this.changePW} placeholder='Mật khẩu' />
+                    <Input className='input-in' 
+                    type="password" 
+                    value={this.state.password} 
+                    onChange={this.changePW} 
+                    placeholder='Mật khẩu' 
+                    onPressEnter={this.onSubmit}/>
                 </label>
                 <Link to='/send-mail' className="forgot-pass">Quên mật khẩu?</Link>
-                <Button className="submit" onClick={this.onSubmit}>Đăng nhập</Button>
+                <Button className="submit" onClick={this.onSubmit} loading={this.state.loading}>Đăng nhập</Button>
                 
             </div>
 

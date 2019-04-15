@@ -1,6 +1,6 @@
 import React from 'react'
 import { Tag, Dropdown, Avatar } from 'antd';
-import { GlobalHeader, TopNavHeader, NoticeIcon } from 'ant-design-pro'
+import {  NoticeIcon } from 'ant-design-pro'
 import '../styles/layout.css'
 import { noti, menu } from './constans/index.js'
 

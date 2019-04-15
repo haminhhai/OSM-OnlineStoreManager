@@ -62,16 +62,45 @@ export const menu = (
     <Menu>
         <Menu.Item key="0">
             <Icon type='profile' />
-            Thông tin
+            Information
       </Menu.Item>
         <Menu.Item key="1">
             <Icon type='setting' />
-            Cài đặt
+            Setting
       </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="3" >
             <Icon type='logout' />
-            Đăng xuất
+            Logout
     </Menu.Item>
     </Menu>
 );
+
+//menu options
+export const options = [
+    {
+        title: 'Dashboard',
+        key: '1',
+        path: 'dashboard'
+    },
+    {
+        title: 'Payment',
+        key: '2',
+        path: 'payment'
+    },
+    {
+        title: 'Checkout',
+        key: '3',
+        path: 'checkout'
+    },
+    {
+        title: 'Information',
+        key: '4',
+        path: 'information'
+    },
+    {
+        title: 'Setting',
+        key: '5',
+        path: 'setting'
+    },
+]

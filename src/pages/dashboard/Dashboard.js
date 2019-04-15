@@ -2,7 +2,6 @@ import React, { Component, Suspense } from 'react'
 import { Row, Col, Icon, Menu, Dropdown } from 'antd'
 import moment from 'moment'
 import '../../styles/dashboard.css'
-import styles from './analysis.less';
 import { getTimeDistance } from '../../utils/utils'
 import PageLoading from '../../components/PageLoading'
 import TradingHistory from './TradingHistory'
@@ -32,6 +31,7 @@ for (let i = 0; i < 10; i++) {
         keyword: `Pepsi`,
         count: Math.floor(Math.random() * 199) + 1,
         range: Math.floor(Math.random() * 100) + 1,
+        status: Math.floor(Math.random() * 2) + 1
     });
 }
 class Dashboard extends Component {
@@ -68,7 +68,7 @@ class Dashboard extends Component {
             rangePickerValue[0].isSame(value[0], 'day') &&
             rangePickerValue[1].isSame(value[1], 'day')
         ) {
-            return styles.currentDate;
+            return 'currentDate';
         }
         return '';
     };
@@ -81,7 +81,7 @@ class Dashboard extends Component {
             </Menu>
         );
         const dropdownGroup = (
-            <span className={styles.iconGroup}>
+            <span className='{iconGroup'>
                 <Dropdown overlay={menu} placement="bottomRight">
                     <Icon type="ellipsis" />
                 </Dropdown>
@@ -113,7 +113,9 @@ class Dashboard extends Component {
                             dropdownGroup={dropdownGroup}
                         />
                     </Suspense>
-                    
+                    <Suspense fallback={null} >
+                        <TradingHistory loading = {this.state.loading}/>
+                    </Suspense>
                 </div>
             </div>
         );

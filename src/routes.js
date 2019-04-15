@@ -34,9 +34,9 @@ export const routes = [
         main:() => <NewPW />
     },
     {
-        path: '/dashboard',
+        path: '/:id',
         exact: false,
-        main:() => <ManageLayout />
+        main:(match) => <ManageLayout match={match}/>
     },
     {
         path: '',

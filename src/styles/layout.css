@@ -113,6 +113,12 @@
     background-color: #1890ff;
     margin-left: 24px;
 }
+.imgfoot{
+    width: 24px;
+    heght: 24px;
+    background-color:#1890ff;
+    border-radius: 22px;
+}
 .name-user{
     color: rgba(0,0,0,.65);
 font-size: 14px;

@@ -42,13 +42,13 @@ function handleToString(value) {
     num = Number(value).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
     return num
   }
+const title = () => <div style={{color: 'rgba(0,0,0,0.85)', fontSize: '14px', fontWeight: '600', textAlign: 'center'}}>Product Trending in April</div>;
 const ChartMonth = memo(({ loading, monthData, rankData, dropdownGroup }) => (
-  <Card
+  <Card style={{margin: 15}}
     loading={loading}
     bordered={false}
     title='Total Monthly'
     extra={dropdownGroup}
-    style={{ marginTop: 24 }}
   >
     <Row gutter={68}>
       <Col sm={12} xs={24} style={{ marginBottom: 24 }}>
@@ -57,9 +57,9 @@ const ChartMonth = memo(({ loading, monthData, rankData, dropdownGroup }) => (
             <span>
               Money Changes
               <Tooltip
-                title='quantity'
+                title='money'
               >
-                <Icon type="fund" theme="filled" style={{ marginLeft: 8 }}/>
+                <Icon type="fund" theme="filled" style={{ marginLeft: 8, color: '#6b8e4e' }}/>
               </Tooltip>
             </span>
           }
@@ -78,7 +78,7 @@ const ChartMonth = memo(({ loading, monthData, rankData, dropdownGroup }) => (
               <Tooltip
                 title='percent'
               >
-                <Icon type="fund" theme="filled" style={{ marginLeft: 8 }}/>
+                <Icon type="fund" theme="filled" style={{ marginLeft: 8, color: '#ec6091'  }}/>
               </Tooltip>
             </span>
           }
@@ -90,7 +90,7 @@ const ChartMonth = memo(({ loading, monthData, rankData, dropdownGroup }) => (
         <MiniArea line height={45} data={monthData} />
       </Col>
     </Row>
-    <Table 
+    <Table title = {title}
       rowKey={record => record.index}
       columns={columns}
       dataSource={rankData}

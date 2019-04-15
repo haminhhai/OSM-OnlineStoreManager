@@ -141,9 +141,9 @@ const IntroduceRow = memo(({ loading }) => (
       >
         <span>Reach to target:</span>
         <MiniProgress
-          percent={78}
+          percent={60}
           strokeWidth={8}
-          target={80}
+          target={60}
           color="#86E3CE"
         />
         

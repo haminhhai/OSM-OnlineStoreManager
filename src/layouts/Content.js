@@ -1,14 +1,24 @@
 import React from 'react'
-import { Layout, Menu, Icon, } from 'antd'
 import '../styles/layout.css'
-import Dashboard from '../pages/dashboard/Dashboard'
+import routes from './constans/routepage'
+import {Route} from 'react-router-dom'
 
 class Content extends React.Component {
-    
     render() {
+        var component = ''
+        var exact = ''
+        const {match} = this.props
+        const name = match.params.name
+        //console.log(match)
+        for(var i=0;i<routes.length;i++)
+            if(name === routes[i].name)
+                {
+                    component = routes[i].component
+                    exact = routes[i].exact
+                }
         return (
             <div>
-                <Dashboard />
+                <Route path={'/:id/:name'} exact={exact} component={component}/>
             </div>
         );
     }
