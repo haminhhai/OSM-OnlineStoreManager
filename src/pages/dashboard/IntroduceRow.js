@@ -39,11 +39,11 @@ const IntroduceRow = memo(({ loading }) => (
         }
         contentHeight={46}
       >
-        <Trend flag="up" style={{ marginRight: 16 }}>
+        <Trend flag="up" style={{ marginRight: 16 }} reverseColor={true}>
           Weekly Changes
           <span className='trendText'> 12%</span>
         </Trend>
-        <Trend flag="down">
+        <Trend flag="down" reverseColor={true}>
           DailyChanges
           <span className='trendText'> 11%</span>
         </Trend>
@@ -71,11 +71,11 @@ const IntroduceRow = memo(({ loading }) => (
         }
         contentHeight={46}
       >
-        <Trend flag="up" style={{ marginRight: 16 }}>
+        <Trend flag="up" style={{ marginRight: 16 }} reverseColor={true}>
           Monthly Changes
           <span className='trendText'> 2%</span>
         </Trend>
-        <Trend flag="down">
+        <Trend flag="down" reverseColor={true}>
           Weekly Changes
           <span className='trendText'> 69%</span>
         </Trend>
@@ -97,7 +97,7 @@ const IntroduceRow = memo(({ loading }) => (
         total="80%"
         footer={
           <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
-            <Trend flag="up" style={{ marginRight: 16 }}>
+            <Trend flag="up" style={{ marginRight: 16 }} reverseColor={true}>
               Compare to yesterday
               <span className='trendText'> 12%</span>
             </Trend>
@@ -131,7 +131,7 @@ const IntroduceRow = memo(({ loading }) => (
         
         footer={
           <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
-            <Trend flag="down">
+            <Trend flag="down" reverseColor={true}>
               Compare to previous month
               <span className='trendText'> 30%</span>
             </Trend>

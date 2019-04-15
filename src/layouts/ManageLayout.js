@@ -37,6 +37,7 @@ class ManageLayout extends React.Component {
     render() {
         const { match } = this.props.match
         const url = match.url
+        
         return (
             <div className='layout-ant'>
                 <Layout>
@@ -71,16 +72,16 @@ class ManageLayout extends React.Component {
                             <SubMenu key='0' 
                                 title={<span>
                                     <Icon type="user" />
-                                    <span>Tài khoản</span>
+                                    <span>Account</span>
                                 </span>}>
                                 <Menu.Item key="4" onClick={this.changeOption}>
-                                    <Link to={`${url}/information`}>
+                                    <Link to={`${url}/account_center`}>
                                         <Icon type='profile' />
                                         <span>{options[3].title}</span>
                                     </Link>
                                 </Menu.Item>
                                 <Menu.Item key="5" onClick={this.changeOption}>
-                                    <Link to={`${url}/setting`}>
+                                    <Link to={`${url}/account_setting`}>
                                         <Icon type='setting' />
                                         <span>{options[4].title}</span>
                                     </Link>

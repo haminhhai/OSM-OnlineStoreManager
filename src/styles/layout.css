@@ -25,7 +25,7 @@
     z-index: 0;
     box-shadow: 2px 0 6px rgba(0,21,41,.35);
     text-rendering: optimizeLegibility;
-    min-height: 300vh;
+    min-height: 100vh;
 }
 
     @media (min-height:0px) {

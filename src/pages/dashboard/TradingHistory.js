@@ -149,6 +149,7 @@ class TradingHistory extends Component {
       align: 'center',
       title: 'Cashier',
       dataIndex: 'cashier',
+      ...this.getColumnSearchProps('cashier'),
     },
     ]
     return (

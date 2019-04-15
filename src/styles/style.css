@@ -12,7 +12,7 @@
   height: 100%;
   overflow: hidden;
   font-family: 'Roboto', sans-serif;
-  
+  z-index: 0;
   }
 .wrapper > img{
   
@@ -37,6 +37,7 @@ input, button {
   background: #ededed;
   box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
   z-index: 1;
+ background: url(../assets/images/bg3.jpg);
  
   
 }
@@ -64,6 +65,7 @@ input, button {
   transition: transform 1.2s ease-in-out;
   transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
   box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
+  background: url(../assets/images/bg3.jpg);
 }
 .cont.s--signup .sub-cont {
   -webkit-transform: translate3d(-640px, 0, 0);
@@ -397,7 +399,8 @@ input {
 	display: block;
 	text-align: center;
 	transition-duration: 0.25s;
-	font-weight: 300;
+  font-weight: 300;
+  z-index: 2;
 }
 .input-in:hover {
 	background-color: rgba(255, 255, 255, 0.4);

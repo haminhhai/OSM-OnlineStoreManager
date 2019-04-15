@@ -2,7 +2,7 @@ import React from 'react'
 import Dashboard from '../../pages/dashboard/Dashboard'
 import Payment from '../../pages/payments/Payment'
 import Checkout from '../../pages/checkouts/Checkout'
-import Information from '../../pages/account/Information'
+import Center from '../../pages/account/Center/Center'
 import Setting from '../../pages/account/Setting'
 
 
@@ -23,12 +23,12 @@ const routes = [
         exact: false,
     },
     {
-        name: 'information',
-        component:() => <Information />,
+        name: 'account_center',
+        component:() => <Center />,
         exact: false,
     },
     {
-        name: 'setting',
+        name: 'account_setting',
         component:() => <Setting />,
         exact: false,
     },

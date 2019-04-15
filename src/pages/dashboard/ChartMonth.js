@@ -30,7 +30,7 @@ const columns = [
     key: 'range',
     sorter: (a, b) => a.range - b.range,
     render: (text, record) => (
-      <Trend flag={record.status === 1 ? 'down' : 'up'}>
+      <Trend flag={record.status === 1 ? 'down' : 'up'} reverseColor={true}>
         <span style={{ marginRight: 4 }}>{text}%</span>
       </Trend>
     ),

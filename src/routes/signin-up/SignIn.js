@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../styles/style.css'
-import { Button, Input, notification } from 'antd'
+import { Button, Input, notification, message } from 'antd'
 import { Link, Redirect } from 'react-router-dom'
 import * as types from '../constans/index.js'
 import { account } from '../constans/index'
@@ -56,12 +56,7 @@ class Signinup extends React.Component {
            
             this.setState({ loading: true})
             setTimeout(() => {
-                notify = notification.open({
-                    message: types.MESSAGE_SUCCESS,
-                    description: types.BD_MESSAGE_SUCCESS,
-                    icon: types.ICON_SUCCESS,
-                    placement: "topLeft"
-                })
+                notify= message.success(types.BD_MESSAGE_SUCCESS)
                 this.setState({redir: true})
             }, 2000);
         }

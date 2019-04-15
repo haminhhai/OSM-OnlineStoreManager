@@ -1,5 +1,6 @@
 import React from 'react'
 import { Menu, Icon } from 'antd'
+import { Link } from 'react-router-dom'
 import mail from '../../assets/icons/mail.png'
 import wing from '../../assets/icons/wing.png'
 import plus from '../../assets/icons/plus.png'
@@ -58,21 +59,30 @@ export const noti = [
 ]
 
 //menu for account
+var pos = window.location.pathname.slice(1).indexOf('/')
+var path = window.location.pathname.slice(0,pos + 1)
+
 export const menu = (
     <Menu>
         <Menu.Item key="0">
-            <Icon type='profile' />
-            Information
-      </Menu.Item>
+            <Link to={`${path}/account_center`}>
+                <Icon type='profile' />
+                {` Center`}
+            </Link>
+        </Menu.Item>
         <Menu.Item key="1">
-            <Icon type='setting' />
-            Setting
-      </Menu.Item>
+            <Link to={`${path}/account_setting`}>
+                <Icon type='setting' />
+                {` Setting`}
+            </Link>
+        </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="3" >
-            <Icon type='logout' />
-            Logout
-    </Menu.Item>
+            <Link to='/signin'>
+                <Icon type='logout' />
+                {` Logout`}
+            </Link>
+        </Menu.Item>
     </Menu>
 );
 
@@ -94,13 +104,13 @@ export const options = [
         path: 'checkout'
     },
     {
-        title: 'Information',
+        title: 'Account Center',
         key: '4',
-        path: 'information'
+        path: 'account_center'
     },
     {
-        title: 'Setting',
+        title: 'Account Setting',
         key: '5',
-        path: 'setting'
+        path: 'account_setting'
     },
 ]

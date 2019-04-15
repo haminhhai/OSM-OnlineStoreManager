@@ -9,7 +9,7 @@ class Content extends React.Component {
         var exact = ''
         const {match} = this.props
         const name = match.params.name
-        //console.log(match)
+        console.log(match)
         for(var i=0;i<routes.length;i++)
             if(name === routes[i].name)
                 {
