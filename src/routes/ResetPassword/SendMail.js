@@ -49,7 +49,7 @@ class SendMail extends React.Component {
             return <Redirect to='/sended' /> 
         return (
             <div className='wrapper'>
-                <img src={Img} alt />
+                <img src={Img} alt='' />
                 <Link to='/'>
                     <div className='white-logo'>
                         <div className='white-osm-logo' />

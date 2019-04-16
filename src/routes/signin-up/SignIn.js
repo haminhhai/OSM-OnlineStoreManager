@@ -26,7 +26,7 @@ class Signinup extends React.Component {
         this.setState({ password: e.target.value })
     }
     onSubmit = (e) => {
-        let { email, password, redir } = this.state
+        let { email, password } = this.state
         var notify = ''
         e.preventDefault()
         if (email === '' || password === '')

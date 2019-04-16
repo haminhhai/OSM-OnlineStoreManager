@@ -11,7 +11,7 @@ class Signinup extends React.Component {
     render() {
         return (
             <div className='wrapper'>
-                <img src={Pic} alt />
+                <img src={Pic} alt=''/>
                 <Link to='/'>
                     <div className='white-logo'>
                         <div className='white-osm-logo' />

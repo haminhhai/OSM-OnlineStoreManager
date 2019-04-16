@@ -26,16 +26,16 @@ const ChartYear = memo(
           tabBarExtraContent={
             <div className='salesExtraWrap'>
               <div className='salesExtra'>
-                <a className={isActive('today')} onClick={() => selectDate('today')}>
+                <a href className={isActive('today')} onClick={() => selectDate('today')}>
                   All Day
                 </a>
-                <a className={isActive('week')} onClick={() => selectDate('week')}>
+                <a href className={isActive('week')} onClick={() => selectDate('week')}>
                   All Week
                 </a>
-                <a className={isActive('month')} onClick={() => selectDate('month')}>
+                <a href className={isActive('month')} onClick={() => selectDate('month')}>
                   All Month
                 </a>
-                <a className={isActive('year')} onClick={() => selectDate('year')}>
+                <a href className={isActive('year')} onClick={() => selectDate('year')}>
                   All Year
                 </a>
               </div>

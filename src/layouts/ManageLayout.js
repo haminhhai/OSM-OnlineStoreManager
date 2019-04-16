@@ -1,12 +1,11 @@
 import React from 'react'
 import { Layout, Menu, Icon, } from 'antd'
-import { Route, NavLink, Link } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import '../styles/layout.css'
 import Content from './Content'
 import Header from './Header'
 import Footer from './Footer'
 import Pic from '../assets/icons/symbol.png'
-import SubMenu from 'antd/lib/menu/SubMenu';
 import { options } from './constans/index'
 
 class ManageLayout extends React.Component {
@@ -37,7 +36,7 @@ class ManageLayout extends React.Component {
     render() {
         const { match } = this.props.match
         const url = match.url
-        
+
         return (
             <div className='layout-ant'>
                 <Layout>
@@ -50,7 +49,7 @@ class ManageLayout extends React.Component {
                             <img src={Pic} alt='' />
                             <h1 >OSM</h1>
                         </div>
-                        <Menu theme="dark" mode="inline" selectedKeys={this.state.key} defaultOpenKeys={['0']}>
+                        <Menu theme="dark" mode="inline" selectedKeys={this.state.key} >
                             <Menu.Item key="1" onClick={this.changeOption}>
                                 <Link to={`${url}/dashboard`}>
                                     <Icon type="dashboard" />
@@ -69,24 +68,13 @@ class ManageLayout extends React.Component {
                                     <span>{options[2].title}</span>
                                 </Link>
                             </Menu.Item>
-                            <SubMenu key='0' 
-                                title={<span>
-                                    <Icon type="user" />
-                                    <span>Account</span>
-                                </span>}>
-                                <Menu.Item key="4" onClick={this.changeOption}>
-                                    <Link to={`${url}/account_center`}>
-                                        <Icon type='profile' />
-                                        <span>{options[3].title}</span>
-                                    </Link>
-                                </Menu.Item>
-                                <Menu.Item key="5" onClick={this.changeOption}>
-                                    <Link to={`${url}/account_setting`}>
-                                        <Icon type='setting' />
-                                        <span>{options[4].title}</span>
-                                    </Link>
-                                </Menu.Item>
-                            </SubMenu>
+                            <Menu.Item key="4" onClick={this.changeOption}>
+                                <Link to={`${url}/account`}>
+                                    <Icon type='user' />
+                                    <span>{options[3].title}</span>
+                                </Link>
+                            </Menu.Item>
+
                         </Menu>
                     </Layout.Sider>
                     <Layout>
@@ -96,7 +84,7 @@ class ManageLayout extends React.Component {
                                 type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                                 onClick={this.toggle}
                             />
-                            <Header />
+                            <Header compo={this.changeOption.bind(this)}/>
                         </Layout.Header>
                         <Layout.Content >
                             <Route path='/:id/:name' component={Content} />

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';   
 import {Icon, Tag, Divider, Input,} from 'antd';
-import Pic from '../../../assets/icons/cr.png'
+import Pic from '../../assets/icons/cr.png'
 
 var tags = []
 for(let i = 0;i < 4; i++)

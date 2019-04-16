@@ -2,7 +2,6 @@ import React from 'react'
 import '../../styles/style.css'
 import { Button, Input, notification, message } from 'antd'
 import * as types from '../constans/index'
-import { Redirect } from 'react-router-dom'
 
 
 class Signinup extends React.Component {

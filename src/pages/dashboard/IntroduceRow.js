@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { Row, Col, Icon, Tooltip } from 'antd';
-import { ChartCard, MiniArea, MiniBar, MiniProgress, Field } from 'ant-design-pro/lib/Charts';
+import { ChartCard, MiniProgress, Field } from 'ant-design-pro/lib/Charts';
 import Trend from 'ant-design-pro/lib/Trend';
 
 const topColResponsiveProps = {

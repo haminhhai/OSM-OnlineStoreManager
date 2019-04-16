@@ -55,7 +55,7 @@ class NewPW extends React.Component {
     render() {
         return (
             <div className='wrapper'>
-                <img src={Img} alt />
+                <img src={Img} alt='' />
                 <Link to='/'>
                     <div className='white-logo'>
                         <div className='white-osm-logo' />
