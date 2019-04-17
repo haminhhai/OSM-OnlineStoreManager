@@ -72,14 +72,16 @@ class NewPW extends React.Component {
                                 type="password"
                                 value={this.state.password}
                                 onChange={this.onChangePW}
-                                placeholder='Nhập mật khẩu mới' />
+                                placeholder='Nhập mật khẩu mới'
+                                onPressEnter={this.onSubmit} />
                         </label>
                         <label>
                             <Input className='inputmail'
                                 type="password"
                                 value={this.state.confirm}
                                 onChange={this.onChangeCF}
-                                placeholder='Nhập lại mật khẩu mới' />
+                                placeholder='Nhập lại mật khẩu mới' 
+                                onPressEnter={this.onSubmit}/>
                         </label>
                         <Button className="send-btn" onClick={this.onSubmit}>Yêu cầu mật khẩu mới</Button>
                         <p>Quay lại <Link to='/signin' className='login-link'>Đăng nhập</Link></p>

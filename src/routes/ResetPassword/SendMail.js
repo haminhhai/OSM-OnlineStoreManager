@@ -67,9 +67,10 @@ class SendMail extends React.Component {
                                 type="email"
                                 value={this.state.email}
                                 onChange={this.onChange}
-                                placeholder='Email' />
+                                placeholder='Email'
+                                onPressEnter={this.onSubmit} />
                         </label>
-                        <Button className="send-btn" onClick={this.onSubmit}>Yêu cầu mật khẩu mới</Button>
+                        <Button className="send-btn" onClick={this.onSubmit} >Yêu cầu mật khẩu mới</Button>
                         <p>Quay lại <Link to='/signin' className='login-link'>Đăng nhập</Link></p>
                     </div>
                 </div>

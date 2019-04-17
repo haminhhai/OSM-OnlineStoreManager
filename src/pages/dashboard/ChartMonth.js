@@ -7,11 +7,14 @@ import { MiniArea } from 'ant-design-pro/lib/Charts';
 
 const columns = [
   {
+    align: 'center',
+    width: '5%',
     title: 'Rank',
     dataIndex: 'key',
     key: 'key',
   },
   {
+    align: 'center',
     title: 'Product Name',
     dataIndex: 'keyword',
     key: 'keyword',

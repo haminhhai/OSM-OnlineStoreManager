@@ -47,46 +47,7 @@ class Dashboard extends Component {
             this.setState({ loading: false })
         }, 2000);
     }
-    handleRangePickerChange = rangePickerValue => {
-        this.setState({
-            rangePickerValue,
-        });
-    };
-
-    selectDate = type => {
-        this.setState({
-            rangePickerValue: getTimeDistance(type),
-        });
-    };
-    isActive = type => {
-        const rangePickerValue = this.state.rangePickerValue;
-        const value = getTimeDistance(type);
-        if (!rangePickerValue[0] || !rangePickerValue[1]) {
-            return '';
-        }
-        if (
-            rangePickerValue[0].isSame(value[0], 'day') &&
-            rangePickerValue[1].isSame(value[1], 'day')
-        ) {
-            return 'currentDate';
-        }
-        return '';
-    };
-
     render() {
-        const menu = (
-            <Menu>
-                <Menu.Item>Changes1</Menu.Item>
-                <Menu.Item>Changes2</Menu.Item>
-            </Menu>
-        );
-        const dropdownGroup = (
-            <span className='{iconGroup'>
-                <Dropdown overlay={menu} placement="bottomRight">
-                    <Icon type="ellipsis" />
-                </Dropdown>
-            </span>
-        );
         return (
             <div>
                 <div>
@@ -95,12 +56,8 @@ class Dashboard extends Component {
                     </Suspense>
                     <Suspense fallback={null}>
                         <ChartYear
-                            rangePickerValue={this.state.rangePickerValue}
                             yearData={yearData}
-                            isActive={this.isActive}
-                            handleRangePickerChange={this.handleRangePickerChange}
                             loading={this.state.loading}
-                            selectDate={this.selectDate}
                         />
                     </Suspense>
 
@@ -108,9 +65,7 @@ class Dashboard extends Component {
                         <ChartMonth
                             loading={this.state.loading}
                             monthData={monthData}
-                            selectDate={this.selectDate}
                             rankData={rankData}
-                            dropdownGroup={dropdownGroup}
                         />
                     </Suspense>
                     <Suspense fallback={null} >

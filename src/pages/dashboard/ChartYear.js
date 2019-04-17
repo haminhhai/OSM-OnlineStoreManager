@@ -19,33 +19,10 @@ function handleToString(value) {
     return num
   }
 const ChartYear = memo(
-  ({ rangePickerValue, yearData, isActive, handleRangePickerChange, loading, selectDate }) => (
+  ({  yearData,  loading}) => (
     <Card loading={loading} bordered={false} bodyStyle={{ padding: 0}} style={{margin: 15}}>
       <div className='salesCard'>
         <Tabs
-          tabBarExtraContent={
-            <div className='salesExtraWrap'>
-              <div className='salesExtra'>
-                <a href className={isActive('today')} onClick={() => selectDate('today')}>
-                  All Day
-                </a>
-                <a href className={isActive('week')} onClick={() => selectDate('week')}>
-                  All Week
-                </a>
-                <a href className={isActive('month')} onClick={() => selectDate('month')}>
-                  All Month
-                </a>
-                <a href className={isActive('year')} onClick={() => selectDate('year')}>
-                  All Year
-                </a>
-              </div>
-              <RangePicker 
-                value={rangePickerValue}
-                onChange={handleRangePickerChange}
-               
-              />
-            </div>
-          }
           size="large"
           tabBarStyle={{ marginBottom: 24 }}
         >
