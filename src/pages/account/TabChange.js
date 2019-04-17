@@ -66,7 +66,7 @@ class TabChange extends PureComponent {
         ]
         const current = this.state.current
         return (
-            <Suspense>
+            <Suspense >
                 <Tabs >
                     <Tabs.TabPane tab={<span><Icon type="table" />List Employees</span>} key='1'>
                         <ListEmploy />

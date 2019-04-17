@@ -1,6 +1,6 @@
 import React from 'react'
 import { Layout, Menu, Icon, } from 'antd'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, Redirect } from 'react-router-dom'
 import '../styles/layout.css'
 import Content from './Content'
 import Header from './Header'
@@ -22,8 +22,7 @@ class ManageLayout extends React.Component {
 
     changeOption = () => {
         let defaul = ''
-        var pos = window.location.pathname.slice(1).indexOf('/')
-        var path = window.location.pathname.slice(pos + 2)
+        var path = window.location.pathname.slice(5)
         for (var i = 0; i < options.length; i++)
             if (path === options[i].path)
                 defaul = options[i].key
@@ -34,9 +33,12 @@ class ManageLayout extends React.Component {
         this.setState({ collapsed: !this.state.collapsed })
     }
     render() {
+        const ha = 1
         const { match } = this.props.match
         const url = match.url
-
+        if(sessionStorage.length === 0)
+            return <Redirect to='/signin' />
+        
         return (
             <div className='layout-ant'>
                 <Layout>
@@ -49,7 +51,7 @@ class ManageLayout extends React.Component {
                             <img src={Pic} alt='' />
                             <h1 >OSM</h1>
                         </div>
-                        <Menu theme="dark" mode="inline" selectedKeys={this.state.key} >
+                        <Menu theme='dark' mode="inline" selectedKeys={this.state.key} defaultSelectedKeys={['1']} >
                             <Menu.Item key="1" onClick={this.changeOption}>
                                 <Link to={`${url}/dashboard`}>
                                     <Icon type="dashboard" />

@@ -20,7 +20,9 @@ class Header extends React.Component {
     onClear = (tabTitle) => {
         console.log(tabTitle);
     }
-
+    onLogout = () => {
+        sessionStorage.clear()
+    }
     getNoticeData = (notices) => {
         if (notices.length === 0) {
             return {};
@@ -67,7 +69,7 @@ class Header extends React.Component {
                     </Link>
                 </Menu.Item>
                 <Menu.Divider />
-                <Menu.Item key="1" >
+                <Menu.Item key="1" onClick={this.onLogout}>
                     <Link to='/signin'>
                         <Icon type='logout' />
                         {` Logout`}

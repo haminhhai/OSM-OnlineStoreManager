@@ -60,12 +60,15 @@ class Signinup extends React.Component {
                 this.setState({redir: true})
             }, 2000);
         }
-        console.log(notify)
         return notify
     }
     render() {
         if(this.state.redir)
-            return <Redirect to='/123/dashboard' />
+            {
+                sessionStorage.setItem("verify", true)
+                return <Redirect to='/osm/dashboard' />
+            }
+        console.log(sessionStorage.getItem("verify"))
         return (
             <div className="form sign-in">
                 <h2>Đăng nhập OSM,</h2>

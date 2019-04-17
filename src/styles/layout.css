@@ -26,6 +26,7 @@
     box-shadow: 2px 0 6px rgba(0,21,41,.35);
     text-rendering: optimizeLegibility;
     min-height: 100vh;
+   ;
 }
 
     @media (min-height:0px) {
@@ -57,7 +58,7 @@
     transition-duration: 0.3s;
     transition-timing-function: ease;
     transition-delay: 0s;
-    
+   
 }
 .logo-db > img{
     border-radius: 20px;

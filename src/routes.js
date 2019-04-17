@@ -34,7 +34,7 @@ export const routes = [
         main:() => <NewPW />
     },
     {
-        path: '/:id',
+        path: '/osm',
         exact: false,
         main:(match) => <ManageLayout match={match}/>
     },
