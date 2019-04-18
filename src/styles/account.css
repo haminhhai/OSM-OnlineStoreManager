@@ -112,7 +112,8 @@
     text-align: right;
     position: relative;
     width: 160px;
-    line-height: 12px;
+    top: -2px;
+    line-height: 16px;
     
 }
 .stepFormText .ant-form-explain{

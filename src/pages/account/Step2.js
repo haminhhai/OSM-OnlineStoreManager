@@ -46,13 +46,13 @@ class Step2 extends React.PureComponent {
                     <Alert
                         closable
                         showIcon
-                        message="Please check below information again and input password for this account to continue."
+                        message="Kiểm tra lại thông tin và nhập mật khẩu để tiếp tục!"
                         style={{ marginBottom: 24 }}
                     />
                     <Form.Item
                         label="Rank"
                     >
-                        Employee
+                        Nhân viên
                             </Form.Item>
                     <Form.Item
                         label="E-mail"
@@ -60,37 +60,37 @@ class Step2 extends React.PureComponent {
                         {email}
                             </Form.Item>
                     <Form.Item
-                        label="First Name"
+                        label="Họ"
                     >
                         {first}
                             </Form.Item>
                     <Form.Item
-                        label="Last Name"
+                        label="Tên"
                     >
                         {last}
                             </Form.Item>
                     <Divider style={{ margin: '24px 0' }} />
-                    <Form.Item {...formItemLayout} label="Password" required={false}>
+                    <Form.Item {...formItemLayout} label="Mật khẩu" required={false}>
                         {getFieldDecorator('password', {
                             rules: [
                                 {
                                     required: true,
-                                    message: 'Please input password for this account!',
+                                    message: 'Nhập mật khẩu!',
                                 },
                             ],
                         })(<Input className='input-employee'
                             type="password"
                             autoComplete="off"
-                            placeholder='Password' />)}
+                            placeholder='Mật khẩu' />)}
                     </Form.Item>
                     <Form.Item>
                         <Button className='step-submit' 
-                            onClick={() => this.props.prev()}>Previous</Button>
+                            onClick={() => this.props.prev()}>Quay lại</Button>
                         <Button loading={this.props.loading} 
                             className='step-submit' 
                             style={{ marginLeft: 2 }} 
                             htmlType='submit'>
-                            Next
+                            Tiếp tục
                         </Button>
                     </Form.Item>
                 </Form>

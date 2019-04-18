@@ -11,10 +11,10 @@ class Step3 extends React.PureComponent {
             <div className='information'>
                 <Row>
                     <Col xs={24} sm={8} className='{label'>
-                        Rank：
+                        Hạng：
                     </Col>
                     <Col xs={24} sm={16}>
-                        Empolyee
+                        Nhân viên
                      </Col>
                 </Row>
                 <Row>
@@ -27,7 +27,7 @@ class Step3 extends React.PureComponent {
                 </Row>
                 <Row>
                     <Col xs={24} sm={8} className='{label'>
-                        First Name：
+                        Họ：
                     </Col>
                     <Col xs={24} sm={16}>
                         {localStorage.getItem('first')}
@@ -35,7 +35,7 @@ class Step3 extends React.PureComponent {
                 </Row>
                 <Row>
                     <Col xs={24} sm={8} className='{label'>
-                        Last Name：
+                        Tên：
                     </Col>
                     <Col xs={24} sm={16}>
                         {localStorage.getItem('last')}
@@ -49,14 +49,14 @@ class Step3 extends React.PureComponent {
                 <Button className='step-submit' onFocus={this.remove}
                     style={{ marginLeft: '10px' }}
                     onClick={() => this.props.init()}
-                >Finished</Button>
+                >Hoàn tất</Button>
             </Fragment>
         )
         return (
             <Result
                 type="success"
-                title="Create Account Successfully"
-                description="Supply this account for your Employee now! "
+                title="Tạo tài khoản thành công"
+                description="Cấp tài khoản cho nhân viên ngay!"
                 extra={information}
                 actions={action}
                 className='result'

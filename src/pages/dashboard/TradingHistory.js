@@ -34,11 +34,11 @@ for (let i = 0; i < 10; i++) {
     time: moment(new Date(beginDay + (1000 * 60 * 60 * 24 * i))).format('YYYY-MM-DD HH:mm:ss'),
     status: statusMap[Math.floor(Math.random() * 3)].status,
     cashier: "Unique",
-    description: `This is the decription of product ${i + 1}`
+    description: `Đây là mô tả sản phẩm ${i + 1}`
 
   });
 }
-const header = () => <div style={{color: 'rgba(0,0,0,0.85)', fontSize: '16px', fontWeight: '600'}}>Trading History</div>;
+const header = () => <div style={{color: 'rgba(0,0,0,0.85)', fontSize: '16px', fontWeight: '600'}}>Lịch sử giao dịch</div>;
 
 class TradingHistory extends Component {
   constructor(props) {
@@ -54,7 +54,7 @@ class TradingHistory extends Component {
         <div style={{ padding: 8 }}>
           <Input
             ref={node => { this.searchInput = node; }}
-            placeholder={`Search ${dataIndex}`}
+            placeholder={`Tìm ${dataIndex}`}
             value={selectedKeys[0]}
             onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
             onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
@@ -68,7 +68,7 @@ class TradingHistory extends Component {
             size="small"
             style={{ width: 90, marginRight: 8 }}
           >
-            Search
+            Tìm
         </Button>
           <Button
             shape='round'
@@ -115,30 +115,30 @@ class TradingHistory extends Component {
   render() {
     const columns = [{
       align: 'center',
-      title: 'Product Code',
+      title: 'Mã sản phẩm',
       dataIndex: 'id',
       width: '20%',
       ...this.getColumnSearchProps('id'),
     }, {
       align: 'center',
-      title: 'Product Name',
+      title: 'Tên sản phẩm',
       dataIndex: 'name',
       ...this.getColumnSearchProps('name'),
     }, {
       align: 'center',
-      title: 'Price',
+      title: 'Giá',
       dataIndex: 'price',
       sorter: (a, b) => a.realprice - b.realprice, sortDirections: ['ascend', 'descend'],defaultSortOrder: 'ascend',
       
       ...this.getColumnSearchProps('price'),
     }, {
       align: 'center',
-      title: 'Time',
+      title: 'Thời điểm',
       dataIndex: 'time',
       ...this.getColumnSearchProps('time'),
     }, {
       align: 'left',
-      title: 'Status',
+      title: 'Trạng thái',
       dataIndex: 'status',
       ...this.getColumnSearchProps('status'),
       render(val) {
@@ -147,7 +147,7 @@ class TradingHistory extends Component {
     
     }, {
       align: 'center',
-      title: 'Cashier',
+      title: 'Thu ngân',
       dataIndex: 'cashier',
       ...this.getColumnSearchProps('cashier'),
     },

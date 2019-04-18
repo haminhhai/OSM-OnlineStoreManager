@@ -47,14 +47,14 @@ class Step1 extends React.PureComponent {
             <Fragment>
                 <Form {...formItemLayout1} onSubmit={this.handleSubmit} className='stepForm'>
                     <Form.Item
-                        label="Rank"
+                        label="Cấp bậc"
                     >
                         {getFieldDecorator('rank', {
-                            initialValue: 'Employee',
-                            rules: [{ required: true, message: 'Please choose Employee' }],
+                            initialValue: 'Nhân viên',
+                            rules: [{ required: true, message: 'Hãy chọn nhân viên' }],
                         })(
                             <Select placeholder="Employee" className='input-employee'>
-                                <Option value="Employee">Employee</Option>
+                                <Option value="Employee">Nhân viên</Option>
                             </Select>
                         )}
                     </Form.Item>
@@ -64,43 +64,43 @@ class Step1 extends React.PureComponent {
                         {getFieldDecorator('email', {
                             initialValue: email,
                             rules: [{
-                                type: 'email', message: 'The input is not valid E-mail!',
+                                type: 'email', message: 'Sai định dạng email!',
                             }, {
-                                required: true, message: 'Please input your E-mail!',
+                                required: true, message: 'Hãy nhập email!',
                             }],
                         })(
                             <Input className='input-employee' placeholder='test@osm.vn' />
                         )}
                     </Form.Item>
                     <Form.Item
-                        label="First Name"
+                        label="Họ"
                     >
                         {getFieldDecorator('first', {
                             initialValue: first,
                             rules: [{
-                                required: true, message: 'Please input his/her first name',
+                                required: true, message: 'Hãy điền thông tin!',
                             },],
                         })(
-                            <Input className='input-employee' type="text" placeholder='First Name' />
+                            <Input className='input-employee' type="text" placeholder='Nhập...' />
                         )}
                     </Form.Item>
                     <Form.Item
-                        label="Last Name"
+                        label="Tên"
                     >
                         {getFieldDecorator('last', {
                             initialValue: last,
                             rules: [{
-                                required: true, message: 'Please input his/her last name',
+                                required: true, message: 'Hãy điền thông tin!',
                             }],
                         })(
-                            <Input className='input-employee' type="text" placeholder='Last Name' />
+                            <Input className='input-employee' type="text" placeholder='Nhập...' />
                         )}
                     </Form.Item>
                     <Form.Item label=''>
                         <Button loading={this.props.loading} htmlType="submit"
                             className='step-submit'
                             style={{marginLeft: '30px'}}
-                        >Next</Button>
+                        >Tiếp tục</Button>
                     </Form.Item>
                 </Form>
             </Fragment>

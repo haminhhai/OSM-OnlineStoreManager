@@ -68,12 +68,15 @@ class Signinup extends React.Component {
                 </div>
                 <div className="form sign-up">
                     <h2>Tạo tài khoản OSM,</h2>
+                    <h4>Họ và tên</h4>
                     <label >
                         <Input className='input-up' type="text" value={this.state.name} onChange={this.changeName} placeholder='Họ và tên' />
                     </label>
+                    <h4>E-mail</h4>
                     <label >
                         <Input className='input-up' type="email" value={this.state.email} onChange={this.changeMail} placeholder='Email' />
                     </label>
+                    <h4>Mật khẩu</h4>
                     <label >
                         <Input className='input-up' type="password" value={this.state.password} onChange={this.changePW} placeholder='Mật khẩu' />
                     </label>

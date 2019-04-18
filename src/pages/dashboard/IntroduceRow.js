@@ -21,30 +21,30 @@ const IntroduceRow = memo(({ loading }) => (
     <Col {...topColResponsiveProps}>
       <ChartCard
         bordered={false}
-        title='Total Daily'
+        title='Tổng hàng trong ngày'
         action={
           <Tooltip
-            title='Today'
+            title='Hôm nay'
           >
-            <Icon type="pie-chart" theme="filled" style={{color: '#86E3CE'}}/>
+            <Icon type="pie-chart" theme="filled" style={{ color: '#86E3CE' }} />
           </Tooltip>
         }
         loading={loading}
         total={handleToString(1000000)}
         footer={
           <Field
-            label='DailyChanges'
+            label='Thay đổi ngày'
             value={handleToString(200000)}
           />
         }
         contentHeight={46}
       >
         <Trend flag="up" style={{ marginRight: 16 }} reverseColor={true}>
-          Weekly Changes
+          Thay đổi tuần
           <span className='trendText'> 12%</span>
         </Trend>
         <Trend flag="down" reverseColor={true}>
-          DailyChanges
+          Thay đổi ngày
           <span className='trendText'> 11%</span>
         </Trend>
       </ChartCard>
@@ -53,30 +53,30 @@ const IntroduceRow = memo(({ loading }) => (
     <Col {...topColResponsiveProps}>
       <ChartCard
         bordered={false}
-        title='Total Monthly'
+        title='Tổng hàng trong tháng'
         action={
           <Tooltip
-            title='April'
+            title='Tháng 4'
           >
-            <Icon type="pie-chart" theme="filled" style={{color: '#ffdd94'}}/>
+            <Icon type="pie-chart" theme="filled" style={{ color: '#ffdd94' }} />
           </Tooltip>
         }
         loading={loading}
         total={handleToString(12000000)}
         footer={
           <Field
-            label='MonthlyChanges'
+            label='Thay đổi tháng'
             value={handleToString(200000)}
           />
         }
         contentHeight={46}
       >
         <Trend flag="up" style={{ marginRight: 16 }} reverseColor={true}>
-          Monthly Changes
+          Thay đổi tháng
           <span className='trendText'> 2%</span>
         </Trend>
         <Trend flag="down" reverseColor={true}>
-          Weekly Changes
+          Thay đổi tuần
           <span className='trendText'> 69%</span>
         </Trend>
       </ChartCard>
@@ -86,19 +86,19 @@ const IntroduceRow = memo(({ loading }) => (
       <ChartCard
         loading={loading}
         bordered={false}
-        title='Profit on Day'
+        title='Lợi nhuận ngày'
         action={
           <Tooltip
-            title='Today'
+            title='Hôm nay'
           >
-            <Icon type="pie-chart" theme="filled" style={{color: '#ccabd8'}}/>
+            <Icon type="pie-chart" theme="filled" style={{ color: '#ccabd8' }} />
           </Tooltip>
         }
         total="80%"
         footer={
           <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
             <Trend flag="up" style={{ marginRight: 16 }} reverseColor={true}>
-              Compare to yesterday
+              So với hôm qua:
               <span className='trendText'> 12%</span>
             </Trend>
 
@@ -106,7 +106,7 @@ const IntroduceRow = memo(({ loading }) => (
         }
         contentHeight={46}
       >
-        <span>Reach to target:</span>
+        <span>Đạt chỉ tiêu:</span>
         <MiniProgress
           percent={78}
           strokeWidth={8}
@@ -119,35 +119,35 @@ const IntroduceRow = memo(({ loading }) => (
       <ChartCard
         loading={loading}
         bordered={false}
-        title='Profit in Month'
+        title='Lợi nhuận tháng'
         action={
           <Tooltip
-            title='April'
+            title='Tháng 4'
           >
-            <Icon type="pie-chart" theme="filled" style={{color: '#a72f1d'}}/>
+            <Icon type="pie-chart" theme="filled" style={{ color: '#a72f1d' }} />
           </Tooltip>
         }
         total="60%"
-        
+
         footer={
           <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
             <Trend flag="down" reverseColor={true}>
-              Compare to previous month
+              So với tháng trước
               <span className='trendText'> 30%</span>
             </Trend>
           </div>
         }
         contentHeight={46}
       >
-        <span>Reach to target:</span>
+        <span>Đạt chỉ tiêu:</span>
         <MiniProgress
           percent={60}
           strokeWidth={8}
           target={60}
           color="#86E3CE"
         />
-        
-        
+
+
       </ChartCard>
     </Col>
   </Row>

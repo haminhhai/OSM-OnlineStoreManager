@@ -1,9 +1,8 @@
 import React, { memo } from 'react';
-import { Row, Col, Card, Tabs, DatePicker } from 'antd';
+import { Row, Col, Card, Tabs} from 'antd';
 import '../../styles/dashboard.css';
 import { Bar } from 'ant-design-pro/lib/Charts';
 
-const { RangePicker } = DatePicker;
 const { TabPane } = Tabs;
 
 const rankingListData = [];
@@ -27,7 +26,7 @@ const ChartYear = memo(
           tabBarStyle={{ marginBottom: 24 }}
         >
           <TabPane
-            tab='Total Yearly'
+            tab='Tổng năm'
             key="sales"
           >
             <Row>
@@ -35,7 +34,7 @@ const ChartYear = memo(
                 <div className='salesBar'>
                   <Bar
                     height={295}
-                    title='Total Sold Products in 2019'
+                    title='Tổng hàng bán được năm 2019'
                     data={yearData}
                   />
                 </div>
@@ -43,7 +42,7 @@ const ChartYear = memo(
               <Col xl={8} lg={12} md={12} sm={24} xs={24}>
                 <div className='salesRank'>
                   <h4 className='rankingTitle'>
-                        Product Ranking 2019
+                        Xếp hạng sản phẩm 2019
                   </h4>
                   <ul className='rankingList'>
                     {rankingListData.map((item, i) => (

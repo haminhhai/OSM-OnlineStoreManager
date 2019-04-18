@@ -72,20 +72,22 @@ class Signinup extends React.Component {
         return (
             <div className="form sign-in">
                 <h2>Đăng nhập OSM,</h2>
+                <h4>E-mail</h4>
                 <label>
                     <Input className='input-in' 
                     type="email" 
                     value={this.state.email} 
                     onChange={this.changeMail} 
-                    placeholder='Email' 
+                    placeholder='123@osm.vn' 
                     onPressEnter={this.onSubmit}/>
                 </label>
+                <h4>Mật khẩu</h4>
                 <label>
                     <Input className='input-in' 
                     type="password" 
                     value={this.state.password} 
                     onChange={this.changePW} 
-                    placeholder='Mật khẩu' 
+                    placeholder='123' 
                     onPressEnter={this.onSubmit}/>
                 </label>
                 <Link to='/send-mail' className="forgot-pass">Quên mật khẩu?</Link>

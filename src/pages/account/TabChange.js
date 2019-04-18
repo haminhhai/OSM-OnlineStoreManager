@@ -49,17 +49,17 @@ class TabChange extends PureComponent {
     render() {
         const steps = [
             {
-                title: 'Initial account',
+                title: 'Khởi tạo thông tin',
                 content: <WrappedStep1 next={this.next.bind(this)} loading={this.state.loading} />,
                 icon: <Icon type="solution" />
             },
             {
-                title: 'Initial password',
+                title: 'Mật khẩu',
                 content: <WrappedStep2 finish={this.fini.bind(this)} prev={this.prev.bind(this)} loading={this.state.loading} />,
                 icon: <Icon type="lock" />
             },
             {
-                title: 'Done',
+                title: 'Xong!',
                 content: <WrappedStep3 init={this.init.bind(this)} />,
                 icon: <Icon type="smile" />
             },
@@ -68,10 +68,10 @@ class TabChange extends PureComponent {
         return (
             <Suspense >
                 <Tabs >
-                    <Tabs.TabPane tab={<span><Icon type="table" />List Employees</span>} key='1'>
+                    <Tabs.TabPane tab={<span><Icon type="table" />Danh sách</span>} key='1'>
                         <ListEmploy />
                      </Tabs.TabPane>
-                    <Tabs.TabPane tab={<span><Icon type="team" />Add Employee</span>} key='2'>
+                    <Tabs.TabPane tab={<span><Icon type="team" />Thêm nhân viên</span>} key='2'>
                         <Steps current={current}>
                             {steps.map(item => <Steps.Step icon={item.icon} key={item.title} title={item.title} />)}
                         </Steps>
@@ -89,12 +89,12 @@ for (let i = 0; i < 20; i++) {
         id: Math.floor(Math.random() * 999) + 1,
         name: `Nhân viên ${i}`,
         email: 'email@osm.vn',
-        rank: 'Employee',
+        rank: 'Nhân viên',
         ava: Math.floor(Math.random() * 5)
     })
 }
 const ava = [dog,cat,bee, beer, girafee]
-const header = () => <div style={{ color: 'rgba(0,0,0,0.85)', fontSize: '16px', fontWeight: '600' }}>List Empolyees</div>;
+const header = () => <div style={{ color: 'rgba(0,0,0,0.85)', fontSize: '16px', fontWeight: '600' }}>Danh sách nhân viên</div>;
 class ListEmploy extends Component {
     constructor(props) {
         super(props);
@@ -123,7 +123,7 @@ class ListEmploy extends Component {
                         size="small"
                         style={{ width: 90, marginRight: 8 }}
                     >
-                        Search
+                        Tìm
                      </Button>
                     <Button
                         shape='round'
@@ -188,7 +188,7 @@ class ListEmploy extends Component {
             
         }, {
             align: 'center',
-            title: 'FullName',
+            title: 'Họ Tên',
             dataIndex: 'name',
             ...this.getColumnSearchProps('name'),
         }, {
@@ -198,7 +198,7 @@ class ListEmploy extends Component {
             ...this.getColumnSearchProps('email'),
         }, {
             align: 'center',
-            title: 'Rank',
+            title: 'Cấp bậc',
             dataIndex: 'rank',
             ...this.getColumnSearchProps('rank'),
         },

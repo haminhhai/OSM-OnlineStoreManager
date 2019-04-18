@@ -65,14 +65,14 @@ class Header extends React.Component {
                 <Menu.Item key="0" onClick={this.props.compo}>
                     <Link to={`${path}/account`} >
                         <Icon type='user' />
-                        {` Account`}
+                        {` Tài khoản`}
                     </Link>
                 </Menu.Item>
                 <Menu.Divider />
                 <Menu.Item key="1" onClick={this.onLogout}>
                     <Link to='/signin'>
                         <Icon type='logout' />
-                        {` Logout`}
+                        {` Đăng xuất`}
                     </Link>
                 </Menu.Item>
             </Menu>

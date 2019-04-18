@@ -58,11 +58,11 @@ class Infor extends PureComponent {
             <div className='detail'>
             <p>
                 <i className='title' />
-                Toy Store
+                Vin Mart
             </p>
             <p>
                 <i className='group' />
-                Admin
+                Quản lý
             </p>
             <p>
                 <i className='address' />
@@ -71,7 +71,7 @@ class Infor extends PureComponent {
             </div>
             <Divider dashed />
             <div className='tags'>
-            <div className='tagsTitle'>Stores</div>
+            <div className='tagsTitle'>Cửa hàng</div>
             {tags.concat(newTags).map(item => (
                 <Tag key={item.key}>{item.label}</Tag>
             ))}

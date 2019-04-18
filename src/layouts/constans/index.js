@@ -63,17 +63,17 @@ export const options = [
         path: 'dashboard'
     },
     {
-        title: 'Payment',
+        title: 'Thanh toán',
         key: '2',
         path: 'payment'
     },
     {
-        title: 'Checkout',
+        title: 'Kiểm hàng',
         key: '3',
         path: 'checkout'
     },
     {
-        title: 'Account',
+        title: 'Tài khoản',
         key: '4',
         path: 'account'
     }

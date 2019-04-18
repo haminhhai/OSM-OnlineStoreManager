@@ -12,7 +12,7 @@ const ChartMonth = React.lazy(() => import('./ChartMonth'));
 const yearData = [];
 for (let i = 0; i < 12; i++) {
     yearData.push({
-        x: `Month ${i + 1}`,
+        x: `Tháng ${i + 1}`,
         y: Math.floor(Math.random() * 100000) + 20000,
     });
 }

@@ -9,26 +9,26 @@ const columns = [
   {
     align: 'center',
     width: '5%',
-    title: 'Rank',
+    title: 'Hạng',
     dataIndex: 'key',
     key: 'key',
   },
   {
     align: 'center',
-    title: 'Product Name',
+    title: 'Tên sản phẩm',
     dataIndex: 'keyword',
     key: 'keyword',
     render: text => <a href="/">{text}</a>,
   },
   {
-    title: 'Number',
+    title: 'Số lượng',
     dataIndex: 'count',
     key: 'count',
     sorter: (a, b) => a.count - b.count,
     align: 'center',
   },
   {
-    title: 'Weekly Range',
+    title: 'Thay đổi tháng',
     dataIndex: 'range',
     key: 'range',
     sorter: (a, b) => a.range - b.range,
@@ -50,7 +50,7 @@ const ChartMonth = memo(({ loading, monthData, rankData, dropdownGroup }) => (
   <Card style={{margin: 15}}
     loading={loading}
     bordered={false}
-    title='Total Monthly'
+    title='Tổng tháng'
     extra={dropdownGroup}
   >
     <Row gutter={68}>
@@ -58,16 +58,16 @@ const ChartMonth = memo(({ loading, monthData, rankData, dropdownGroup }) => (
         <NumberInfo
           subTitle={
             <span>
-              Money Changes
+              Lợi nhuận
               <Tooltip
-                title='money'
+                title='VND'
               >
                 <Icon type="fund" theme="filled" style={{ marginLeft: 8, color: '#6b8e4e' }}/>
               </Tooltip>
             </span>
           }
           gap={8}
-          total={handleToString(12321)}
+          total={handleToString(1232109)}
           status="up"
           subTotal={17.1}
         />
@@ -77,9 +77,9 @@ const ChartMonth = memo(({ loading, monthData, rankData, dropdownGroup }) => (
         <NumberInfo
           subTitle={
             <span>
-              Percent Changes
+              % Thay đổi
               <Tooltip
-                title='percent'
+                title='%'
               >
                 <Icon type="fund" theme="filled" style={{ marginLeft: 8, color: '#ec6091'  }}/>
               </Tooltip>

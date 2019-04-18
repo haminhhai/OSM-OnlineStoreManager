@@ -4,7 +4,7 @@
   padding: 0;
 }
 .wrapper404{
-  background: url(../assets/images/bg3.jpg);
+  background: url(../assets/images/ufo.png);
   background-size: 100%;
 	position: absolute;
   width: 100%;
@@ -20,11 +20,30 @@
   z-index: 1;
   position: absolute;
 }
+.antd-pro-exception-imgBlock{
+  position: absolute;
+  left: 558px;
+  top: 115px;
+  background-size: 100%;
+}
 .antd-pro-exception-exception{
   margin-top: -70px;
+  background-size: 100%;
 }
 .antd-pro-exception-content{
   z-index: 2;
+  position: absolute;
+  text-align: center;
+  left: 40%;
+  top: 20%;
+  color: #FFF;
+  background-size: 100%;
+}
+.antd-pro-exception-exception .antd-pro-exception-content h1{
+  color: rgb(255, 255, 255);
+}
+.antd-pro-exception-exception .antd-pro-exception-content .antd-pro-exception-desc{
+  color: #FFF
 }
 .wrapper {
 	background: #50a3a2;
@@ -59,9 +78,8 @@ input, button {
   background: #ededed;
   box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
   z-index: 1;
- background: url(../assets/images/bg3.jpg);
+ background: url(../assets/images/global.png);
  
-  
 }
 
 .form {
@@ -87,7 +105,7 @@ input, button {
   transition: transform 1.2s ease-in-out;
   transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
   box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
-  background: url(../assets/images/bg3.jpg);
+  background: url(../assets/images/gloreverse.png);
 }
 .cont.s--signup .sub-cont {
   -webkit-transform: translate3d(-640px, 0, 0);
@@ -261,6 +279,7 @@ input {
   text-align: center;
   font-size: 12px;
   left:43%;
+  font-weight: bold
 }
 .close {
   cursor: pointer;
@@ -410,7 +429,21 @@ input {
 
 .sign-in {
   transition-timing-function: ease-out;
-  font-family: 'Roboto', sans-serif;
+  font-family: Avenir,Helvetica Neue,Arial,Helvetica,sans-serif;
+}
+.sign-in > h4{
+  font-weight: bold;
+  margin-bottom: -20px;
+  color: rgba(0,0,0,.85);
+  text-align: center;
+  text-transform: uppercase;
+}
+.sign-up > h4{
+  font-weight: bold;
+  margin-bottom: -20px;
+  color: rgba(0,0,0,.85);
+  text-align: center;
+  text-transform: uppercase
 }
 .cont.s--signup .sign-in {
   transition-timing-function: ease-in-out;
@@ -421,7 +454,8 @@ input {
 
 .sign-up {
   -webkit-transform: translate3d(-900px, 0, 0);
-          transform: translate3d(-900px, 0, 0);
+  transform: translate3d(-900px, 0, 0);
+  font-family: Avenir,Helvetica Neue,Arial,Helvetica,sans-serif;
 }
 .cont.s--signup .sign-up {
   transition-timing-function: ease-in-out;
