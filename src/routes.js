@@ -14,8 +14,8 @@ export const routes = [
         main: () =>  <HomePage />
     },
     {
-        path: '/signin',
-        exact: false,
+        path: '/signin&signup',
+        exact: true,
         main:() => <Signinup />
     },
     {

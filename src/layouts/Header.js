@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tag, Dropdown, Avatar,Menu, Icon  } from 'antd';
+import { Tag, Dropdown, Avatar,Menu, Icon, message  } from 'antd';
 import {  NoticeIcon } from 'ant-design-pro'
 import '../styles/layout.css'
 import { noti} from './constans/index.js'
@@ -10,7 +10,7 @@ class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: 'F.Hiquey'
+            name: 'F.Hiquery'
         }
     }
 
@@ -22,6 +22,7 @@ class Header extends React.Component {
     }
     onLogout = () => {
         sessionStorage.clear()
+        message.warning("Bạn đã đăng xuất!")
     }
     getNoticeData = (notices) => {
         if (notices.length === 0) {
@@ -70,7 +71,7 @@ class Header extends React.Component {
                 </Menu.Item>
                 <Menu.Divider />
                 <Menu.Item key="1" onClick={this.onLogout}>
-                    <Link to='/signin'>
+                    <Link to='/signin&signup'>
                         <Icon type='logout' />
                         {` Đăng xuất`}
                     </Link>

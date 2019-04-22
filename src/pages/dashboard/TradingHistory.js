@@ -74,6 +74,7 @@ class TradingHistory extends Component {
             shape='round'
             onClick={() => this.handleReset(clearFilters)}
             size="small"
+            icon='redo'
             style={{ width: 90 }}
           >
             Reset

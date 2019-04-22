@@ -2,7 +2,7 @@ import React, { PureComponent} from 'react';
 import { Card, Row, Col, } from 'antd';
 import '../../styles/account.css'
 import Infor from './Infor'
-import TabChange from './TabChange'
+import AddEmploy from './AddEmploy'
 
 class Account extends PureComponent {
   render() {
@@ -15,7 +15,7 @@ class Account extends PureComponent {
             </Card>
           </Col>
           <Col lg={19} md={24}>
-            <TabChange />
+            <AddEmploy />
           </Col>
         </Row>
       </Card>

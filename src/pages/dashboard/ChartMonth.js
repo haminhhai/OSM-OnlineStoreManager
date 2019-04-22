@@ -45,7 +45,7 @@ function handleToString(value) {
     num = Number(value).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
     return num
   }
-const title = () => <div style={{color: 'rgba(0,0,0,0.85)', fontSize: '14px', fontWeight: '600', textAlign: 'center'}}>Product Trending in April</div>;
+const title = () => <div style={{color: 'rgba(0,0,0,0.85)', fontSize: '14px', fontWeight: '600', textAlign: 'left'}}>Sản phẩm bán chạy Tháng 4</div>;
 const ChartMonth = memo(({ loading, monthData, rankData, dropdownGroup }) => (
   <Card style={{margin: 15}}
     loading={loading}

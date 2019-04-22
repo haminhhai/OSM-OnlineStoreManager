@@ -71,7 +71,7 @@ class SendMail extends React.Component {
                                 onPressEnter={this.onSubmit} />
                         </label>
                         <Button className="send-btn" onClick={this.onSubmit} >Yêu cầu mật khẩu mới</Button>
-                        <p>Quay lại <Link to='/signin' className='login-link'>Đăng nhập</Link></p>
+                        <p>Quay lại <Link to='/signin&signup' className='login-link'>Đăng nhập</Link></p>
                     </div>
                 </div>
                 <ul className="bg-bubbles">

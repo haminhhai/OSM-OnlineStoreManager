@@ -196,4 +196,9 @@
   .antd-pro-result-extra{
       text-align: center
   }
-  
+  .ant-popover-inner-content{
+      width: auto;
+  }
+  .ant-popover-inner-content .ant-btn{
+      width: auto;
+  }

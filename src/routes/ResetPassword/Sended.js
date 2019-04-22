@@ -30,7 +30,7 @@ class Sended extends React.Component {
                             Chúng tôi đã gửi tới bạn link đặt lại mật khẩu.
                             Cảm ơn bạn đã sử dụng OSM!
                         </div>
-                        <p>Quay lại <Link to='/signin' className='login-link'>Đăng nhập</Link></p>
+                        <p>Quay lại <Link to='/signin&signup' className='login-link'>Đăng nhập</Link></p>
                     </div>
                 </div>
                 <ul className="bg-bubbles">

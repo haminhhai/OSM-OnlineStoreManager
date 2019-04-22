@@ -1,6 +1,7 @@
 .row-intro{
     position: relative;
     padding: 15px 15px;
+    margin-bottom: -30px;
   }
 .year-chart{
   position: relative;

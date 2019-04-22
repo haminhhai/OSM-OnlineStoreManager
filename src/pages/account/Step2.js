@@ -50,7 +50,7 @@ class Step2 extends React.PureComponent {
                         style={{ marginBottom: 24 }}
                     />
                     <Form.Item
-                        label="Rank"
+                        label="Hạng"
                     >
                         Nhân viên
                             </Form.Item>

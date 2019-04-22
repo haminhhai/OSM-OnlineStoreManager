@@ -33,11 +33,10 @@ class ManageLayout extends React.Component {
         this.setState({ collapsed: !this.state.collapsed })
     }
     render() {
-        const ha = 1
         const { match } = this.props.match
         const url = match.url
         if(sessionStorage.length === 0)
-            return <Redirect to='/signin' />
+            return <Redirect to='/signin&signup' />
         
         return (
             <div className='layout-ant'>

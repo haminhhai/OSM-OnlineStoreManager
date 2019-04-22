@@ -30,7 +30,7 @@
     cursor: pointer;
 }
 .logo .osm-logo{
-    background:url(../assets/images/osm-logo.png);
+    background:url(../assets/images/white-osm.png);
     height: 35px;
     width: 130px;
     background-size: 130px 35px;
@@ -39,7 +39,17 @@
     margin-right: 50px;
     top: 20px;
     position: relative;
-
+}
+.home-panel:hover .osm-logo{
+    background: url(../assets/images/osm-logo.png);
+    height: 35px;
+    width: 130px;
+    background-size: 130px 35px;
+    box-sizing: inherit;
+    margin-left: 50px;
+    margin-right: 50px;
+    top: 20px;
+    position: relative;
 }
 .home-panel__about{
     position: absolute;
@@ -61,13 +71,13 @@
     position: absolute;
     top: 27px;
     font-size: 15px;
-    left: 10px;
+    left: 5px;
 }
 .icon-sp{
     position: absolute;
     top: 27px;
     font-size: 15px;
-    left: 20px;
+    left: 5px;
 }
 .home-panel__support{
     position: absolute;
@@ -85,12 +95,6 @@
     border-top-color: #4eb7f5;
     border-top-style: solid;
     border-top-width: 5px;
-}
-.home-panel__support .icon-down{
-    position: absolute;
-    top: 28px;
-    font-size: 13px;
-    right: 20px;
 }
 .home-panel .home-panel__button{
     position: relative;
@@ -130,10 +134,10 @@
 }
 .body{
     position: relative;
-    top: 5%;
-    width: 240px;
+    top: 7%;
+    width: 600px;
     height: auto;
-    max-width: 300px;
+    max-width: 600px;
     text-align: center;
     color: white;
     font-weight: bold;

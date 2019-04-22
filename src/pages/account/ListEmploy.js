@@ -1,95 +1,19 @@
-import React, { PureComponent, Suspense, Component } from 'react'
-import { Icon, Steps, Tabs, message, Input, Card, Table, Button, Avatar } from 'antd'
+import React, {Component} from 'react'
+import {Input, Card, Table, Button, Avatar, Popconfirm, Icon } from 'antd'
 import Highlighter from 'react-highlight-words'
 import dog from '../../assets/icons/dog.png'
 import cat from '../../assets/icons/cat.png'
 import beer from '../../assets/icons/beer.png'
 import girafee from '../../assets/icons/girafee.png'
 import bee from '../../assets/icons/bee.png'
-
-import WrappedStep1 from './Step1'
-import WrappedStep2 from './Step2'
-import WrappedStep3 from './Step3'
-class TabChange extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            current: 0,
-            loading: false
-        }
-    }
-
-    next() {
-        const current = this.state.current + 1;
-        this.setState({ loading: true })
-        setTimeout(() => {
-            this.setState({
-                current, loading: false
-            });
-        }, 1000);
-    }
-    prev() {
-        const current = this.state.current - 1;
-        this.setState({ current });
-    }
-    fini() {
-        const current = this.state.current + 1
-        this.setState({ loading: true })
-        message.loading('Confirming', 2.5)
-            .then(() => message.success('Finished', 2.5))
-        setTimeout(() => {
-            this.setState({
-                current, loading: false
-            });
-        }, 3000);
-    }
-    init() {
-        this.setState({ current: 0 })
-    }
-    render() {
-        const steps = [
-            {
-                title: 'Khởi tạo thông tin',
-                content: <WrappedStep1 next={this.next.bind(this)} loading={this.state.loading} />,
-                icon: <Icon type="solution" />
-            },
-            {
-                title: 'Mật khẩu',
-                content: <WrappedStep2 finish={this.fini.bind(this)} prev={this.prev.bind(this)} loading={this.state.loading} />,
-                icon: <Icon type="lock" />
-            },
-            {
-                title: 'Xong!',
-                content: <WrappedStep3 init={this.init.bind(this)} />,
-                icon: <Icon type="smile" />
-            },
-        ]
-        const current = this.state.current
-        return (
-            <Suspense >
-                <Tabs >
-                    <Tabs.TabPane tab={<span><Icon type="table" />Danh sách</span>} key='1'>
-                        <ListEmploy />
-                     </Tabs.TabPane>
-                    <Tabs.TabPane tab={<span><Icon type="team" />Thêm nhân viên</span>} key='2'>
-                        <Steps current={current}>
-                            {steps.map(item => <Steps.Step icon={item.icon} key={item.title} title={item.title} />)}
-                        </Steps>
-                        <div className="steps-content">{steps[current].content}</div>
-                    </Tabs.TabPane>
-
-                </Tabs>
-            </Suspense >
-        );
-    }
-}
 const data = []
 for (let i = 0; i < 20; i++) {
     data.push({
+        key: `${i+1}`,  
         id: Math.floor(Math.random() * 999) + 1,
-        name: `Nhân viên ${i}`,
+        tên: `Nhân viên ${i}`,
         email: 'email@osm.vn',
-        rank: 'Nhân viên',
+        hạng: 'Nhân viên',
         ava: Math.floor(Math.random() * 5)
     })
 }
@@ -99,7 +23,8 @@ class ListEmploy extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchText: ''
+            searchText: '',
+            dataSource: data
         }
     }
     getColumnSearchProps = (dataIndex) => ({
@@ -109,7 +34,7 @@ class ListEmploy extends Component {
                 <div style={{ padding: 8 }}>
                     <Input
                         ref={node => { this.searchInput = node; }}
-                        placeholder={`Search ${dataIndex}`}
+                        placeholder={`Tìm ${dataIndex}`}
                         value={selectedKeys[0]}
                         onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
                         onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
@@ -129,6 +54,7 @@ class ListEmploy extends Component {
                         shape='round'
                         onClick={() => this.handleReset(clearFilters)}
                         size="small"
+                        icon='redo'
                         style={{ width: 90 }}
                     >
                         Reset
@@ -167,6 +93,12 @@ class ListEmploy extends Component {
         clearFilters();
         this.setState({ searchText: '' });
     }
+
+    handleDelete = (key) => {
+        const dataSource = [...this.state.dataSource];
+        this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
+        
+    }
     render() {
         const columns = [
         {
@@ -178,8 +110,7 @@ class ListEmploy extends Component {
                 return <Avatar src={ava[val]}/>
             }
 
-        },
-        {
+        }, {
             align: 'center',
             title: 'ID',
             dataIndex: 'id',
@@ -189,8 +120,8 @@ class ListEmploy extends Component {
         }, {
             align: 'center',
             title: 'Họ Tên',
-            dataIndex: 'name',
-            ...this.getColumnSearchProps('name'),
+            dataIndex: 'tên',
+            ...this.getColumnSearchProps('tên'),
         }, {
             align: 'center',
             title: 'Email',
@@ -199,16 +130,33 @@ class ListEmploy extends Component {
         }, {
             align: 'center',
             title: 'Cấp bậc',
-            dataIndex: 'rank',
-            ...this.getColumnSearchProps('rank'),
+            dataIndex: 'hạng',
+        }, {
+            align: 'center',
+            title: 'Xóa tài khoản',
+            dataIndex: 'action',
+            render: (text, record) => (
+                this.state.dataSource.length >= 1
+                  ? (
+                    <Popconfirm title="Chắc chắn muốn xóa?" 
+                        placement='topRight' 
+                        onConfirm={() => this.handleDelete(record.key)}
+                        icon={<Icon type='rest' theme='filled' style={{color: '#0077ff'}}/>}
+                        okText='Có'
+                        cancelText='Không'>
+                        <a href="javascript:;">Xóa</a>
+                    </Popconfirm>
+                  ) : null
+              ),
+              
         },
         ]
         return (
-            <div>
+            <div>     
                 <Card loading={this.props.loading} style={{ margin: 15 }}>
                     <div className='ListTab'>
                         <Table title={header}
-                            dataSource={data}
+                            dataSource={this.state.dataSource}
                             columns={columns}
                         />
                     </div>
@@ -218,5 +166,4 @@ class ListEmploy extends Component {
     }
 
 }
-
-export default TabChange
+export default ListEmploy

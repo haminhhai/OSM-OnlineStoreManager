@@ -3,7 +3,6 @@ import '../../styles/resetpw.css'
 import { Link } from 'react-router-dom'
 import Pic from '../../assets/images/forgot.jpg'
 import { Input, Button, notification } from 'antd'
-import {Redirect} from 'react-router-dom'
 import * as types from '../constans/index'
 import Img from '../../assets/images/city.png'
 
@@ -39,17 +38,16 @@ class NewPW extends React.Component {
             })
         else if (password !== confirm && (password !== '' && confirm !== ''))
             notify = notification.open({
-                message: types.INCOMPLETE_INFORMATION,
-                description: types.BD_INCOMPLETE_CONFIRM_PASSWORD,
-                icon: types.ICON_INCOMPLETE,
+                message: types.MESSAGE_FAILED,
+                description: types.RC_MESSAGE_WRONG_CONFIRMPASSWORD,
+                icon: types.ICON_FAILED,
             })
         else 
             {notify = notification.open({
                 message: types.MESSAGE_SUCCESS,
                 description: types.BD_RESET_PASSWORD_SUCCESS,
                 icon: types.ICON_SUCCESS,
-            })
-            return <Redirect to='/signin' />}
+            })}
         return notify
     }
     render() {
@@ -84,7 +82,7 @@ class NewPW extends React.Component {
                                 onPressEnter={this.onSubmit}/>
                         </label>
                         <Button className="send-btn" onClick={this.onSubmit}>Yêu cầu mật khẩu mới</Button>
-                        <p>Quay lại <Link to='/signin' className='login-link'>Đăng nhập</Link></p>
+                        <p>Quay lại <Link to='/signin&signup' className='login-link'>Đăng nhập</Link></p>
                     </div>
                 </div>
                 <ul className="bg-bubbles">
