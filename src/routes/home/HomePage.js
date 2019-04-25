@@ -2,6 +2,7 @@ import React from 'react'
 import { Icon, Button, Menu, Dropdown } from 'antd'
 import { Link } from 'react-router-dom'
 import '../../styles/home.css'
+import logo from '../../assets/icons/symbol.png'
 
 class HomePage extends React.Component {
     render() {
@@ -44,8 +45,10 @@ class HomePage extends React.Component {
                     </Link>
 
                 </div>
+                
                 <div className='body'>
-                    Chào mừng tới <br />Online Store Management!
+                    <img src={logo} alt='' />
+                    <h1>Chào mừng tới <br />Online Store Management!</h1>
                 </div>
             </div>
         );

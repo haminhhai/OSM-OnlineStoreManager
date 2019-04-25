@@ -35,9 +35,9 @@ class ManageLayout extends React.Component {
     render() {
         const { match } = this.props.match
         const url = match.url
-        if(sessionStorage.length === 0)
+        if (sessionStorage.length === 0)
             return <Redirect to='/signin&signup' />
-        
+
         return (
             <div className='layout-ant'>
                 <Layout>
@@ -50,28 +50,29 @@ class ManageLayout extends React.Component {
                             <img src={Pic} alt='' />
                             <h1 >OSM</h1>
                         </div>
-                        <Menu theme='dark' mode="inline" selectedKeys={this.state.key} defaultSelectedKeys={['1']} >
+                        <Menu theme='dark' mode="inline" selectedKeys={this.state.key} defaultSelectedKeys={['1']} 
+                            >
                             <Menu.Item key="1" onClick={this.changeOption}>
                                 <Link to={`${url}/dashboard`}>
-                                    <Icon type="dashboard" />
+                                    <Icon type="dashboard" theme="filled" style={{ fontSize: '18px' }}/>
                                     <span>{options[0].title}</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="2" onClick={this.changeOption}>
                                 <Link to={`${url}/payment`}>
-                                    <Icon type="credit-card" />
+                                    <Icon type="credit-card" theme="filled" style={{ fontSize: '18px' }}/>
                                     <span>{options[1].title}</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="3" onClick={this.changeOption}>
                                 <Link to={`${url}/checkout`}>
-                                    <Icon type="security-scan" />
+                                    <Icon type="security-scan" theme="filled" style={{ fontSize: '18px' }}/>
                                     <span>{options[2].title}</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="4" onClick={this.changeOption}>
                                 <Link to={`${url}/account`}>
-                                    <Icon type='user' />
+                                    <Icon type="idcard" theme="filled" style={{ fontSize: '18px' }}/>
                                     <span>{options[3].title}</span>
                                 </Link>
                             </Menu.Item>
@@ -85,7 +86,7 @@ class ManageLayout extends React.Component {
                                 type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                                 onClick={this.toggle}
                             />
-                            <Header compo={this.changeOption.bind(this)}/>
+                            <Header compo={this.changeOption.bind(this)} />
                         </Layout.Header>
                         <Layout.Content >
                             <Route path='/:id/:name' component={Content} />

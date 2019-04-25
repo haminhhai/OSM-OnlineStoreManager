@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Open Sans', sans-serif;
 }
 .wrapper404{
   background: url(../assets/images/ufo.png);
@@ -75,10 +76,9 @@ input, button {
   width: 900px;
   height: 550px;
   margin: 0 auto 60px;
-  background: #ededed;
+  background: #ffffff;
   box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
   z-index: 1;
- background: url(../assets/images/global.png);
  
 }
 
@@ -100,12 +100,12 @@ input, button {
   width: 900px;
   height: 100%;
   padding-left: 260px;
-  background: #ededed;
+  background: #ffffff;
   transition: -webkit-transform 1.2s ease-in-out;
   transition: transform 1.2s ease-in-out;
   transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
   box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
-  background: url(../assets/images/gloreverse.png);
+
 }
 .cont.s--signup .sub-cont {
   -webkit-transform: translate3d(-640px, 0, 0);
@@ -429,7 +429,7 @@ input {
 
 .sign-in {
   transition-timing-function: ease-out;
-  font-family: Avenir,Helvetica Neue,Arial,Helvetica,sans-serif;
+ 
 }
 .sign-in > h4{
   font-weight: bold;
@@ -455,7 +455,7 @@ input {
 .sign-up {
   -webkit-transform: translate3d(-900px, 0, 0);
   transform: translate3d(-900px, 0, 0);
-  font-family: Avenir,Helvetica Neue,Arial,Helvetica,sans-serif;
+  
 }
 .cont.s--signup .sign-up {
   transition-timing-function: ease-in-out;

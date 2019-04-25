@@ -1,3 +1,9 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+  }
 .db-wrapper{
     width: 100%;
     height: 100%;
@@ -26,6 +32,7 @@
     box-shadow: 2px 0 6px rgba(0,21,41,.35);
     text-rendering: optimizeLegibility;
     min-height: 100vh;
+
    ;
 }
 
@@ -87,17 +94,12 @@
 .notice-ant{
     text-align: right;
     position: relative;
-    top: -60px;
+    top: -64px;
     height: 64px;
     line-height: 64px;
     padding: 0 32px;
     right: 0px;
     width: 1500px auto;
-}
-.notice-icon{
-    position: relative;
-    
-    top: -63px;
 }
 .dropdown-user{
     position: relative;

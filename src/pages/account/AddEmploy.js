@@ -1,5 +1,5 @@
 import React, { PureComponent, Suspense, } from 'react'
-import { Icon, Steps, Tabs, message, } from 'antd'
+import { Icon, Steps, Tabs, message, Tooltip, } from 'antd'
 import ListEmploy from './ListEmploy'
 
 
@@ -12,7 +12,7 @@ class AddEmploy extends PureComponent {
         this.state = {
             current: 0,
             loading: false,
-            
+
         }
     }
 
@@ -65,16 +65,15 @@ class AddEmploy extends PureComponent {
         return (
             <Suspense >
                 <Tabs >
-                    <Tabs.TabPane tab={<span><Icon type="table" />Danh sách</span>} key='1'>
+                    <Tabs.TabPane tab={<Tooltip title='Chỉ dành cho quản lý'><Icon type="table" />Danh sách</Tooltip>} key='1'>
                         <ListEmploy />
-                     </Tabs.TabPane>
-                    <Tabs.TabPane tab={<span><Icon type="team" />Thêm nhân viên</span>} key='2'>
+                    </Tabs.TabPane>
+                    <Tabs.TabPane tab={<Tooltip title='Chỉ dành cho quản lý'><Icon type="team" />Thêm nhân viên</Tooltip>} key='2'>
                         <Steps current={current}>
-                            {steps.map(item => <Steps.Step icon={item.icon} key={item.title} title={item.title} />)}
+                            {steps.map(item =><Steps.Step icon={item.icon} key={item.title} title={item.title} />)}
                         </Steps>
                         <div className="steps-content">{steps[current].content}</div>
                     </Tabs.TabPane>
-
                 </Tabs>
             </Suspense >
         );

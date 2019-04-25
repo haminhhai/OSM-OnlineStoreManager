@@ -24,7 +24,8 @@ class ListEmploy extends Component {
         super(props);
         this.state = {
             searchText: '',
-            dataSource: data
+            dataSource: data,
+            loading: false
         }
     }
     getColumnSearchProps = (dataIndex) => ({
@@ -96,7 +97,14 @@ class ListEmploy extends Component {
 
     handleDelete = (key) => {
         const dataSource = [...this.state.dataSource];
-        this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
+        this.setState({loading: true})
+        setTimeout(() => {
+            this.setState({ 
+                dataSource: dataSource.filter(item => item.key !== key),
+                loading: false
+            });
+        }, 1000);
+        
         
     }
     render() {
@@ -156,6 +164,7 @@ class ListEmploy extends Component {
                 <Card loading={this.props.loading} style={{ margin: 15 }}>
                     <div className='ListTab'>
                         <Table title={header}
+                            loading={this.state.loading}
                             dataSource={this.state.dataSource}
                             columns={columns}
                         />
