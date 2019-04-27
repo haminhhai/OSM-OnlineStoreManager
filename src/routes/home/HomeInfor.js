@@ -1,21 +1,25 @@
 import React from 'react'
 import { BackTop } from 'antd'
+import pxl from '../../assets/images/pxl.PNG'
+
 class HomeInfor extends React.Component {
     render() {
         return (
             <div className='home-page page1'>
                 <BackTop />
+                <div className='bg-top'/>
+                
                 <div className="home-page-wrapper" id="page1-wrapper">
-                    <div className="page1-bg" style={{ transform: 'translate(0px,180px)' }}>Feature</div>
+                    <div className="page1-bg" style={{ transform: 'translate(0px,400px)' }}>Feature</div>
                     <h2><span>OSM</span> có thể làm gì cho bạn </h2>
                     <div className="title-line-wrapper page1-line">
                         <div className="title-line" />
                     </div>
+                    <img className='sketch' src={pxl} alt=''/>
                     <div>
                         <ul className="page1-box-wrapper" >
                             <li style={{ opacity: 1, transform: 'translate(0px)' }} >
                                 <div className="page1-box">
-
                                     <div className="page1-image" style={{ boxShadow: 'rgba(26, 196, 77, 0.12) 0px 6px 12px' }}>
                                         <img src="https://gw.alipayobjects.com/zos/rmsportal/BISfzKcCNCYFmTYcUygW.svg" alt="img" />
                                     </div>
@@ -25,7 +29,6 @@ class HomeInfor extends React.Component {
                             </li>
                             <li style={{ opacity: 1, transform: 'translate(0px)' }}>
                                 <div className="page1-box">
-
                                     <div className="page1-image" style={{ boxShadow: 'rgba(47, 84, 235, 0.12) 0px 6px 12px' }}>
                                         <img src="https://gw.alipayobjects.com/zos/rmsportal/smwQOoxCjXVbNAKMqvWk.svg" alt="img" />
                                     </div><h3>Giao diện thân thiện</h3>
@@ -44,7 +47,6 @@ class HomeInfor extends React.Component {
                         <ul className="page1-box-wrapper">
                             <li style={{ opacity: 1, transform: 'translate(0px)' }} >
                                 <div className="page1-box">
-
                                     <div className="page1-image" style={{ boxShadow: 'rgba(250, 140, 22, 0.12) 0px 6px 12px' }}>
                                         <img src="https://gw.alipayobjects.com/zos/rmsportal/pbmKMSFpLurLALLNliUQ.svg" alt="img" />
                                     </div>
@@ -54,7 +56,6 @@ class HomeInfor extends React.Component {
                             </li>
                             <li style={{ opacity: 1, transform: 'translate(0px)' }} >
                                 <div className="page1-box">
-
                                     <div className="page1-image" style={{ boxShadow: 'rgba(250, 173, 20, 0.12) 0px 6px 12px' }}>
                                         <img src="https://gw.alipayobjects.com/zos/rmsportal/XxqEexmShHOofjMYOCHi.svg" alt="img" style={{ marginLeft: '-15px' }} />
                                     </div>
@@ -64,7 +65,6 @@ class HomeInfor extends React.Component {
                             </li>
                             <li style={{ opacity: 1, transform: 'translate(0px)' }} >
                                 <div className="page1-box">
-
                                     <div className="page1-image" style={{ boxShadow: 'rgba(24, 144, 255, 0.12) 0px 6px 12px' }}>
                                         <img src="https://gw.alipayobjects.com/zos/rmsportal/RpJIQitGbSCHwLMimybX.svg" alt="img" />
                                     </div>
@@ -73,9 +73,10 @@ class HomeInfor extends React.Component {
                                 </div>
                             </li>
                         </ul>
-
                     </div>
+                    
                 </div>
+                <div className='bg-bot'/>
             </div>
         );
     }

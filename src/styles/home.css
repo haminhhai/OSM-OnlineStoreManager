@@ -159,42 +159,69 @@
     border-radius: 50px;
 }
 .title-line-wrapper {
-    height:3px;
+    height:5px;
     width:100%;
     overflow:hidden;
 }
 .title-line-wrapper .title-line {
     height:100%;
-    width:64px;
-    -webkit-transform:translateX(-64px);
-    transform: translateX(-64px);
-    background: -moz-linear-gradient(left, rgba(24,144,255,0), #1890ff);
-    background:linear-gradient(90deg,rgba(24,144,255,0) 0,#1890ff)
+    width:100px;
+    -webkit-transform:translateX(-100px);
+    transform: translateX(-100px);
+    background: -moz-linear-gradient(left, rgba(24,144,255,0), #0583F2);
+    background:linear-gradient(90deg,rgba(24,144,255,0) 0,#0583F2)
+}
+.bg-top{
+    width: 100%;
+    height: 100%;
+    margin-top: -100px;
+    margin-bottom: -1000px;
+    background: url(../assets/images/bg-top.png);
+    background-size: 100% 100%;
+}
+.bg-bot{
+    margin-top: -300px;
+    min-width: 1080px;
+    min-height: 322px;
+    width: auto;
+    height: auto;
+    background: url(../assets/images/bg-bot.png);
+    background-size: 100% 100%;
 }
 .home-page {
-    margin:50px auto
+    margin:50px auto;
+    font-family: 'Roboto', sans-serif;
+    
 }
 .home-page h2 {
     text-align:center;
     font-weight:300;
     font-size:28px;
     color:#314659;
-    letter-spacing:.6px
+    letter-spacing:.6px;
+    font-size: 4.235801032rem;
+    font-weight: 700;
 }
 .home-page h2 span {
-    font-weight:600
+    color: #1890ff;
 }
 .home-page-wrapper {
     max-width:1280px;
     width:100%;
     margin:auto;
-    position:relative
+    position:relative;
 }
 .page1 {
-    height:760px
+    height:1160px;
+}
+.page1 .sketch{
+    width: 70%;
+    text-align: center;
+    margin-top: -50px;
+    margin-left: 15%;
 }
 .page1-line.title-line-wrapper {
-    width:312px;
+    width:896px;
     margin:24px auto 76px
 }
 .page1-line.title-line-wrapper .title-line {
@@ -257,8 +284,8 @@
 @-webkit-keyframes page1TitleLine {
     0%,
     25% {
-     -webkit-transform:translateX(-64px);
-     transform:translateX(-64px)
+     -webkit-transform:translateX(-100px);
+     transform:translateX(-100px)
     }
     75%,
     to {
@@ -269,13 +296,13 @@
    @keyframes page1TitleLine {
     0%,
     25% {
-     -webkit-transform:translateX(-64px);
-     transform:translateX(-64px)
+     -webkit-transform:translateX(-100px);
+     transform:translateX(-100px)
     }
     75%,
     to {
-     -webkit-transform:translateX(376px);
-     transform:translateX(376px)
+     -webkit-transform:translateX(300px);
+     transform:translateX(900px)
     }
    }
 @media only screen and (max-width:480px) {
