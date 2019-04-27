@@ -17,7 +17,7 @@ class Signinup extends React.Component {
             loading: false,
         }
     }
-    
+
     changeMail = (e) => {
         console.log(e.target)
         this.setState({ email: e.target.value })
@@ -53,46 +53,48 @@ class Signinup extends React.Component {
             this.setState({ password: '' })
         }
         else {
-           
-            this.setState({ loading: true})
+
+            this.setState({ loading: true })
             setTimeout(() => {
-                notify= message.success(types.BD_MESSAGE_SUCCESS)
-                this.setState({redir: true})
+                notify = message.success(types.BD_MESSAGE_SUCCESS)
+                this.setState({ redir: true })
             }, 2000);
         }
         return notify
     }
     render() {
-        if(this.state.redir)
-            {
-                sessionStorage.setItem("verify", true)
-                return <Redirect to='/osm/dashboard' />
-            }
+        if (this.state.redir) {
+            sessionStorage.setItem("verify", true)
+            return <Redirect to='/osm/dashboard' />
+        }
         console.log(sessionStorage.getItem("verify"))
         return (
             <div className="form sign-in">
+                <div className="title-line-wrapper1" style={{ opacity: 1, transform: 'translate(0px)' }}>
+                    <div className="title-line" style={{ transform: 'translateX(-64px)' }} />
+                </div>
                 <h2>Đăng nhập OSM,</h2>
                 <h4>E-mail</h4>
                 <label>
-                    <Input className='input-in' 
-                    type="email" 
-                    value={this.state.email} 
-                    onChange={this.changeMail} 
-                    placeholder='123@osm.vn' 
-                    onPressEnter={this.onSubmit}/>
+                    <Input className='input-in'
+                        type="email"
+                        value={this.state.email}
+                        onChange={this.changeMail}
+                        placeholder='123@osm.vn'
+                        onPressEnter={this.onSubmit} />
                 </label>
                 <h4>Mật khẩu</h4>
                 <label>
-                    <Input className='input-in' 
-                    type="password" 
-                    value={this.state.password} 
-                    onChange={this.changePW} 
-                    placeholder='123' 
-                    onPressEnter={this.onSubmit}/>
+                    <Input className='input-in'
+                        type="password"
+                        value={this.state.password}
+                        onChange={this.changePW}
+                        placeholder='123'
+                        onPressEnter={this.onSubmit} />
                 </label>
                 <Link to='/send-mail' className="forgot-pass">Quên mật khẩu?</Link>
                 <Button className="submit" onClick={this.onSubmit} loading={this.state.loading}>Đăng nhập</Button>
-                
+
             </div>
 
 

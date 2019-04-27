@@ -436,14 +436,12 @@ input {
   margin-bottom: -20px;
   color: rgba(0,0,0,.85);
   text-align: center;
-  text-transform: uppercase;
 }
 .sign-up > h4{
   font-weight: bold;
   margin-bottom: -20px;
   color: rgba(0,0,0,.85);
   text-align: center;
-  text-transform: uppercase
 }
 .cont.s--signup .sign-in {
   transition-timing-function: ease-in-out;
@@ -645,6 +643,38 @@ input {
 	-webkit-animation-delay: 13s;
 			animation-delay: 13s;
   }
+  .title-line{
+    -webkit-transform:translateX(-64px);
+    transform:translateX(-64px);
+    -webkit-animation:bannerTitleLine 3s ease-in-out 0s infinite;
+    animation:bannerTitleLine 3s ease-in-out 0s infinite
+  }
+  .title-line-wrapper1 {
+    height:3px;
+    width:100%;
+    overflow:hidden;
+   }
+  .title-line-wrapper1 .title-line {
+    height:100%;
+    width:64px;
+    -webkit-transform:translateX(-64px);
+    transform: translateX(-64px);
+    background: -moz-linear-gradient(left, rgba(24,144,255,0), #1890ff);
+    background:linear-gradient(90deg,rgba(24,144,255,0) 0,#1890ff)
+   }
+   .title-line-wrapper2 {
+    height:3px;
+    width:100%;
+    overflow:hidden;
+   }
+  .title-line-wrapper2 .title-line {
+    height:100%;
+    width:64px;
+    -webkit-transform:translateX(-64px);
+    transform: translateX(-64px);
+    background: -moz-linear-gradient(left, rgba(24,144,255,0), #ef5350);
+    background:linear-gradient(90deg,rgba(24,144,255,0) 0,#ef5350)
+   }
   @-webkit-keyframes square {
 	0% {
 	  -webkit-transform: translateY(0);
@@ -665,6 +695,30 @@ input {
 			  transform: translateY(-1000px) rotate(600deg);
 	}
   }
+  @-webkit-keyframes bannerTitleLine {
+    0%,
+    25% {
+     -webkit-transform:translateX(-64px);
+     transform:translateX(-64px)
+    }
+    75%,
+    to {
+     -webkit-transform:translateX(544px);
+     transform:translateX(544px)
+    }
+   }
+   @keyframes bannerTitleLine {
+    0%,
+    25% {
+     -webkit-transform:translateX(-64px);
+     transform:translateX(-64px)
+    }
+    75%,
+    to {
+     -webkit-transform:translateX(574px);
+     transform:translateX(574px)
+    }
+   }
   
 
 

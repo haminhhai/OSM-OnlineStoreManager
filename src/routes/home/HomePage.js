@@ -3,6 +3,7 @@ import { Icon, Button, Menu, Dropdown } from 'antd'
 import { Link } from 'react-router-dom'
 import '../../styles/home.css'
 import logo from '../../assets/icons/symbol.png'
+import HomeInfor from './HomeInfor';
 
 class HomePage extends React.Component {
     render() {
@@ -23,33 +24,35 @@ class HomePage extends React.Component {
             </Menu>
         )
         return (
-            <div className='background'>
-                <div className='home-panel'>
-                    <div className='logo'>
-                        <div className='osm-logo' />
-                    </div>
-                    <Dropdown className='home-panel__about' overlay={menu}>
-                        <span>
-                            <Icon type='profile' className='icon-about' theme='filled' />
-                            Thành viên
+            <div>
+                <div className='background'>
+                    <div className='home-panel'>
+                        <div className='logo'>
+                            <div className='osm-logo' />
+                        </div>
+                        <Dropdown className='home-panel__about' overlay={menu}>
+                            <span>
+                                <Icon type='profile' className='icon-about' theme='filled' />
+                                Thành viên
                         </span>
-                    </Dropdown>
-                    <div className='home-panel__support'>
-                        <Icon type="question-circle" theme='filled' className='icon-sp' />
-                        Hướng dẫn
-                    </div>
-                    <Link to='/signin&signup'>
-                        <Button className='home-panel__button' shape="round">
-                            Đăng nhập
+                        </Dropdown>
+                        <div className='home-panel__support'>
+                            <Icon type="github" theme="filled" className='icon-sp' />
+                            Github
+                        </div>
+                        <Link to='/signin&signup'>
+                            <Button className='home-panel__button' shape="round">
+                                Đăng nhập
                         </Button>
-                    </Link>
+                        </Link>
+                    </div>
+                    <div className='body'>
+                        <img src={logo} alt='' />
+                        <h1>Chào mừng tới <br />Online Store Management!</h1>
+                    </div>
 
                 </div>
-                
-                <div className='body'>
-                    <img src={logo} alt='' />
-                    <h1>Chào mừng tới <br />Online Store Management!</h1>
-                </div>
+                <HomeInfor />
             </div>
         );
     }

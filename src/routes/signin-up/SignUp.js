@@ -42,7 +42,7 @@ class Signinup extends React.Component {
                 icon: types.ICON_FAILED,
             })
         else {
-            notify= message.success(types.BD_REGISTER_SUCCESS)
+            notify = message.success(types.BD_REGISTER_SUCCESS)
             this.myFunction()
         }
 
@@ -52,6 +52,7 @@ class Signinup extends React.Component {
     render() {
         return (
             <div className="sub-cont">
+
                 <div className="img">
                     <div className="img__text m--up">
                         <h2 className='txt-tranform'>Bạn chưa có tài khoản?</h2>
@@ -67,6 +68,9 @@ class Signinup extends React.Component {
                     </div>
                 </div>
                 <div className="form sign-up">
+                    <div className="title-line-wrapper2" style={{ opacity: 1, transform: 'translate(0px)' }}>
+                        <div className="title-line" style={{ transform: 'translateX(-64px)' }} />
+                    </div>
                     <h2>Tạo tài khoản OSM,</h2>
                     <h4>Họ và tên</h4>
                     <label >
