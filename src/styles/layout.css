@@ -11,6 +11,14 @@
 .layout-ant{
     height: 100%;
 }
+.footer{
+    height: 100%;
+    width: 100%;
+    background: url('https://gw.alipayobjects.com/zos/rmsportal/ZsWYzLOItgeaWDSsXdZd.svg') no-repeat bottom;
+    background-size: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
 .trigger {
     font-size: 18px;
     line-height: 64px;

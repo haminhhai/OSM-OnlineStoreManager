@@ -1,8 +1,8 @@
 import React from 'react'
-import Dashboard from '../../pages/dashboard/Dashboard'
+import Dashboard from '../../pages/dashboard/Dashboard.jsx'
 import Payment from '../../pages/payments/Payment'
 import Checkout from '../../pages/checkouts/Checkout'
-import Account from '../../pages/account/Account'
+import Account from '../../pages/account/Account.jsx'
 
 
 const routes = [

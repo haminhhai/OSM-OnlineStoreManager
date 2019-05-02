@@ -9,6 +9,8 @@
     "jquery": "^3.4.0",
     "moment": "^2.24.0",
     "node-sass": "^4.11.0",
+    "rc-queue-anim": "^1.6.12",
+    "rc-scroll-anim": "^2.5.7",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-highlight-words": "^0.16.0",

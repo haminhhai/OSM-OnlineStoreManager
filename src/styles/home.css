@@ -138,6 +138,13 @@
 .home-panel .home-panel__button:focus{
     box-shadow: 0 0 3px 1px #3899ec, 0 0 1px 0 hsla(0, 0%, 100%, 9);
 }
+.banner0-icon{
+    font-size: 30px;
+    position: absolute;
+    right: 9.2%;
+    margin-top: -345px;
+    color: #fff;
+}
 .body{
     position: relative;
     height: auto;
@@ -180,7 +187,7 @@
     background-size: 100% 100%;
 }
 .bg-bot{
-    margin-top: -300px;
+    margin-top: -100px;
     min-width: 1080px;
     min-height: 322px;
     width: auto;
@@ -214,11 +221,11 @@
 .page1 {
     height:1160px;
 }
-.page1 .sketch{
-    width: 70%;
+.page1 .banner{
+    width: 100%;
     text-align: center;
     margin-top: -50px;
-    margin-left: 15%;
+    margin-bottom: 20px;
 }
 .page1-line.title-line-wrapper {
     width:896px;
@@ -228,17 +235,17 @@
     -webkit-animation:page1TitleLine 3s ease-in-out 1.5s infinite;
     animation:page1TitleLine 3s ease-in-out 1.5s infinite
 }
+
 .page1-bg {
-    font-size:320px;
-    color:#e1e3e6;
-    position:absolute;
-    width:100%;
-    text-align:center;
-    opacity:.25;
-    margin-top:-120;
-    -webkit-transform:translateY(160px);
-    transform:translateY(160px)
-}
+    font-size: 320px;
+    color: #d9dbdf;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    opacity: .25;
+    top: 0;
+    transform: translateY(960px);
+  }
 .page1-box-wrapper {
     margin-bottom:62px;
     display:flex;
@@ -279,6 +286,40 @@
     color:#0d1a26;
     font-size:16px;
     margin:8px auto
+}
+.page1-point-wrapper {
+    position: absolute;
+    width: 0;
+    left: 50%;
+    top: 0;
+}
+.page1-point-wrapper .point-0 {
+    width: 4px;
+    height: 4px;
+}
+.page1-point-wrapper .point-2, .page1-point-wrapper .point-ring {
+    width: 10px;
+    height: 10px;
+}
+.page1-point-wrapper .point-ring {
+    border-style: solid;
+    border-width: 1px;
+    background: transparent !important;
+}
+.page1-point-wrapper .point-1 {
+    width: 6px;
+    height: 6px;
+}
+.page1-point-wrapper .point-3 {
+    width: 15px;
+    height: 15px;
+}
+.page1-point-wrapper i {
+    display: inline-block;
+    border-radius: 100%;
+    position: absolute;
+    opacity: 0;
+    transform: translate(0,30px);
 }
 
 @-webkit-keyframes page1TitleLine {
