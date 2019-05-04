@@ -19,7 +19,7 @@ const statusMap = [
 
 function handleToString(value) {
   var num = 0
-  num = Number(value).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' VND'
+  num = `${Number(value).toString()} đ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   return num
 }
 const data = []

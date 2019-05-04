@@ -1,0 +1,98 @@
+$blue: #5bb2ff;
+$f: #FFF;
+.payment-card{
+    margin: 15px;
+    .ant-select-search__field{
+        text-align: left;    
+    }
+    .ant-input-number-input{
+        top:0px;
+        margin-top: 0px;
+        
+    }
+    .ant-btn {
+        display:inline-block;
+        background-color: #459fed;
+        text-transform: uppercase;
+        border-radius:100px;
+        line-height:30px;
+        height: 40px;
+        width: 145px;
+        margin-top: 20px;
+        margin-right: 20px;
+        color:$f;
+        line-height: normal;
+        letter-spacing: normal;
+        cursor:pointer;
+        text-align: center;
+        -webkit-transition:border .2s ease,-webkit-box-shadow .2s ease;
+        -o-transition:box-shadow .2s ease,border .2s ease;
+        transition:box-shadow .2s ease,border .2s ease;
+        transition:box-shadow .2s ease,border .2s ease,-webkit-box-shadow .2s ease;
+        transition: background-color .2s linear;
+        font: {
+            weight: bold;
+            style: normal;
+            stretch: normal;
+            size:14px;
+            weight:700;
+        }
+      }
+      .ant-btn:focus,
+      .ant-btn:hover {
+        color: $f;
+        cursor:pointer;
+        -webkit-box-shadow:0 3px 15px 0 rgba(0,0,0,.25);
+        box-shadow:0 3px 15px 0 rgba(0,0,0,.25);
+        background-color: $blue;
+        -webkit-transition: background-color .2s linear;
+       
+      }
+      small{
+          font-size: 20px;
+          color: $blue
+      }
+      .ant-btn-sm{
+          text-align: center;
+          margin-left: -20px;
+      }
+}
+ .billInfor {
+     line-height: 22px;
+     .label {
+        color: rgba(0,0,0,0.45);
+        font-weight: bold;
+
+    }
+    :global .ant-row:not(:last-child) {
+        margin-bottom: 24px;
+   }
+    .ant-col-sm-13,
+    .ant-col-sm-16{
+        text-align: right;
+        color: #52c41a
+    } 
+}
+.res{
+    .antd-pro-result-success{
+        display: inline;
+    }
+    .antd-pro-result-extra{
+        margin-top: 30px;
+    }
+}
+.unRes{
+    .antd-pro-result-success{
+        display: none;
+    }
+    .antd-pro-result-extra{
+        margin-top: 159px;
+    }
+}
+.query{
+    position: absolute;
+    font-size: 75px;
+    margin-left: 187px;
+    margin-top: 23px;
+    
+}

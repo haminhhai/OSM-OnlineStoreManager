@@ -1,7 +1,7 @@
 import React from 'react'
 import Dashboard from '../../pages/dashboard/Dashboard.jsx'
-import Payment from '../../pages/payments/Payment'
-import Checkout from '../../pages/checkouts/Checkout'
+import Payment from '../../pages/payments/Payment.jsx'
+import Checkout from '../../pages/checkouts/Checkout.jsx'
 import Account from '../../pages/account/Account.jsx'
 
 

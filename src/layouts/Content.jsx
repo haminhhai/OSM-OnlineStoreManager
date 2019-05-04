@@ -10,7 +10,6 @@ class Content extends React.Component {
         const {match} = this.props
         const name = match.params.name
         var count = 0
-        console.log(match)
         for(var i=0;i<routes.length;i++)
             if(name === routes[i].name)
                 {
