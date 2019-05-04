@@ -1,3 +1,114 @@
+$blue: #5bb2ff;
+$f: #FFF;
+.ant-input-number-input{
+  margin-top: -2px;
+  height: 32px;
+  
+}
 .checkout-card{
     margin: 15px;
+    .editable-row .ant-form-explain {
+        position: absolute;
+        font-size: 12px;
+        margin-top: -4px;
+        margin-left: 5px;
+      }
+      .ant-input-number-input-wrap{
+        width: 100%;
+      }
+      
+      .btns {
+        width: 100%;
+        text-align: center;
+        .ant-btn {
+          display:inline-block;
+          background-color: #459fed;
+          text-transform: uppercase;
+          border-radius:100px;
+          line-height:30px;
+          height: 45px;
+          width: 150px;
+          margin-top: 20px;
+          margin-right: 20px;
+          color:$f;
+          line-height: normal;
+          letter-spacing: normal;
+          cursor:pointer;
+          text-align: center;
+          -webkit-transition:border .2s ease,-webkit-box-shadow .2s ease;
+          -o-transition:box-shadow .2s ease,border .2s ease;
+          transition:box-shadow .2s ease,border .2s ease;
+          transition:box-shadow .2s ease,border .2s ease,-webkit-box-shadow .2s ease;
+          transition: background-color .2s linear;
+          font: {
+              weight: bold;
+              style: normal;
+              stretch: normal;
+              size:14px;
+              weight:700;
+          }
+        }
+        .ant-btn:focus,
+        .ant-btn:hover {
+          color: $f;
+          cursor:pointer;
+          -webkit-box-shadow:0 3px 15px 0 rgba(0,0,0,.25);
+          box-shadow:0 3px 15px 0 rgba(0,0,0,.25);
+          background-color: $blue;
+          -webkit-transition: background-color .2s linear;
+         
+        }
+        
+      }
+      
+}
+.ant-modal-close{
+  width: 50px;
+  
+}
+.modal-add{
+  .ant-modal-title{
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+  }
+  .ant-btn {
+    display:inline-block;
+    background-color: #459fed;
+    text-transform: uppercase;
+    border-radius:100px;
+    line-height:30px;
+    height: 45px;
+    width: 150px;
+    margin-right: 60px;
+    
+    color:$f;
+    line-height: normal;
+    letter-spacing: normal;
+    cursor:pointer;
+    text-align: center;
+    -webkit-transition:border .2s ease,-webkit-box-shadow .2s ease;
+    -o-transition:box-shadow .2s ease,border .2s ease;
+    transition:box-shadow .2s ease,border .2s ease;
+    transition:box-shadow .2s ease,border .2s ease,-webkit-box-shadow .2s ease;
+    transition: background-color .2s linear;
+    font: {
+        weight: bold;
+        style: normal;
+        stretch: normal;
+        size:14px;
+        weight:700;
+    }
+  }
+  .ant-btn:focus,
+  .ant-btn:hover {
+    color: $f;
+    cursor:pointer;
+    -webkit-box-shadow:0 3px 15px 0 rgba(0,0,0,.25);
+    box-shadow:0 3px 15px 0 rgba(0,0,0,.25);
+    background-color: $blue;
+    -webkit-transition: background-color .2s linear;
+   
+  }
 }
