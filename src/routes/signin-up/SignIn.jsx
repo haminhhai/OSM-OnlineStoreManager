@@ -1,64 +1,76 @@
 import React from 'react'
 import '../../styles/style.css'
-import { Button, Input, notification, message } from 'antd'
+import { Button, Input, notification } from 'antd'
 import { Link, Redirect } from 'react-router-dom'
 import * as types from '../constans/index.js'
-import { account } from '../constans/index'
-
+import callAPI from '../../utils/apiCaller'
 
 
 class Signinup extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            email: '',
+            username: '',
             password: '',
             redir: false,
             loading: false,
         }
     }
 
-    changeMail = (e) => {
+    changeusername = (e) => {
         console.log(e.target)
-        this.setState({ email: e.target.value })
+        this.setState({ username: e.target.value })
     }
     changePW = (e) => {
         this.setState({ password: e.target.value })
     }
     onSubmit = (e) => {
-        let { email, password } = this.state
+        let { username, password } = this.state
         var notify = ''
         e.preventDefault()
-        if (email === '' || password === '')
+        if (username === '' || password === '')
             notify = notification.open({
                 message: types.INCOMPLETE_INFORMATION,
                 description: types.BD_INCOMPLETE_INFORMATION,
                 icon: types.ICON_INCOMPLETE,
                 placement: "topLeft"
             })
-        else if (email !== '' && email !== account[0].mail)
-            notify = notification.open({
-                message: types.MESSAGE_FAILED,
-                description: types.BD_MESSAGE_FAILED_PHONE_NOT_EXIST,
-                icon: types.ICON_FAILED,
-                placement: "topLeft"
-            })
-        else if (password !== '' && password !== account[0].password) {
-            notify = notification.open({
-                message: types.MESSAGE_FAILED,
-                description: types.BD_MESSAGE_FAILED_WRONG_PASSWORD,
-                icon: types.ICON_FAILED,
-                placement: "topLeft"
-            })
-            this.setState({ password: '' })
-        }
         else {
-
-            this.setState({ loading: true })
-            setTimeout(() => {
-                notify = message.success(types.BD_MESSAGE_SUCCESS)
-                this.setState({ redir: true })
-            }, 2000);
+            let infoRequest = `/Outside/Login?USERNAME=${username}&PASSWORD=${password}`
+            callAPI(infoRequest, 'POST', null).then(res => {
+                this.setState({ code: res.data.code, message: res.data.message })
+                let code = this.state.code
+                let message = this.state.message
+                if (Number(code) === 400){
+                    if (message === "Không tồn tại tên đăng nhập"){
+                        notify = notification.open({
+                            message: types.MESSAGE_FAILED,
+                            description: types.BD_MESSAGE_FAILED_PHONE_NOT_EXIST,
+                            icon: types.ICON_FAILED,
+                            placement: "topLeft"
+                        })
+                        this.setState({username: '', password: ''})
+                    }
+                    else if (message === "Mật khẩu sai"){
+                        notify = notification.open({
+                            message: types.MESSAGE_FAILED,
+                            description: types.BD_MESSAGE_FAILED_WRONG_PASSWORD,
+                            icon: types.ICON_FAILED,
+                            placement: "topLeft"
+                        })
+                        this.setState({username: '', password: ''})
+                    }
+                }
+                else {
+                    this.setState({ loading: true, redir: true })
+                    notify = notification.open({
+                        message: types.MESSAGE_SUCCESS,
+                        description: types.BD_MESSAGE_SUCCESS,
+                        icon: types.ICON_SUCCESS,
+                        placement: "topLeft"
+                    })
+                }
+            })
         }
         return notify
     }
@@ -76,13 +88,13 @@ class Signinup extends React.Component {
                     <div className="title-line" style={{ transform: 'translateX(-64px)' }} />
                 </div>
                 <h2>Đăng nhập OSM,</h2>
-                <h4>E-mail</h4>
+                <h4>User name</h4>
                 <label>
                     <Input className='input-in'
-                        type="email"
-                        value={this.state.email}
-                        onChange={this.changeMail}
-                        placeholder='123@osm.vn'
+                        type="username"
+                        value={this.state.username}
+                        onChange={this.changeusername}
+                        placeholder='username'
                         onPressEnter={this.onSubmit} />
                 </label>
                 <h4>Mật khẩu</h4>
@@ -91,7 +103,7 @@ class Signinup extends React.Component {
                         type="password"
                         value={this.state.password}
                         onChange={this.changePW}
-                        placeholder='123'
+                        placeholder='password'
                         onPressEnter={this.onSubmit} />
                 </label>
                 <Link to='/send-mail' className="forgot-pass">Quên mật khẩu?</Link>
