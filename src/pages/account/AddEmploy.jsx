@@ -1,8 +1,7 @@
 import React, { PureComponent, Suspense, } from 'react'
 import { Icon, Steps, Tabs, message, Tooltip, } from 'antd'
 import ListEmploy from './ListEmploy'
-
-
+import Report from './Report'
 import WrappedStep1 from './Step1'
 import WrappedStep2 from './Step2'
 import WrappedStep3 from './Step3'
@@ -73,6 +72,9 @@ class AddEmploy extends PureComponent {
                             {steps.map(item =><Steps.Step icon={item.icon} key={item.title} title={item.title} />)}
                         </Steps>
                         <div className="steps-content">{steps[current].content}</div>
+                    </Tabs.TabPane>
+                    <Tabs.TabPane tab={<Tooltip title='Chỉ dành cho nhân viên'><Icon type="message" />Gửi phản hồi</Tooltip>} key='3'>
+                        <Report />
                     </Tabs.TabPane>
                 </Tabs>
             </Suspense >

@@ -19,6 +19,14 @@ class Step3 extends React.PureComponent {
                 </Row>
                 <Row>
                     <Col xs={24} sm={8} className='{label'>
+                        Username：
+                    </Col>
+                    <Col xs={24} sm={16}>
+                        {localStorage.getItem('username')}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={24} sm={8} className='{label'>
                         E-mail：
                     </Col>
                     <Col xs={24} sm={16}>
@@ -27,20 +35,13 @@ class Step3 extends React.PureComponent {
                 </Row>
                 <Row>
                     <Col xs={24} sm={8} className='{label'>
-                        Họ：
+                        Họ và tên：
                     </Col>
                     <Col xs={24} sm={16}>
-                        {localStorage.getItem('first')}
+                        {localStorage.getItem('fullname')}
                     </Col>
                 </Row>
-                <Row>
-                    <Col xs={24} sm={8} className='{label'>
-                        Tên：
-                    </Col>
-                    <Col xs={24} sm={16}>
-                        {localStorage.getItem('last')}
-                    </Col>
-                </Row>
+               
 
             </div>
         );

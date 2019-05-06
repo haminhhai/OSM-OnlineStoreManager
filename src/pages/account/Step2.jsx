@@ -6,16 +6,16 @@ class Step2 extends React.PureComponent {
         super(props);
         this.state = {
             email: '',
-            first: '',
-            last: '',
+            username: '',
+            fullname: '',
         }
     }
     componentDidMount() {
         if (localStorage.length !== 0)
             this.setState({
                 email: localStorage.getItem('email'),
-                first: localStorage.getItem('first'),
-                last: localStorage.getItem('last'),
+                username: localStorage.getItem('username'),
+                fullname: localStorage.getItem('fullname'),
             })
     }
     
@@ -29,7 +29,7 @@ class Step2 extends React.PureComponent {
     }
     render() {
         const { getFieldDecorator } = this.props.form;
-        const {email, first, last} = this.state
+        const {email, username, fullname} = this.state
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
@@ -53,22 +53,23 @@ class Step2 extends React.PureComponent {
                         label="Hạng"
                     >
                         Nhân viên
-                            </Form.Item>
+                    </Form.Item>
+                    <Form.Item
+                        label="Username"
+                    >
+                        {username}
+                    </Form.Item>
                     <Form.Item
                         label="E-mail"
                     >
                         {email}
-                            </Form.Item>
+                    </Form.Item>
+                    
                     <Form.Item
-                        label="Họ"
+                        label="Họ và tên"
                     >
-                        {first}
-                            </Form.Item>
-                    <Form.Item
-                        label="Tên"
-                    >
-                        {last}
-                            </Form.Item>
+                        {fullname}
+                    </Form.Item>
                     <Divider style={{ margin: '24px 0' }} />
                     <Form.Item {...formItemLayout} label="Mật khẩu" required={false}>
                         {getFieldDecorator('password', {

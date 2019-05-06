@@ -14,6 +14,7 @@ class Header extends React.Component {
 
     onLogout = () => {
         sessionStorage.clear()
+        localStorage.clear()
         message.warning("Bạn đã đăng xuất!")
     }
     render() {

@@ -1,27 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { Table, Card, Badge, Input, Button, Icon } from 'antd';
+import { Table, Card, Input, Button, Icon } from 'antd';
 import Highlighter from 'react-highlight-words'
-
-const statusMap = [
-  {
-    status: 'success',
-    txt: 'Success'
-  }, {
-    status: 'error',
-    txt: 'Fail'
-  }, {
-    status: 'processing',
-    txt: 'Paying'
-  },
-
-]
-
-function handleToString(value) {
-  var num = 0
-  num = `${Number(value).toString()} đ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-  return num
-}
+ 
 const data = []
 const beginDay = new Date().getTime();
 for (let i = 0; i < 10; i++) {
@@ -29,12 +10,10 @@ for (let i = 0; i < 10; i++) {
   data.push({
     id: `${i + 1}`,
     name: `Pepsi ${i + 1}`,
-    price: handleToString(res),
-    realprice: res,
+    quantity: Math.floor(Math.random() * 99) + 1,
+    price: res,
     time: moment(new Date(beginDay + (1000 * 60 * 60 * 24 * i))).format('YYYY-MM-DD HH:mm:ss'),
-    status: statusMap[Math.floor(Math.random() * 3)].status,
     cashier: "Unique",
-    description: `Đây là mô tả sản phẩm ${i + 1}`
 
   });
 }
@@ -46,6 +25,11 @@ class TradingHistory extends Component {
     this.state = {
       searchText: ''
     }
+  }
+  handleToString = (value) => {
+    var num = 0
+    num = `${Number(value).toString()} đ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    return num
   }
   getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
@@ -127,25 +111,23 @@ class TradingHistory extends Component {
       ...this.getColumnSearchProps('name'),
     }, {
       align: 'center',
+      title: 'Số lượng',
+      dataIndex: 'quantity',
+      sorter: (a, b) => a.quantity - b.quantity, sortDirections: ['ascend', 'descend'],
+      ...this.getColumnSearchProps('quantity'),
+    }, 
+    {
+      align: 'center',
       title: 'Giá',
       dataIndex: 'price',
-      sorter: (a, b) => a.realprice - b.realprice, sortDirections: ['ascend', 'descend'],defaultSortOrder: 'ascend',
-      
+      sorter: (a, b) => a.price - b.price, sortDirections: ['ascend', 'descend'],defaultSortOrder: 'ascend',
+      render: (value) => (<div>{this.handleToString(value)}</div>),
       ...this.getColumnSearchProps('price'),
     }, {
       align: 'center',
       title: 'Thời điểm',
       dataIndex: 'time',
       ...this.getColumnSearchProps('time'),
-    }, {
-      align: 'left',
-      title: 'Trạng thái',
-      dataIndex: 'status',
-      ...this.getColumnSearchProps('status'),
-      render(val) {
-        return <Badge status={val} text={val.toUpperCase()} />
-      },
-    
     }, {
       align: 'center',
       title: 'Thu ngân',
@@ -158,7 +140,6 @@ class TradingHistory extends Component {
         <Card loading={this.props.loading} style={{margin: 15}}>
           <div className='salesCard'>
             <Table title={header}
-              expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>}
               dataSource={data}
               columns={columns}
             />
