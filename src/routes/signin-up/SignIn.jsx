@@ -18,7 +18,6 @@ class Signinup extends React.Component {
     }
 
     changeusername = (e) => {
-        console.log(e.target)
         this.setState({ username: e.target.value })
     }
     changePW = (e) => {
@@ -39,6 +38,7 @@ class Signinup extends React.Component {
             let infoRequest = `/Outside/Login?USERNAME=${username}&PASSWORD=${password}`
             callAPI(infoRequest, 'POST', null).then(res => {
                 this.setState({ code: res.data.code, message: res.data.message })
+                console.log(res)
                 let code = this.state.code
                 let message = this.state.message
                 if (Number(code) === 400){
@@ -69,6 +69,8 @@ class Signinup extends React.Component {
                         icon: types.ICON_SUCCESS,
                         placement: "topLeft"
                     })
+                    localStorage.setItem("ID", res.data.ID_Employee)
+                    localStorage.setItem("rights", res.data.reportsTo)
                 }
             })
         }
@@ -81,7 +83,6 @@ class Signinup extends React.Component {
         }
         if(sessionStorage.length !== 0)
             return <Redirect to='/osm/dashboard' />
-        console.log(sessionStorage.getItem("verify"))
         return (
             <div className="form sign-in">
                 <div className="title-line-wrapper1" style={{ opacity: 1, transform: 'translate(0px)' }}>

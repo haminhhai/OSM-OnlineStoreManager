@@ -233,6 +233,7 @@ class CheckoutTable extends React.Component {
                 newData.push(row);
                 this.setState({ datasource: newData, editingKey: '' });
             }
+            console.log(row)
         });
     }
 

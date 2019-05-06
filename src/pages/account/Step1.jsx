@@ -15,17 +15,17 @@ class Step1 extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
+            username: '',
             email: '',
-            first: '',
-            last: '',
+            fullname: '',
         }
     }
     componentDidMount() {
         if (localStorage.length !== 0)
             this.setState({
                 email: localStorage.getItem('email'),
-                first: localStorage.getItem('first'),
-                last: localStorage.getItem('last'),
+                fullname: localStorage.getItem('fullname'),
+                username: localStorage.getItem('username'),
             })
     }
     handleSubmit = (e) => {
@@ -34,15 +34,15 @@ class Step1 extends React.PureComponent {
             if (!err) {
                 this.props.next()
                 localStorage.setItem('email', values.email)
-                localStorage.setItem('first', values.first)
-                localStorage.setItem('last', values.last)
+                localStorage.setItem('fullname', values.fullname)
+                localStorage.setItem('username', values.username)
             }
 
         });
     }
     render() {
         const { getFieldDecorator } = this.props.form;
-        const { email, first, last } = this.state
+        const { email, fullname, username } = this.state
         return (
             <Fragment>
                 <Form {...formItemLayout1} onSubmit={this.handleSubmit} className='stepForm'>
@@ -56,6 +56,18 @@ class Step1 extends React.PureComponent {
                             <Select placeholder="Employee" className='input-employee'>
                                 <Option value="Employee">Nhân viên</Option>
                             </Select>
+                        )}
+                    </Form.Item>
+                    <Form.Item
+                        label="Username"
+                    >
+                        {getFieldDecorator('username', {
+                            initialValue: username,
+                            rules: [{
+                                required: true, message: 'Hãy điền thông tin!',
+                            }],
+                        })(
+                            <Input className='input-employee' type="text" placeholder='Nhập...' />
                         )}
                     </Form.Item>
                     <Form.Item
@@ -73,10 +85,10 @@ class Step1 extends React.PureComponent {
                         )}
                     </Form.Item>
                     <Form.Item
-                        label="Họ"
+                        label="Họ và tên"
                     >
-                        {getFieldDecorator('first', {
-                            initialValue: first,
+                        {getFieldDecorator('fullname', {
+                            initialValue: fullname,
                             rules: [{
                                 required: true, message: 'Hãy điền thông tin!',
                             },],
@@ -84,18 +96,7 @@ class Step1 extends React.PureComponent {
                             <Input className='input-employee' type="text" placeholder='Nhập...' />
                         )}
                     </Form.Item>
-                    <Form.Item
-                        label="Tên"
-                    >
-                        {getFieldDecorator('last', {
-                            initialValue: last,
-                            rules: [{
-                                required: true, message: 'Hãy điền thông tin!',
-                            }],
-                        })(
-                            <Input className='input-employee' type="text" placeholder='Nhập...' />
-                        )}
-                    </Form.Item>
+                    
                     <Form.Item label=''>
                         <Button loading={this.props.loading} htmlType="submit"
                             className='step-submit'
