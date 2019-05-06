@@ -39,7 +39,7 @@ class Signinup extends React.Component {
         else if (email !== '' && email !== account[0].mail)
             notify = notification.open({
                 message: types.MESSAGE_FAILED,
-                description: types.BD_MESSAGE_FAILED_PHONE_NOT_EXIST,
+                description: types.BD_MESSAGE_FAILED_USER_NOT_EXIST,
                 icon: types.ICON_FAILED,
                 placement: "topLeft"
             })

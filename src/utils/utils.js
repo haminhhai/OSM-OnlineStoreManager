@@ -1,4 +1,3 @@
-
 import moment from 'moment';
 
 export function fixedZero(val) {
@@ -48,5 +47,4 @@ export function getTimeDistance(type) {
   
     const year = now.getFullYear();
     return [moment(`${year}-01-01 00:00:00`), moment(`${year}-12-31 23:59:59`)];
-  }
-  
+}

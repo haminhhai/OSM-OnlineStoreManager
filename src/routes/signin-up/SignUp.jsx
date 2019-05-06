@@ -2,22 +2,25 @@ import React from 'react'
 import '../../styles/style.css'
 import { Button, Input, notification, message } from 'antd'
 import * as types from '../constans/index'
+import callAPI from '../../utils/apiCaller'
 
 
 class Signinup extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            name: '',
+            username: '',
             email: '',
             password: '',
+            code: '',
+            message: ''
         }
     }
     myFunction = () => {
         document.querySelector('.cont').classList.toggle('s--signup')
     }
-    changeName = (e) => {
-        this.setState({ name: e.target.value })
+    changeUserName = (e) => {
+        this.setState({ username: e.target.value })
     }
     changeMail = (e) => {
         this.setState({ email: e.target.value })
@@ -27,32 +30,66 @@ class Signinup extends React.Component {
     }
     onSubmit = (e) => {
         var notify = ''
-        const { name, email, password } = this.state
+        const { username, email, password } = this.state
         e.preventDefault()
-        if (name === '' || email === '' || password === '')
+        if (username === '' || email === '' || password === '')
             notify = notification.open({
                 message: types.INCOMPLETE_INFORMATION,
                 description: types.BD_INCOMPLETE_INFORMATION,
                 icon: types.ICON_INCOMPLETE,
             })
-        else if (email === types.account[0].mail)
-            notify = notification.open({
-                message: types.MESSAGE_FAILED,
-                description: types.BD_EMAIL_EXISTED,
-                icon: types.ICON_FAILED,
-            })
         else {
-            notify = message.success(types.BD_REGISTER_SUCCESS)
-            this.myFunction()
-        }
+            let infoRequest = `/Outside/Signup?USERNAME=${username}&PASSWORD=${password}&EMAIL=${email}`
+            callAPI(infoRequest, 'POST', null).then(res => {
+                console.log(res)
+                this.setState({ code: res.data.code, message: res.data.message })
+                let { code, message } = this.state
+                if (Number(code) === 200)
+                {
+                    notify = notification.open({
+                        message: types.MESSAGE_SUCCESS,
+                        description: types.BD_REGISTER_SUCCESS,
+                        icon: types.ICON_SUCCESS,
+                    })
+                    this.myFunction()
+                }
+                else if (Number(code) === 400) {
+                    if (message === "Tên đăng nhập đã tồn tại")
+                        notify = notification.open({
+                            message: types.MESSAGE_FAILED,
+                            description: types.BD_WRONG_FAILED_USER_EXIST,
+                            icon: types.ICON_FAILED,
+                        })
+                    else if (message === types.BD_WRONG_TYPE_EMAIL)
+                    notify = notification.open({
+                        message: types.MESSAGE_FAILED,
+                        description: types.BD_WRONG_TYPE_EMAIL,
+                        icon: types.ICON_FAILED,
+                    }) 
+                    else if (message === "Email đã tồn tại")
+                        notify = notification.open({
+                            message: types.MESSAGE_FAILED,
+                            description: types.BD_EMAIL_EXISTED,
+                            icon: types.ICON_FAILED,
+                        })
+                    else if (message === "Mật khẩu không đủ độ dài")
+                    {
+                        notify = notification.open({
+                            message: types.MESSAGE_FAILED,
+                            description: types.BD_MESSAGE_FAILED_CHAR_PASSWORD,
+                            icon: types.ICON_FAILED,
+                        })
+                        this.setState({password: ''})
+                    }
+                }
+            })
 
-        console.log(notify)
+        }
         return notify
     }
     render() {
         return (
             <div className="sub-cont">
-
                 <div className="img">
                     <div className="img__text m--up">
                         <h2 className='txt-tranform'>Bạn chưa có tài khoản?</h2>
@@ -72,17 +109,20 @@ class Signinup extends React.Component {
                         <div className="title-line" style={{ transform: 'translateX(-64px)' }} />
                     </div>
                     <h2>Tạo tài khoản OSM,</h2>
-                    <h4>Họ và tên</h4>
+                    <h4>Tên tài khoản</h4>
                     <label >
-                        <Input className='input-up' type="text" value={this.state.name} onChange={this.changeName} placeholder='Họ và tên' />
+                        <Input className='input-up' type="text" value={this.state.username}
+                            onChange={this.changeUserName} placeholder='Nhập tên tài khoản' onPressEnter={this.onSubmit} />
                     </label>
                     <h4>E-mail</h4>
                     <label >
-                        <Input className='input-up' type="email" value={this.state.email} onChange={this.changeMail} placeholder='Email' />
+                        <Input className='input-up' type="email" value={this.state.email}
+                            onChange={this.changeMail} placeholder='example@gmail.com' onPressEnter={this.onSubmit} />
                     </label>
                     <h4>Mật khẩu</h4>
                     <label >
-                        <Input className='input-up' type="password" value={this.state.password} onChange={this.changePW} placeholder='Mật khẩu' />
+                        <Input className='input-up' type="password" value={this.state.password}
+                            onChange={this.changePW} placeholder='Mật khẩu' onPressEnter={this.onSubmit} />
                     </label>
                     <Button type="button" className="submit1" onClick={this.onSubmit}>Đăng ký</Button>
                 </div>
