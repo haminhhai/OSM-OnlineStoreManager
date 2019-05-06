@@ -3,20 +3,11 @@ import { Card, Select, Typography, InputNumber, Button, AutoComplete, message, R
 import moment from 'moment'
 import '../../styles/payment.scss'
 import Fulfill from './Fulfill.jsx'
+import callAPI from '../../utils/apiCaller'
 
 const { Title } = Typography
 const cashiers = ['Kim Dung', 'Vân Dung', 'Hoàng Dung', 'Phương Dung', 'Ngọc Dung', 'Mộ Dung']
-const products = [
-    { name: 'Táo', price: 100 },
-    { name: 'Chanh', price: 200 },
-    { name: 'Đào', price: 300 },
-    { name: 'Lê', price: 400 },
-    { name: 'Mận', price: 500 },
-    { name: 'Bưởi', price: 600 },
-    { name: 'Dưa Hấu', price: 700 },
-    { name: 'Quýt', price: 800 },
-    { name: 'Cam', price: 900 },
-    { name: 'Ổi', price: 1000 },
+var products = [
 ]
 var idBill = Math.floor((Math.random() * 89999) + 10000)
 const paymentDate = moment().format('DD-MM-YYYY')
@@ -31,8 +22,19 @@ class Payment extends React.Component {
             isCompleting: false,
             prodPrice: '',
             quantity: 0,
-
+            availableProducts: [],
+            availableQuantity: 'Số lượng'
         }
+        let infoRequest = `/Products/KiemHangTrongKho`
+        callAPI(infoRequest, 'POST', null).then(res => {
+            if(res.data.code === 200){
+                products = res.data.data
+                let listpros = []
+                for (let i = 0; i < products.length; i++)
+                    listpros.push(products[i].productName)
+                this.setState({availableProducts: listpros})
+            }
+        })
     }
     getName = (value) => {
         info[0] = value
@@ -41,8 +43,12 @@ class Payment extends React.Component {
         info[1] = value
         
         for (let i = 0; i < products.length; i++)
-            if (value === products[i].name)
-                this.setState({prodPrice: Number(products[i].price)})
+            if (value === products[i].productName){
+                this.setState({prodPrice: Number(products[i].buyPrice),
+                    availableQuantity: products[i].quantityInStock})
+            }
+                
+
     }
     changeNum = (value) => {
         info[2] = value
@@ -59,7 +65,7 @@ class Payment extends React.Component {
             info[3] = prodPrice * quantity
             this.setState({ isCompleting: true, tranfer: info[3]})
         }
-        else message.warn('Thiếu thông tin không thể thêm hàng!')
+        else message.warn('Thiếu thông tin không thể tính tiền!')
     }
     onSubmit = () => {
         message.success('Tạo hóa đơn thành công!')
@@ -68,9 +74,7 @@ class Payment extends React.Component {
     }
     render() {
         const { isCompleting } = this.state
-        let listpros = []
-        for (let i = 0; i < products.length; i++)
-            listpros.push(products[i].name)
+        
         return (
             <Card className='payment-card'>
                 <Row gutter={24} >
@@ -107,7 +111,7 @@ class Payment extends React.Component {
                         <br />
                                     <AutoComplete
                                         style={{ width: 200 }}
-                                        dataSource={listpros}
+                                        dataSource={this.state.availableProducts}
                                         placeholder="Chọn sản phẩm"
                                         onSelect={this.onSelect}
                                         filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
@@ -117,12 +121,12 @@ class Payment extends React.Component {
                                 <div>
                                     Số lượng:
                         <br />
-                                    <InputNumber min={1} onChange={this.changeNum} placeholder='Nhập số'/>
+                                    <InputNumber min={0} max={this.state.availableQuantity} onChange={this.changeNum} placeholder={this.state.availableQuantity}/>
                                 </div>
                                 <br />
                                 <span>Thành tiền: <small>{`${this.state.tranfer} đ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</small></span>
                                 <br />
-                                <Button onClick={this.onTranfer}>Thêm hàng</Button>
+                                <Button onClick={this.onTranfer}>Thành tiền</Button>
                                 <Tooltip title={!isCompleting ? 'Hãy nhập đầy đủ thông tin!' : ''}>
                                     {!isCompleting ? 
                                         <Button disabled>Hoàn tất</Button> :

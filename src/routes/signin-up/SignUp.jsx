@@ -109,7 +109,7 @@ class Signinup extends React.Component {
                         <div className="title-line" style={{ transform: 'translateX(-64px)' }} />
                     </div>
                     <h2>Tạo tài khoản OSM,</h2>
-                    <h4>Tên tài khoản</h4>
+                    <h4>Username</h4>
                     <label >
                         <Input className='input-up' type="text" value={this.state.username}
                             onChange={this.changeUserName} placeholder='Nhập tên tài khoản' onPressEnter={this.onSubmit} />

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import '../../styles/checkout.scss'
 import jsPDF from 'jspdf'
 import 'jspdf-autotable';
+import callAPI from '../../utils/apiCaller'
 
 const { Title } = Typography
 function handleToString(value) {
