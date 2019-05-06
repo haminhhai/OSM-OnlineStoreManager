@@ -13,16 +13,7 @@ function handleToString(value) {
     return num
 }
 const data = []
-for (let i = 0; i < 10; i++) {
-    var res = Math.floor(Math.random() * 20000) + 5000
-    data.push({
-        key: `${i + 1}`,
-        id: `${i + 1}`,
-        name: `Pepsi ${i + 1}`,
-        quant: Math.floor(Math.random() * 99) + 1,
-        price: res,
-    });
-}
+
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
 class EditableCell extends React.Component {
@@ -71,7 +62,7 @@ class CheckoutTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            datasource: data,
+            datasource: [],
             loading: false,
             editingKey: '',
             visible: false,
@@ -79,29 +70,46 @@ class CheckoutTable extends React.Component {
             quant: 0,
             price: 0
         }
+        let infoRequest = `/Products/KiemHangTrongKho`
+        callAPI(infoRequest, 'POST', null).then(res => {
+            if(res.data.code === 200){
+                var getData = res.data.data
+                for (let i = 0; i < getData.length; i++){
+                    data.push({
+                        key: getData[i].ID_Product,
+                        ID_Product: getData[i].ID_Product,
+                        productName: getData[i].productName,
+                        quantityInStock: getData[i].quantityInStock,
+                        buyPrice: getData[i].buyPrice,
+                    })
+                }
+                this.setState({datasource: data})
+            }
+        })
+
         this.columns = [{
             align: 'center',
             title: 'STT',
-            dataIndex: 'id',
+            dataIndex: 'ID_Product',
             width: '5%',
         }, {
             align: 'center',
             title: 'Tên sản phẩm',
-            dataIndex: 'name',
+            dataIndex: 'productName',
             editable: true,
         },
         {
             align: 'center',
             title: 'Số lượng',
-            dataIndex: 'quant',
-            sorter: (a, b) => a.quant - b.quant, sortDirections: ['ascend', 'descend'],
+            dataIndex: 'quantityInStock',
+            sorter: (a, b) => a.quantityInStock - b.quantityInStock, sortDirections: ['ascend', 'descend'],
             editable: true,
         },
         {
             align: 'center',
             title: 'Giá',
-            dataIndex: 'price',
-            sorter: (a, b) => a.price - b.price, sortDirections: ['ascend', 'descend'],
+            dataIndex: 'buyPrice',
+            sorter: (a, b) => a.buyPrice - b.buyPrice, sortDirections: ['ascend', 'descend'],
             render: (value) => (<div>{handleToString(value)}</div>),
             editable: true,
         },
@@ -166,8 +174,12 @@ class CheckoutTable extends React.Component {
                 loading: false
             });
         }, 1000);
-
-
+        let infoRequest = `/Products/DeleteProduct?ID_Product=${key}`
+            callAPI(infoRequest, 'POST', null).then(res => {
+                if(res.data.code === 400){
+                    console.log('an error has orrured')
+                }
+            })
     }
     showModal = () => {
         this.setState({
@@ -180,16 +192,23 @@ class CheckoutTable extends React.Component {
         if (name !== '' && quant !== 0 && price !== 0)
             {newData.push({
                 key: `${Number(datasource[datasource.length - 1].key) + 1}`,
-                id: `${Number(datasource[datasource.length - 1].id) + 1}`,
-                name: name,
-                quant: quant,
-                price: price,
+                ID_Product: `${Number(datasource[datasource.length - 1].ID_Product) + 1}`,
+                productName: name,
+                quantityInStock: quant,
+                buyPrice: price,
             
             })
             this.setState({
                 visible: false,
                 datasource: newData
-            });}
+            });
+            let infoRequest = `/Products/AddNewProduct?PRODUCTNAME=${name}&QUANTITY=${quant}&BUYPRICE=${price}`
+            callAPI(infoRequest, 'POST', null).then(res => {
+                if(res.data.code === 400){
+                    console.log('an error has orrured')
+                }
+            })
+        }
         else message.warn('Hãy nhập đủ thông tin!')
         
     }
@@ -245,14 +264,14 @@ class CheckoutTable extends React.Component {
         var doc = new jsPDF();
         var databody = []
         for (let i = 0; i < datasource.length; i++) {
-            databody.push([[datasource[i].id], [datasource[i].name], [datasource[i].price + ' đ'], [datasource[i].cashier]])
+            databody.push([[datasource[i].ID_Product], [datasource[i].productName], [datasource[i].quantityInStock + ' đ'], [datasource[i].buyPrice]])
         }
         doc.addFont('Roboto-Regular.ttf', 'Roboto-Regular', 'normal');
         doc.setFont('Roboto-Regular');
         doc.autoTable({
             font: '[Base64-encoded string of your font]',
             styles: { halign: 'center', font: 'Arimo' },
-            head: [['STT', 'Tên sản phẩm', 'Giá', 'Thu ngân']],
+            head: [['STT', 'Tên sản phẩm', 'Số lượng', 'Giá']],
             body: databody
         });
 
@@ -293,7 +312,6 @@ class CheckoutTable extends React.Component {
                     okText='Thêm'
                     
                 >
-                    <p>STT: <span>{Number(datasource[datasource.length - 1].id) + 1}</span></p>
                     <p>Tên sản phẩm: <span><Input value={name} onChange={this.changeName} placeholder='Nhập tên sản phẩm' style={{ width: '200px' }} /></span></p>
                     <p>Số lượng: <span><InputNumber onChange={this.changeQuant} placeholder='Nhập số' /></span></p>
                     <p>Giá: <span><InputNumber onChange={this.changePrice} min={1000} step={1000} placeholder='Nhập giá' /></span></p>
