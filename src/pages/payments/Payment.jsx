@@ -6,7 +6,8 @@ import Fulfill from './Fulfill.jsx'
 import callAPI from '../../utils/apiCaller'
 
 const { Title } = Typography
-const cashiers = ['Kim Dung', 'Vân Dung', 'Hoàng Dung', 'Phương Dung', 'Ngọc Dung', 'Mộ Dung']
+var cashiers = [
+]
 var products = [
 ]
 var idBill = Math.floor((Math.random() * 89999) + 10000)
@@ -23,9 +24,11 @@ class Payment extends React.Component {
             prodPrice: '',
             quantity: 0,
             availableProducts: [],
-            availableQuantity: 'Số lượng'
+            availableQuantity: 'Số lượng',
+            id: localStorage.getItem("ID"),
+            cashiers: []
         }
-        let infoRequest = `/Products/KiemHangTrongKho`
+        let infoRequest = `/Products/KiemHangTrongKho?ID_Employee=${this.state.id}`
         callAPI(infoRequest, 'POST', null).then(res => {
             if(res.data.code === 200){
                 products = res.data.data
@@ -35,6 +38,17 @@ class Payment extends React.Component {
                 this.setState({availableProducts: listpros})
             }
         })
+        let infoRequest2 = `/Inside/DanhSachNhanVien?ID_Boss=1`
+        callAPI(infoRequest2, 'POST', null).then(res => {
+            if(res.data.code === 200){
+                var staff = res.data.data
+                for (let i = 0; i < staff.length; i++){
+                    cashiers.push(staff[i].fullname)
+                }
+                this.setState({cashiers: cashiers})
+            }
+        })
+
     }
     getName = (value) => {
         info[0] = value
@@ -68,9 +82,14 @@ class Payment extends React.Component {
         else message.warn('Thiếu thông tin không thể tính tiền!')
     }
     onSubmit = () => {
-        message.success('Tạo hóa đơn thành công!')
-        idBill = Math.floor((Math.random() * 89999) + 10000)
-        this.setState({ data: info })
+        let infoRequest = `/Payments/NhapHoaDon?ID_Employee=${this.state.id}&PRODUCTNAME=${info[1]}&AMOUNT=${info[2]}`
+        callAPI(infoRequest, 'POST', null).then(res => {
+            if(res.data.code === 200){
+                message.success('Tạo hóa đơn thành công!')
+                idBill = Math.floor((Math.random() * 89999) + 10000)
+                this.setState({ data: info })
+            }
+        })
     }
     render() {
         const { isCompleting } = this.state
@@ -98,7 +117,7 @@ class Payment extends React.Component {
                                         optionFilterProp="children"
                                         filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                                     >
-                                        {cashiers.map((cashier, i) => (
+                                        {this.state.cashiers.map((cashier, i) => (
                                             <Select.Option key={i} value={cashier}>
                                                 {cashier}
                                             </Select.Option>

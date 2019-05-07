@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../styles/style.css'
-import { Button, Input, notification, message } from 'antd'
+import { Button, Input, notification } from 'antd'
 import * as types from '../constans/index'
 import callAPI from '../../utils/apiCaller'
 
