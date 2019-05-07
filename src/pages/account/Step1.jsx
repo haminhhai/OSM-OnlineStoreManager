@@ -1,5 +1,8 @@
 import React, { Fragment } from 'react';
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select, notification } from 'antd';
+import callAPI from '../../utils/apiCaller'
+import * as types from '../../routes/constans/index'
+
 const { Option } = Select;
 const formItemLayout1 = {
     labelCol: {
@@ -11,6 +14,7 @@ const formItemLayout1 = {
         sm: { span: 16 },
     },
 };
+
 class Step1 extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -18,6 +22,9 @@ class Step1 extends React.PureComponent {
             username: '',
             email: '',
             fullname: '',
+            password: '',
+            code: '',
+            message: ''
         }
     }
     componentDidMount() {
@@ -26,23 +33,75 @@ class Step1 extends React.PureComponent {
                 email: localStorage.getItem('email'),
                 fullname: localStorage.getItem('fullname'),
                 username: localStorage.getItem('username'),
+                password: localStorage.getItem('password'),
             })
     }
+    sendNoti = (value) => {
+        return value
+    }
     handleSubmit = (e) => {
+        var notify = ''
+        const rights = localStorage.getItem('rights')
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                this.props.next()
-                localStorage.setItem('email', values.email)
-                localStorage.setItem('fullname', values.fullname)
-                localStorage.setItem('username', values.username)
+                const email = values.email
+                const username = values.username
+                const fullname = values.fullname
+                const password = values.password
+                let infoRequest = `/Inside/AddEmployee?ID_BOSS=${rights}&USERNAME=${username}&PASSWORD=${password}&EMAIL=${email}&FULLNAME=${fullname}`
+                callAPI(infoRequest, 'POST', null).then(res => {
+                    console.log(res)
+                    this.setState({code: res.data.code, message: res.data.message})
+                    let {code, message} = this.state
+                if(Number(code) === 200)
+                {
+                    this.props.next()
+                    localStorage.setItem('email', values.email)
+                    localStorage.setItem('fullname', values.fullname)
+                    localStorage.setItem('username', values.username)
+                    localStorage.setItem('password', values.password)
+                }
+                else if(Number(code) === 400)
+                {
+                    if(message === "Tên đăng nhập đã tồn tại")
+                    {
+                        notify = notification.open({
+                            message: types.MESSAGE_FAILED,
+                            description: types.BD_WRONG_FAILED_USER_EXIST,
+                            icon: types.ICON_FAILED,
+                        })
+                        this.sendNoti(notify)
+                    }
+                    else if (message === "Email đã tồn tại")
+                        notify = notification.open({
+                            message: types.MESSAGE_FAILED,
+                            description: types.BD_EMAIL_EXISTED,
+                            icon: types.ICON_FAILED,
+                    })
+                    else if(message === 'Mật khẩu không đủ độ dài')
+                    {
+                        notify = notification.open({
+                            message: types.MESSAGE_FAILED,
+                            description: types.BD_MESSAGE_FAILED_CHAR_PASSWORD,
+                            icon: types.ICON_FAILED,
+                        })
+                        this.sendNoti(notify)
+                    }
+                    
+                }
+                })
+                
+                
+                
+                
             }
 
         });
     }
     render() {
         const { getFieldDecorator } = this.props.form;
-        const { email, fullname, username } = this.state
+        const { email, fullname, username, password } = this.state
         return (
             <Fragment>
                 <Form {...formItemLayout1} onSubmit={this.handleSubmit} className='stepForm'>
@@ -96,7 +155,20 @@ class Step1 extends React.PureComponent {
                             <Input className='input-employee' type="text" placeholder='Nhập...' />
                         )}
                     </Form.Item>
-                    
+                    <Form.Item  label="Mật khẩu">
+                        {getFieldDecorator('password', {
+                            initialValue: password,
+                            rules: [
+                                {
+                                    required: true,
+                                    message: 'Nhập mật khẩu!',
+                                },
+                            ],
+                        })(<Input className='input-employee'
+                            type="password"
+                            autoComplete="off"
+                            placeholder='Mật khẩu' />)}
+                    </Form.Item>
                     <Form.Item label=''>
                         <Button loading={this.props.loading} htmlType="submit"
                             className='step-submit'

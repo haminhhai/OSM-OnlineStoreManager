@@ -3,6 +3,7 @@ import moment from 'moment'
 import '../../styles/dashboard.css'
 import { getTimeDistance } from '../../utils/utils'
 import TradingHistory from './TradingHistory'
+import callAPI from '../../utils/apiCaller'
 
 const IntroduceRow = React.lazy(() => import('./IntroduceRow'));
 const ChartYear = React.lazy(() => import('./ChartYear'));
@@ -38,32 +39,47 @@ class Dashboard extends Component {
         this.state = {
             loading: true,
             rangePickerValue: getTimeDistance('year'),
+            sumDay: 0,
+            sumMon: 0,
+            profitDay: 0,
+            profitMon: 0,
         }
     }
     componentDidMount() {
-        setTimeout(() => {
-            this.setState({ loading: false })
-        }, 2000);
+        const ID = localStorage.getItem('ID')
+        let infoRequest = `/Payments/TongHangBanTrongNgay?ID_Employee=1`
+        callAPI(infoRequest, 'POST', null).then(res => {
+            this.setState({sumDay: res.data.data})
+            setTimeout(() => {
+                this.setState({ loading: false })
+            }, 2000);
+        })
+        infoRequest = `/Payments/TongHangBanTrongThang?ID_Employee=1`
+        callAPI(infoRequest, 'POST', null).then(res => {
+            console.log(res)
+            this.setState({sumMon: res.data.data})
+            
+        })
+        infoRequest = `/Payments/LoiNhuanNgay?ID_Employee=1`
+        callAPI(infoRequest, 'POST', null).then(res => {
+            console.log(res)
+     
+            
+        })
     }
     render() {
+        const {loading, sumDay, sumMon, profitDay, profitMon} = this.state
         return (
             <div>
                 <div>
                     <Suspense fallback={null}>
-                        <IntroduceRow loading={this.state.loading} className='row-intro' />
+                        <IntroduceRow loading={loading} className='row-intro' 
+                        sumDay={sumDay} sumMon={sumMon} profitDay={profitDay} profitMon={profitMon}/>
                     </Suspense>
                     <Suspense fallback={null}>
                         <ChartYear
                             yearData={yearData}
                             loading={this.state.loading}
-                        />
-                    </Suspense>
-
-                    <Suspense fallback={null}>
-                        <ChartMonth
-                            loading={this.state.loading}
-                            monthData={monthData}
-                            rankData={rankData}
                         />
                     </Suspense>
                     <Suspense fallback={null} >

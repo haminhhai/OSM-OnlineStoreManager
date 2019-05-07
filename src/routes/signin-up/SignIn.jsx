@@ -58,7 +58,7 @@ class Signinup extends React.Component {
                             icon: types.ICON_FAILED,
                             placement: "topLeft"
                         })
-                        this.setState({username: '', password: ''})
+                        this.setState({ password: ''})
                     }
                 }
                 else {

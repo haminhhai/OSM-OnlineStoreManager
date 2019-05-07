@@ -25,7 +25,7 @@ class Payment extends React.Component {
             availableProducts: [],
             availableQuantity: 'Số lượng'
         }
-        let infoRequest = `/Products/KiemHangTrongKho`
+        let infoRequest = `/Products/KiemHangTrongKho?ID_Employee=1`
         callAPI(infoRequest, 'POST', null).then(res => {
             if(res.data.code === 200){
                 products = res.data.data

@@ -1,69 +1,98 @@
 import React, { Fragment } from 'react';
-import { Button, Row, Col, Form } from 'antd';
-import Result from 'ant-design-pro/lib/Result';
+import { Form, Input, Divider, Alert, Button } from 'antd';
 
-class Step3 extends React.PureComponent {
-    remove() {
-        localStorage.clear()
+class Step2 extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            username: '',
+            fullname: '',
+            password: ''
+        }
+    }
+    componentDidMount() {
+        if (localStorage.length !== 0)
+            this.setState({
+                email: localStorage.getItem('email'),
+                username: localStorage.getItem('username'),
+                fullname: localStorage.getItem('fullname'),
+                password: localStorage.getItem('password'),
+            })
+    }
+    
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                console.log(values)
+            }
+        });
     }
     render() {
-        const information = (
-            <div className='information'>
-                <Row>
-                    <Col xs={24} sm={8} className='{label'>
-                        Hạng：
-                    </Col>
-                    <Col xs={24} sm={16}>
-                        Nhân viên
-                     </Col>
-                </Row>
-                <Row>
-                    <Col xs={24} sm={8} className='{label'>
-                        Username：
-                    </Col>
-                    <Col xs={24} sm={16}>
-                        {localStorage.getItem('username')}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={24} sm={8} className='{label'>
-                        E-mail：
-                    </Col>
-                    <Col xs={24} sm={16}>
-                        {localStorage.getItem('email')}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={24} sm={8} className='{label'>
-                        Họ và tên：
-                    </Col>
-                    <Col xs={24} sm={16}>
-                        {localStorage.getItem('fullname')}
-                    </Col>
-                </Row>
-               
-
-            </div>
-        );
-        const action = (
-            <Fragment>
-                <Button className='step-submit' onFocus={this.remove}
-                    style={{ marginLeft: '10px' }}
-                    onClick={() => this.props.init()}
-                >Hoàn tất</Button>
-            </Fragment>
-        )
+        const {email, username, fullname, password} = this.state
+        const formItemLayout = {
+            labelCol: {
+                xs: { span: 24 },
+                sm: { span: 8 },
+            },
+            wrapperCol: {
+                xs: { span: 24 },
+                sm: { span: 16 },
+            },
+        };
         return (
-            <Result
-                type="success"
-                title="Tạo tài khoản thành công"
-                description="Cấp tài khoản cho nhân viên ngay!"
-                extra={information}
-                actions={action}
-                className='result'
-            />
+            <Fragment>
+                <Form {...formItemLayout} onSubmit={this.handleSubmit} className='stepFormText'>
+                    <Alert
+                        closable
+                        showIcon
+                        message="Kiểm tra lại thông tin và nhập mật khẩu để tiếp tục!"
+                        style={{ marginBottom: 24 }}
+                    />
+                    <Form.Item
+                        label="Hạng"
+                    >
+                        Nhân viên
+                    </Form.Item>
+                    <Form.Item
+                        label="Username"
+                    >
+                        {username}
+                    </Form.Item>
+                    <Form.Item
+                        label="E-mail"
+                    >
+                        {email}
+                    </Form.Item>
+                    
+                    <Form.Item
+                        label="Họ và tên"
+                    >
+                        {fullname}
+                    </Form.Item>
+                    <Form.Item
+                        label="Mật khẩu"
+                    >
+                        {password}
+                    </Form.Item>
+                    <Divider style={{ margin: '24px 0' }} />
+                   
+                    <Form.Item>
+                        <Button className='step-submit' 
+                            onClick={() => this.props.prev()}>Quay lại</Button>
+                        <Button loading={this.props.loading} 
+                            className='step-submit' 
+                            style={{ marginLeft: 2 }} 
+                            htmlType='submit'>
+                            Tiếp tục
+                        </Button>
+                    </Form.Item>
+                </Form>
+
+            </Fragment>
         );
     }
 }
-const WrappedStep3 = Form.create({ name: 'step3' })(Step3);
-export default WrappedStep3;
+const WrappedStep2 = Form.create({ name: 'step2' })(Step2);
+export default WrappedStep2;

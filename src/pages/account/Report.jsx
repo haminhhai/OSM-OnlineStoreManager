@@ -1,5 +1,5 @@
 import React from 'react'
-import {  Form, Button, Input, Card, Popconfirm, Icon, notification } from 'antd'
+import {  Form, Button, Input, Card, Popconfirm, Icon, notification, message } from 'antd'
 import callAPI from '../../utils/apiCaller'
 import * as types from '../../routes/constans/index'
 
@@ -43,6 +43,7 @@ class Report extends React.Component {
 
     handleSubmit = () => {
         var notify = ''
+        const id = localStorage.getItem('ID')
         const {value} = this.state
         if (value === '')
             notify = notification.open({
@@ -52,18 +53,21 @@ class Report extends React.Component {
             })
         else
         {
-            let infoRequest = `/Inside/DanhSachNhanVien?ID_Boss=2`
-            callAPI(infoRequest, 'POST', null).then(res => {
-                console.log(res)
-            })
             this.setState({
                 submitting: true,
             })
-            setTimeout(() => {
-                this.setState({
-                    submitting: false,
-                })
-            }, 2000);
+            let infoRequest = `/Inside/ReportToBoss?ID_Employee=${id}&TEXTREPORT=${value}`
+            callAPI(infoRequest, 'POST', null).then(res => {
+                console.log(res)
+                
+                setTimeout(() => {
+                    message.success('Gửi thành công!')
+                    this.setState({
+                        submitting: false,
+                    })
+                }, 2000);
+            })
+            
         }
         
         return notify

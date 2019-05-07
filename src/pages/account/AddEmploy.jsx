@@ -4,7 +4,6 @@ import ListEmploy from './ListEmploy'
 import Report from './Report'
 import WrappedStep1 from './Step1'
 import WrappedStep2 from './Step2'
-import WrappedStep3 from './Step3'
 class AddEmploy extends PureComponent {
     constructor(props) {
         super(props);
@@ -50,30 +49,30 @@ class AddEmploy extends PureComponent {
                 icon: <Icon type="solution" />
             },
             {
-                title: 'Mật khẩu',
-                content: <WrappedStep2 finish={this.fini.bind(this)} prev={this.prev.bind(this)} loading={this.state.loading} />,
-                icon: <Icon type="lock" />
-            },
-            {
                 title: 'Xong!',
-                content: <WrappedStep3 init={this.init.bind(this)} />,
+                content: <WrappedStep2 init={this.init.bind(this)} />,
                 icon: <Icon type="smile" />
             },
         ]
         const current = this.state.current
+        const id = localStorage.getItem('ID')
+        const rights = localStorage.getItem('rights')
         return (
             <Suspense >
                 <Tabs >
-                    <Tabs.TabPane tab={<Tooltip title='Chỉ dành cho quản lý'><Icon type="table" />Danh sách</Tooltip>} key='1'>
+                    <Tabs.TabPane disabled={id === rights ? false : true} tab={<Tooltip title='Chỉ dành cho quản lý'>
+                        <Icon type="table" />Danh sách</Tooltip>} key={id === rights ? '1' : '2'}>
                         <ListEmploy />
                     </Tabs.TabPane>
-                    <Tabs.TabPane tab={<Tooltip title='Chỉ dành cho quản lý'><Icon type="team" />Thêm nhân viên</Tooltip>} key='2'>
+                    <Tabs.TabPane disabled={id === rights ? false : true} tab={<Tooltip title='Chỉ dành cho quản lý'>
+                        <Icon type="team" />Thêm nhân viên</Tooltip>} key={id === rights ? '2' : '3'}>
                         <Steps current={current}>
                             {steps.map(item =><Steps.Step icon={item.icon} key={item.title} title={item.title} />)}
                         </Steps>
                         <div className="steps-content">{steps[current].content}</div>
                     </Tabs.TabPane>
-                    <Tabs.TabPane tab={<Tooltip title='Chỉ dành cho nhân viên'><Icon type="message" />Gửi phản hồi</Tooltip>} key='3'>
+                    <Tabs.TabPane disabled={id !== rights ? false : true} tab={<Tooltip title='Chỉ dành cho nhân viên'>
+                        <Icon type="message" />Gửi phản hồi</Tooltip>} key={id !== rights ? '1' : '3'}>
                         <Report />
                     </Tabs.TabPane>
                 </Tabs>

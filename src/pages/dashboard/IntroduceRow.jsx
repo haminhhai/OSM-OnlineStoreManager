@@ -16,7 +16,7 @@ function handleToString(value) {
   num = Number(value).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + " VND"
   return num
 }
-const IntroduceRow = memo(({ loading }) => (
+const IntroduceRow = memo(({ loading, sumDay, sumMon }) => (
   <Row gutter={24} className='row-intro'>
     <Col {...topColResponsiveProps}>
       <ChartCard
@@ -30,23 +30,11 @@ const IntroduceRow = memo(({ loading }) => (
           </Tooltip>
         }
         loading={loading}
-        total={handleToString(1000000)}
-        footer={
-          <Field
-            label='Thay đổi ngày'
-            value={handleToString(200000)}
-          />
-        }
-        contentHeight={46}
+        total= {sumDay}
+        
+        contentHeight={30}
       >
-        <Trend flag="up" style={{ marginRight: 16 }} reverseColor={true}>
-          Thay đổi tuần
-          <span className='trendText'> 12%</span>
-        </Trend>
-        <Trend flag="down" reverseColor={true}>
-          Thay đổi ngày
-          <span className='trendText'> 11%</span>
-        </Trend>
+      
       </ChartCard>
     </Col>
 
@@ -56,29 +44,16 @@ const IntroduceRow = memo(({ loading }) => (
         title='Tổng hàng trong tháng'
         action={
           <Tooltip
-            title='Tháng 4'
+            title='Tháng 5'
           >
             <Icon type="pie-chart" theme="filled" style={{ color: '#ffdd94' }} />
           </Tooltip>
         }
         loading={loading}
-        total={handleToString(12000000)}
-        footer={
-          <Field
-            label='Thay đổi tháng'
-            value={handleToString(200000)}
-          />
-        }
-        contentHeight={46}
+        total={sumMon}
+        contentHeight={30}
       >
-        <Trend flag="up" style={{ marginRight: 16 }} reverseColor={true}>
-          Thay đổi tháng
-          <span className='trendText'> 2%</span>
-        </Trend>
-        <Trend flag="down" reverseColor={true}>
-          Thay đổi tuần
-          <span className='trendText'> 69%</span>
-        </Trend>
+        
       </ChartCard>
     </Col>
 
@@ -95,24 +70,8 @@ const IntroduceRow = memo(({ loading }) => (
           </Tooltip>
         }
         total="80%"
-        footer={
-          <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
-            <Trend flag="up" style={{ marginRight: 16 }} reverseColor={true}>
-              So với hôm qua:
-              <span className='trendText'> 12%</span>
-            </Trend>
-
-          </div>
-        }
-        contentHeight={46}
+        contentHeight={30}
       >
-        <span>Đạt chỉ tiêu:</span>
-        <MiniProgress
-          percent={78}
-          strokeWidth={8}
-          target={80}
-          color="#DE5B6D"
-        />
       </ChartCard>
     </Col>
     <Col {...topColResponsiveProps}>
@@ -128,26 +87,8 @@ const IntroduceRow = memo(({ loading }) => (
           </Tooltip>
         }
         total="60%"
-
-        footer={
-          <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
-            <Trend flag="down" reverseColor={true}>
-              So với tháng trước
-              <span className='trendText'> 30%</span>
-            </Trend>
-          </div>
-        }
-        contentHeight={46}
+        contentHeight={30}
       >
-        <span>Đạt chỉ tiêu:</span>
-        <MiniProgress
-          percent={60}
-          strokeWidth={8}
-          target={60}
-          color="#86E3CE"
-        />
-
-
       </ChartCard>
     </Col>
   </Row>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Input, Card, Table, Button, Avatar, Popconfirm, Icon } from 'antd'
+import {Input, Card, Table, Button, Avatar, Popconfirm, Icon, message } from 'antd'
 import {Link} from 'react-router-dom'
 import Highlighter from 'react-highlight-words'
 import dog from '../../assets/icons/dog.png'
@@ -10,17 +10,9 @@ import bee from '../../assets/icons/bee.png'
 import alien from '../../assets/icons/alien.png'
 import bird from '../../assets/icons/bird.png'
 import girl from '../../assets/icons/girl.png'
-const data = []
-for (let i = 0; i < 20; i++) {
-    data.push({
-        key: `${i+1}`,  
-        id: Math.floor(Math.random() * 999) + 1,
-        tên: `Nhân viên ${i}`,
-        email: 'email@osm.vn',
-        hạng: 'Nhân viên',
-        ava: Math.floor(Math.random() * 8)
-    })
-}
+
+import callAPI from '../../utils/apiCaller'
+
 const ava = [dog,cat,bee, beer, girafee, alien, bird, girl]
 const header = () => <div style={{ color: 'rgba(0,0,0,0.85)', fontSize: '16px', fontWeight: '600' }}>Danh sách nhân viên</div>;
 class ListEmploy extends Component {
@@ -28,9 +20,21 @@ class ListEmploy extends Component {
         super(props);
         this.state = {
             searchText: '',
-            dataSource: data,
+            dataSource: [],
             loading: false
         }
+    }
+    componentDidMount() {
+        let rights = localStorage.getItem('rights')
+        let infoRequest = `/Inside/DanhSachNhanVien?ID_Boss=${rights}`
+        callAPI(infoRequest, 'POST', null).then(res => {
+            var data = []
+            const arr = res.data.data
+            for(let i = 0; i < arr.length; i++)
+                data.push(arr[i])
+            
+            this.setState({dataSource: data})
+        })
     }
     getColumnSearchProps = (dataIndex) => ({
         filterDropdown: ({
@@ -99,15 +103,23 @@ class ListEmploy extends Component {
         this.setState({ searchText: '' });
     }
 
-    handleDelete = (key) => {
+    handleDelete = (ID_Employee) => {
         const dataSource = [...this.state.dataSource];
         this.setState({loading: true})
-        setTimeout(() => {
-            this.setState({ 
-                dataSource: dataSource.filter(item => item.key !== key),
-                loading: false
-            });
-        }, 1000);
+        let infoRequest = `/Inside/DeleteEmployee?ID_Employee=${ID_Employee}`
+        callAPI(infoRequest, 'POST', null).then(res => {
+            
+            setTimeout(() => {
+                message.success('Xóa tài khoản thành công!')
+                this.setState({ 
+                    dataSource: dataSource.filter(item => item.ID_Employee !== ID_Employee),
+                    loading: false
+                });
+                this.componentDidMount()
+            }, 1000);
+        })
+        
+        
         
         
     }
@@ -118,31 +130,33 @@ class ListEmploy extends Component {
             title: '',
             dataIndex:'ava',
             width: '2%',
-            render(val) {
-                return <Avatar src={ava[val]}/>
+            render() {
+                return <Avatar src={ava[Math.floor((Math.random() * 8))]}/>
             }
 
         }, {
             align: 'center',
             title: 'ID',
-            dataIndex: 'id',
+            dataIndex: 'ID_Employee',
             width: '20%',
-            ...this.getColumnSearchProps('id'),
+            ...this.getColumnSearchProps('ID_Employee'),
             
-        }, {
+        },{
+            align: 'center',
+            title: 'Username',
+            dataIndex: 'username',
+            ...this.getColumnSearchProps('username'),
+        },
+         {
             align: 'center',
             title: 'Họ Tên',
-            dataIndex: 'tên',
-            ...this.getColumnSearchProps('tên'),
+            dataIndex: 'fullname',
+            ...this.getColumnSearchProps('fullname'),
         }, {
             align: 'center',
             title: 'Email',
             dataIndex: 'email',
             ...this.getColumnSearchProps('email'),
-        }, {
-            align: 'center',
-            title: 'Cấp bậc',
-            dataIndex: 'hạng',
         }, {
             align: 'center',
             title: 'Xóa tài khoản',
@@ -152,7 +166,7 @@ class ListEmploy extends Component {
                   ? (
                     <Popconfirm title="Chắc chắn muốn xóa?" 
                         placement='topRight' 
-                        onConfirm={() => this.handleDelete(record.key)}
+                        onConfirm={() => this.handleDelete(record.ID_Employee)}
                         icon={<Icon type='rest' theme='filled' style={{color: '#0077ff'}}/>}
                         okText='Có'
                         cancelText='Không'>
