@@ -16,7 +16,7 @@ function handleToString(value) {
   num = Number(value).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + " VND"
   return num
 }
-const IntroduceRow = memo(({ loading, sumDay, sumMon }) => (
+const IntroduceRow = memo(({ loading, sumDay, sumMon, profitDay, profitMon }) => (
   <Row gutter={24} className='row-intro'>
     <Col {...topColResponsiveProps}>
       <ChartCard
@@ -69,7 +69,7 @@ const IntroduceRow = memo(({ loading, sumDay, sumMon }) => (
             <Icon type="pie-chart" theme="filled" style={{ color: '#ccabd8' }} />
           </Tooltip>
         }
-        total="80%"
+        total={profitDay}
         contentHeight={30}
       >
       </ChartCard>
@@ -81,12 +81,12 @@ const IntroduceRow = memo(({ loading, sumDay, sumMon }) => (
         title='Lợi nhuận tháng'
         action={
           <Tooltip
-            title='Tháng 4'
+            title='Tháng 5'
           >
             <Icon type="pie-chart" theme="filled" style={{ color: '#a72f1d' }} />
           </Tooltip>
         }
-        total="60%"
+        total={profitMon}
         contentHeight={30}
       >
       </ChartCard>

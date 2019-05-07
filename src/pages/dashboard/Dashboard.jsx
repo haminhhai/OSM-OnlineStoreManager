@@ -47,23 +47,28 @@ class Dashboard extends Component {
     }
     componentDidMount() {
         const ID = localStorage.getItem('ID')
-        let infoRequest = `/Payments/TongHangBanTrongNgay?ID_Employee=1`
+        let infoRequest = `/Payments/TongHangBanTrongNgay?ID_Employee=${ID}`
         callAPI(infoRequest, 'POST', null).then(res => {
             this.setState({sumDay: res.data.data})
             setTimeout(() => {
                 this.setState({ loading: false })
             }, 2000);
         })
-        infoRequest = `/Payments/TongHangBanTrongThang?ID_Employee=1`
+        infoRequest = `/Payments/TongHangBanTrongThang?ID_Employee=${ID}`
         callAPI(infoRequest, 'POST', null).then(res => {
-            console.log(res)
             this.setState({sumMon: res.data.data})
             
         })
-        infoRequest = `/Payments/LoiNhuanNgay?ID_Employee=1`
+        infoRequest = `/Payments/LoiNhuanNgay?ID_Employee=${ID}`
         callAPI(infoRequest, 'POST', null).then(res => {
             console.log(res)
-     
+            this.setState({profitDay: res.data.data})
+            
+        })
+        infoRequest = `/Payments/LoiNhuanThang?ID_Employee=${ID}`
+        callAPI(infoRequest, 'POST', null).then(res => {
+            console.log(res)
+            this.setState({profitMon: res.data.data})
             
         })
     }
