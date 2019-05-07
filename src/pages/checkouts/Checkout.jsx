@@ -257,18 +257,19 @@ class CheckoutTable extends React.Component {
                 this.setState({ datasource: newData, editingKey: '' });
             }
             console.log(row.productName)
-             let infoRequest = `/Products/AddQuantityExistedProduct?ID_Employee=${this.state.id}&ID_Product=${key}&PRODUCTNAME=${row.productName}&QUANTITY=${row.quantityInStock}`
+             let infoRequest = `/Products/UpdateQuantityExistedProduct?ID_Employee=${this.state.id}&ID_Product=${key}&QUANTITY=${row.quantityInStock}`
             callAPI(infoRequest, 'POST', null).then(res => {
                 if(res.data.code === 400){
                     console.log('an error has orrured')
                 }
             })
-            /** let infoRequest2 = `/Products/EditProduct?ID_Employee=${this.state.id}&PRODUCTNAME=${row.productName}&BUYPRICE=${row.buyPrice}`
+    
+             let infoRequest2 = `/Products/EditProduct?ID_Employee=${this.state.id}&ID_Product=${key}&PRODUCTNAME=${row.productName}&BUYPRICE=${row.buyPrice}`
             callAPI(infoRequest2, 'POST', null).then(res => {
                 if(res.data.code === 400){
                     console.log('an error has orrured')
                 }
-            })*/
+            })
 
 
         });
