@@ -11,25 +11,22 @@ import girl from '../../assets/icons/girl.png'
 const ava = [dog, cat, bee, beer, girafee, alien, bird, girl]
 class Infor extends PureComponent {
   render() {
+    const fullname = localStorage.getItem('nameAcc')
+    const email = localStorage.getItem('emailAcc')
+    const id = localStorage.getItem('ID')
+    const rights = localStorage.getItem('rights')
+    const avatar = localStorage.getItem('ava')
     return (
       <div>
         <div className='avatarHolder'>
-          <img alt="" src={ava[Math.floor(Math.random() * 8)]} />
-          <div className='name'>F.Hiquery</div>
-          <div>123@osm.vn</div>
+          <img alt="" src={ava[avatar]} />
+          <div className='name'>{fullname}</div>
+          <div>{email}</div>
         </div>
         <div className='detail'>
           <p>
             <i className='title' />
-            Shop ABC
-            </p>
-          <p>
-            <i className='group' />
-            Quản lý
-            </p>
-          <p>
-            <i className='address' />
-            Đã bị ẩn
+              {id === rights ? 'Quản lý' : 'Nhân viên'}
             </p>
         </div>
 

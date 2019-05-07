@@ -28,10 +28,9 @@
     left: 0;
     width: 14px;
     height: 14px;
-    background: url(https://gw.alipayobjects.com/zos/rmsportal/pBjWzVAHnOOtAUvZmZfy.svg);
 }
 .detail i.title {
-    background-position: 0 0;
+    background-position: 10px 10px;
 }
 .detail i.group {
     background-position: 0 -22px;

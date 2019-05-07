@@ -71,6 +71,9 @@ class Signinup extends React.Component {
                     })
                     localStorage.setItem("ID", res.data.ID_Employee)
                     localStorage.setItem("rights", res.data.reportsTo)
+                    localStorage.setItem("nameAcc", res.data.fullname)
+                    localStorage.setItem("emailAcc", res.data.email)
+                    localStorage.setItem("ava", Math.floor(Math.random() * 8))
                 }
             })
         }

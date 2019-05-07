@@ -8,13 +8,7 @@ import callAPI from '../../utils/apiCaller'
 const IntroduceRow = React.lazy(() => import('./IntroduceRow'));
 const ChartYear = React.lazy(() => import('./ChartYear'));
 const ChartMonth = React.lazy(() => import('./ChartMonth'));
-const yearData = [];
-for (let i = 0; i < 12; i++) {
-    yearData.push({
-        x: `Tháng ${i + 1}`,
-        y: Math.floor(Math.random() * 100000) + 20000,
-    });
-}
+
 const monthData = [];
 const beginDay = new Date().getTime();
 for (let i = 0; i < 20; i++) {
@@ -43,6 +37,8 @@ class Dashboard extends Component {
             sumMon: 0,
             profitDay: 0,
             profitMon: 0,
+            yearData: [],
+            rankingTrend: []
         }
     }
     componentDidMount() {
@@ -52,7 +48,7 @@ class Dashboard extends Component {
             this.setState({sumDay: res.data.data})
             setTimeout(() => {
                 this.setState({ loading: false })
-            }, 2000);
+            }, 100);
         })
         infoRequest = `/Payments/TongHangBanTrongThang?ID_Employee=${ID}`
         callAPI(infoRequest, 'POST', null).then(res => {
@@ -61,19 +57,39 @@ class Dashboard extends Component {
         })
         infoRequest = `/Payments/LoiNhuanNgay?ID_Employee=${ID}`
         callAPI(infoRequest, 'POST', null).then(res => {
-            console.log(res)
             this.setState({profitDay: res.data.data})
             
         })
         infoRequest = `/Payments/LoiNhuanThang?ID_Employee=${ID}`
         callAPI(infoRequest, 'POST', null).then(res => {
-            console.log(res)
             this.setState({profitMon: res.data.data})
             
         })
+        infoRequest = `/Payments/ThongKeTongNam?ID_Employee=${ID}`
+        callAPI(infoRequest, 'POST', null).then(res => {
+            
+            var yearData = []
+            const datas = res.data.data
+            for(let i = 0; i < datas.length; i++)
+                yearData.push({
+                    x: `Tháng ${datas[i].Thang}`,
+                    y: datas[i].Tien
+                })
+            this.setState({yearData: yearData})
+            
+        })
+        infoRequest = `/Payments/TopHangBanChay?ID_Employee=${ID}`
+        callAPI(infoRequest, 'POST', null).then(res => {
+          console.log(res)
+          var rankingTrend = []
+          const datas = res.data.data
+          for(let i = 0; i < datas.length; i++)
+              rankingTrend.push(datas[i])
+          this.setState({rankingTrend: rankingTrend})
+        })
     }
     render() {
-        const {loading, sumDay, sumMon, profitDay, profitMon} = this.state
+        const {loading, sumDay, sumMon, profitDay, profitMon, yearData, rankingTrend} = this.state
         return (
             <div>
                 <div>
@@ -85,6 +101,7 @@ class Dashboard extends Component {
                         <ChartYear
                             yearData={yearData}
                             loading={this.state.loading}
+                            rankingTrend={rankingTrend}
                         />
                     </Suspense>
                     <Suspense fallback={null} >

@@ -18,7 +18,7 @@ function handleToString(value) {
     return num
   }
 const ChartYear = memo(
-  ({  yearData,  loading}) => (
+  ({  yearData,  loading, rankingTrend}) => (
     <Card loading={loading} bordered={false} bodyStyle={{ padding: 0}} style={{margin: 15}}>
       <div className='salesCard'>
         <Tabs
@@ -45,18 +45,18 @@ const ChartYear = memo(
                         Xếp hạng sản phẩm 2019
                   </h4>
                   <ul className='rankingList'>
-                    {rankingListData.map((item, i) => (
-                      <li key={item.title}>
+                    {rankingTrend.map((item, i) => (
+                      <li key={item.productName}>
                         <span
                           className={`rankingItemNumber ${i < 3 ? 'active' : ''}`}
                         >
                           {i + 1}
                         </span>
                         <span className='rankingItemTitle' title={item.title}>
-                          {item.title}
+                          {item.productName}
                         </span>
                         <span className='rankingItemValue'>
-                          {handleToString(item.total)}
+                          {handleToString(item.amount)}
                         </span>
                       </li>
                     ))}

@@ -12,7 +12,7 @@ function handleToString(value) {
     num = `${Number(value).toString()} đ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     return num
 }
-const data = []
+var data = []
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -68,24 +68,9 @@ class CheckoutTable extends React.Component {
             visible: false,
             name: '',
             quant: 0,
-            price: 0
+            price: 0,
+            id: localStorage.getItem("ID")
         }
-        let infoRequest = `/Products/KiemHangTrongKho`
-        callAPI(infoRequest, 'POST', null).then(res => {
-            if(res.data.code === 200){
-                var getData = res.data.data
-                for (let i = 0; i < getData.length; i++){
-                    data.push({
-                        key: getData[i].ID_Product,
-                        ID_Product: getData[i].ID_Product,
-                        productName: getData[i].productName,
-                        quantityInStock: getData[i].quantityInStock,
-                        buyPrice: getData[i].buyPrice,
-                    })
-                }
-                this.setState({datasource: data})
-            }
-        })
 
         this.columns = [{
             align: 'center',
@@ -164,7 +149,25 @@ class CheckoutTable extends React.Component {
         },
         ]
     }
-
+    componentDidMount() {
+        let infoRequest = `/Products/KiemHangTrongKho?ID_Employee=${this.state.id}`
+        callAPI(infoRequest, 'POST', null).then(res => {
+            if(res.data.code === 200){
+                var getData = res.data.data
+                 data = []
+                for (let i = 0; i < getData.length; i++){
+                    data.push({
+                        key: getData[i].ID_Product,
+                        ID_Product: `${i + 1}`,
+                        productName: getData[i].productName,
+                        quantityInStock: getData[i].quantityInStock,
+                        buyPrice: getData[i].buyPrice,
+                    })
+                }
+                this.setState({datasource: data})
+            }
+        })
+    }
     handleDelete = (key) => {
         const datasource = [...this.state.datasource];
         this.setState({ loading: true })
@@ -174,7 +177,7 @@ class CheckoutTable extends React.Component {
                 loading: false
             });
         }, 1000);
-        let infoRequest = `/Products/DeleteProduct?ID_Product=${key}`
+        let infoRequest = `/Products/DeleteProduct?ID_Employee=${this.state.id}&ID_Product=${key}`
             callAPI(infoRequest, 'POST', null).then(res => {
                 if(res.data.code === 400){
                     console.log('an error has orrured')
@@ -202,7 +205,7 @@ class CheckoutTable extends React.Component {
                 visible: false,
                 datasource: newData
             });
-            let infoRequest = `/Products/AddNewProduct?PRODUCTNAME=${name}&QUANTITY=${quant}&BUYPRICE=${price}`
+            let infoRequest = `/Products/AddNewProduct?ID_Employee=${this.state.id}&PRODUCTNAME=${name}&QUANTITY=${quant}&BUYPRICE=${price}`
             callAPI(infoRequest, 'POST', null).then(res => {
                 if(res.data.code === 400){
                     console.log('an error has orrured')
@@ -235,6 +238,7 @@ class CheckoutTable extends React.Component {
     };
 
     save(form, key) {
+        console.log(key)
         form.validateFields((error, row) => {
             if (error) {
                 return;
@@ -252,6 +256,21 @@ class CheckoutTable extends React.Component {
                 newData.push(row);
                 this.setState({ datasource: newData, editingKey: '' });
             }
+            console.log(row.productName)
+             let infoRequest = `/Products/AddQuantityExistedProduct?ID_Employee=${this.state.id}&ID_Product=${key}&PRODUCTNAME=${row.productName}&QUANTITY=${row.quantityInStock}`
+            callAPI(infoRequest, 'POST', null).then(res => {
+                if(res.data.code === 400){
+                    console.log('an error has orrured')
+                }
+            })
+            /** let infoRequest2 = `/Products/EditProduct?ID_Employee=${this.state.id}&PRODUCTNAME=${row.productName}&BUYPRICE=${row.buyPrice}`
+            callAPI(infoRequest2, 'POST', null).then(res => {
+                if(res.data.code === 400){
+                    console.log('an error has orrured')
+                }
+            })*/
+
+
         });
     }
 
