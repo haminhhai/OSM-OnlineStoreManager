@@ -1,3 +1,4 @@
+import {message} from 'antd'
 import axios from 'axios'
 export default function callApi(endpoint, method , body){
     return axios({
@@ -6,6 +7,7 @@ export default function callApi(endpoint, method , body){
         data: body    
     }).catch(res =>{
         console.log(res)
+        message.error('Lỗi không thể kết nối tới server')
     })
     
     

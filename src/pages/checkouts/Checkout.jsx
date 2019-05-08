@@ -152,20 +152,23 @@ class CheckoutTable extends React.Component {
     componentDidMount() {
         let infoRequest = `/Products/KiemHangTrongKho?ID_Employee=${this.state.id}`
         callAPI(infoRequest, 'POST', null).then(res => {
-            if(res.data.code === 200){
-                var getData = res.data.data
-                 data = []
-                for (let i = 0; i < getData.length; i++){
-                    data.push({
-                        key: getData[i].ID_Product,
-                        ID_Product: `${i + 1}`,
-                        productName: getData[i].productName,
-                        quantityInStock: getData[i].quantityInStock,
-                        buyPrice: getData[i].buyPrice,
-                    })
+            if (res !== undefined) {
+                if (res.data.code === 200) {
+                    var getData = res.data.data
+                    data = []
+                    for (let i = 0; i < getData.length; i++) {
+                        data.push({
+                            key: getData[i].ID_Product,
+                            ID_Product: `${i + 1}`,
+                            productName: getData[i].productName,
+                            quantityInStock: getData[i].quantityInStock,
+                            buyPrice: getData[i].buyPrice,
+                        })
+                    }
+                    this.setState({ datasource: data })
                 }
-                this.setState({datasource: data})
             }
+            else console.log(res)
         })
     }
     handleDelete = (key) => {
@@ -178,11 +181,13 @@ class CheckoutTable extends React.Component {
             });
         }, 1000);
         let infoRequest = `/Products/DeleteProduct?ID_Employee=${this.state.id}&ID_Product=${key}`
-            callAPI(infoRequest, 'POST', null).then(res => {
-                if(res.data.code === 400){
-                    console.log('an error has orrured')
+        callAPI(infoRequest, 'POST', null).then(res => {
+            if (res !== undefined)
+                if (res.data.code === 400) {
+                    message.error("Đã có lỗi xảy ra")
                 }
-            })
+                else console.log(res)
+        })
     }
     showModal = () => {
         this.setState({
@@ -192,14 +197,14 @@ class CheckoutTable extends React.Component {
     handleOk = (e) => {
         const { datasource, name, quant, price } = this.state
         var newData = this.state.datasource
-        if (name !== '' && quant !== 0 && price !== 0)
-            {newData.push({
-                key: `${Number(datasource[datasource.length - 1].key) + 1}`,
-                ID_Product: `${Number(datasource[datasource.length - 1].ID_Product) + 1}`,
+        if (name !== '' && quant !== 0 && price !== 0) {
+            newData.push({
+                key: `${datasource.length >= 1 ? Number(datasource[datasource.length - 1].key) + 1 : 1}`,
+                ID_Product: `${datasource.length >= 1 ? Number(datasource[datasource.length - 1].ID_Product) + 1 : 1}`,
                 productName: name,
                 quantityInStock: quant,
                 buyPrice: price,
-            
+
             })
             this.setState({
                 visible: false,
@@ -207,13 +212,15 @@ class CheckoutTable extends React.Component {
             });
             let infoRequest = `/Products/AddNewProduct?ID_Employee=${this.state.id}&PRODUCTNAME=${name}&QUANTITY=${quant}&BUYPRICE=${price}`
             callAPI(infoRequest, 'POST', null).then(res => {
-                if(res.data.code === 400){
-                    console.log('an error has orrured')
-                }
+                if (res !== undefined)
+                    if (res.data.code === 400) {
+                        message.error("Đã có lỗi xảy ra")
+                    }
+                    else console.log(res)
             })
         }
         else message.warn('Hãy nhập đủ thông tin!')
-        
+
     }
 
     handleCancel = (e) => {
@@ -257,18 +264,22 @@ class CheckoutTable extends React.Component {
                 this.setState({ datasource: newData, editingKey: '' });
             }
             console.log(row.productName)
-             let infoRequest = `/Products/UpdateQuantityExistedProduct?ID_Employee=${this.state.id}&ID_Product=${key}&QUANTITY=${row.quantityInStock}`
+            let infoRequest = `/Products/UpdateQuantityExistedProduct?ID_Employee=${this.state.id}&ID_Product=${key}&QUANTITY=${row.quantityInStock}`
             callAPI(infoRequest, 'POST', null).then(res => {
-                if(res.data.code === 400){
-                    console.log('an error has orrured')
-                }
+                if (res !== undefined)
+                    if (res.data.code === 400) {
+                        message.error("Đã có lỗi xảy ra")
+                    }
+                    else console.log(res)
             })
-    
-             let infoRequest2 = `/Products/EditProduct?ID_Employee=${this.state.id}&ID_Product=${key}&PRODUCTNAME=${row.productName}&BUYPRICE=${row.buyPrice}`
+
+            let infoRequest2 = `/Products/EditProduct?ID_Employee=${this.state.id}&ID_Product=${key}&PRODUCTNAME=${row.productName}&BUYPRICE=${row.buyPrice}`
             callAPI(infoRequest2, 'POST', null).then(res => {
-                if(res.data.code === 400){
-                    console.log('an error has orrured')
-                }
+                if (res !== undefined)
+                    if (res.data.code === 400) {
+                        message.error("Đã có lỗi xảy ra")
+                    }
+                    else console.log(res)
             })
 
 
@@ -330,7 +341,7 @@ class CheckoutTable extends React.Component {
                     onCancel={this.handleCancel}
                     cancelText="Hủy"
                     okText='Thêm'
-                    
+
                 >
                     <p>Tên sản phẩm: <span><Input value={name} onChange={this.changeName} placeholder='Nhập tên sản phẩm' style={{ width: '200px' }} /></span></p>
                     <p>Số lượng: <span><InputNumber onChange={this.changeQuant} placeholder='Nhập số' /></span></p>

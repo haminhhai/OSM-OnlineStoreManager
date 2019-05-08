@@ -51,50 +51,49 @@ class Step1 extends React.PureComponent {
                 const password = values.password
                 let infoRequest = `/Inside/AddEmployee?ID_BOSS=${rights}&USERNAME=${username}&PASSWORD=${password}&EMAIL=${email}&FULLNAME=${fullname}`
                 callAPI(infoRequest, 'POST', null).then(res => {
-                    console.log(res)
-                    this.setState({code: res.data.code, message: res.data.message})
-                    let {code, message} = this.state
-                if(Number(code) === 200)
-                {
-                    this.props.next()
-                    localStorage.setItem('email', values.email)
-                    localStorage.setItem('fullname', values.fullname)
-                    localStorage.setItem('username', values.username)
-                    localStorage.setItem('password', values.password)
-                }
-                else if(Number(code) === 400)
-                {
-                    if(message === "Tên đăng nhập đã tồn tại")
-                    {
-                        notify = notification.open({
-                            message: types.MESSAGE_FAILED,
-                            description: types.BD_WRONG_FAILED_USER_EXIST,
-                            icon: types.ICON_FAILED,
-                        })
-                        this.sendNoti(notify)
+                    if (res !== undefined) {
+                        this.setState({ code: res.data.code, message: res.data.message })
+                        let { code, message } = this.state
+                        if (Number(code) === 200) {
+                            this.props.next()
+                            localStorage.setItem('email', values.email)
+                            localStorage.setItem('fullname', values.fullname)
+                            localStorage.setItem('username', values.username)
+                            localStorage.setItem('password', values.password)
+                        }
+                        else if (Number(code) === 400) {
+                            if (message === "Tên đăng nhập đã tồn tại") {
+                                notify = notification.open({
+                                    message: types.MESSAGE_FAILED,
+                                    description: types.BD_WRONG_FAILED_USER_EXIST,
+                                    icon: types.ICON_FAILED,
+                                })
+                                this.sendNoti(notify)
+                            }
+                            else if (message === "Email đã tồn tại")
+                                notify = notification.open({
+                                    message: types.MESSAGE_FAILED,
+                                    description: types.BD_EMAIL_EXISTED,
+                                    icon: types.ICON_FAILED,
+                                })
+                            else if (message === 'Mật khẩu không đủ độ dài') {
+                                notify = notification.open({
+                                    message: types.MESSAGE_FAILED,
+                                    description: types.BD_MESSAGE_FAILED_CHAR_PASSWORD,
+                                    icon: types.ICON_FAILED,
+                                })
+                                this.sendNoti(notify)
+                            }
+
+                        }
                     }
-                    else if (message === "Email đã tồn tại")
-                        notify = notification.open({
-                            message: types.MESSAGE_FAILED,
-                            description: types.BD_EMAIL_EXISTED,
-                            icon: types.ICON_FAILED,
-                    })
-                    else if(message === 'Mật khẩu không đủ độ dài')
-                    {
-                        notify = notification.open({
-                            message: types.MESSAGE_FAILED,
-                            description: types.BD_MESSAGE_FAILED_CHAR_PASSWORD,
-                            icon: types.ICON_FAILED,
-                        })
-                        this.sendNoti(notify)
-                    }
-                    
-                }
+                    else console.log(res)
+
                 })
-                
-                
-                
-                
+
+
+
+
             }
 
         });
@@ -155,7 +154,7 @@ class Step1 extends React.PureComponent {
                             <Input className='input-employee' type="text" placeholder='Nhập...' />
                         )}
                     </Form.Item>
-                    <Form.Item  label="Mật khẩu">
+                    <Form.Item label="Mật khẩu">
                         {getFieldDecorator('password', {
                             initialValue: password,
                             rules: [
@@ -172,7 +171,7 @@ class Step1 extends React.PureComponent {
                     <Form.Item label=''>
                         <Button loading={this.props.loading} htmlType="submit"
                             className='step-submit'
-                            style={{marginLeft: '30px'}}
+                            style={{ marginLeft: '30px' }}
                         >Tiếp tục</Button>
                     </Form.Item>
                 </Form>

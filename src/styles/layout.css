@@ -120,6 +120,12 @@
     width: auto;
     height: 64px;
 }
+.imgfoot{
+    width: 25px;
+    heght: 25px;
+    background-color:#1890ff;
+    border-radius: 25px;
+}
 .name-user{
     color: rgba(0,0,0,.65);
 font-size: 14px;

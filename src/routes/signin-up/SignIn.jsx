@@ -37,45 +37,51 @@ class Signinup extends React.Component {
         else {
             let infoRequest = `/Outside/Login?USERNAME=${username}&PASSWORD=${password}`
             callAPI(infoRequest, 'POST', null).then(res => {
-                this.setState({ code: res.data.code, message: res.data.message })
-                console.log(res)
-                let code = this.state.code
-                let message = this.state.message
-                if (Number(code) === 400){
-                    if (message === "Không tồn tại tên đăng nhập"){
+                if (res !== undefined) {
+                    this.setState({ code: res.data.code, message: res.data.message })
+                    let code = this.state.code
+                    let message = this.state.message
+                    if (Number(code) === 400) {
+                        if (message === "Không tồn tại tên đăng nhập") {
+                            notify = notification.open({
+                                message: types.MESSAGE_FAILED,
+                                description: types.BD_MESSAGE_FAILED_USER_NOT_EXIST,
+                                icon: types.ICON_FAILED,
+                                placement: "topLeft"
+                            })
+                            this.setState({ username: '', password: '' })
+                        }
+                        else if (message === "Mật khẩu sai") {
+                            notify = notification.open({
+                                message: types.MESSAGE_FAILED,
+                                description: types.BD_MESSAGE_FAILED_WRONG_PASSWORD,
+                                icon: types.ICON_FAILED,
+                                placement: "topLeft"
+                            })
+                            this.setState({ password: '' })
+                        }
+                    }
+                    else {
+                        localStorage.setItem("ID", res.data.ID_Employee)
+                        localStorage.setItem("rights", res.data.reportsTo)
+                        localStorage.setItem("nameAcc", res.data.fullname)
+                        localStorage.setItem("emailAcc", res.data.email)
+                        localStorage.setItem("ava", Math.floor(Math.random() * 8))
+                        this.setState({ loading: true, redir: true })
                         notify = notification.open({
-                            message: types.MESSAGE_FAILED,
-                            description: types.BD_MESSAGE_FAILED_USER_NOT_EXIST,
-                            icon: types.ICON_FAILED,
+                            message: types.MESSAGE_SUCCESS,
+                            description: types.BD_MESSAGE_SUCCESS,
+                            icon: types.ICON_SUCCESS,
                             placement: "topLeft"
                         })
-                        this.setState({username: '', password: ''})
+                        
                     }
-                    else if (message === "Mật khẩu sai"){
-                        notify = notification.open({
-                            message: types.MESSAGE_FAILED,
-                            description: types.BD_MESSAGE_FAILED_WRONG_PASSWORD,
-                            icon: types.ICON_FAILED,
-                            placement: "topLeft"
-                        })
-                        this.setState({ password: ''})
-                    }
+
+
                 }
-                else {
-                    this.setState({ loading: true, redir: true })
-                    notify = notification.open({
-                        message: types.MESSAGE_SUCCESS,
-                        description: types.BD_MESSAGE_SUCCESS,
-                        icon: types.ICON_SUCCESS,
-                        placement: "topLeft"
-                    })
-                    localStorage.setItem("ID", res.data.ID_Employee)
-                    localStorage.setItem("rights", res.data.reportsTo)
-                    localStorage.setItem("nameAcc", res.data.fullname)
-                    localStorage.setItem("emailAcc", res.data.email)
-                    localStorage.setItem("ava", Math.floor(Math.random() * 8))
-                }
+                else console.log(res)
             })
+            
         }
         return notify
     }
@@ -84,7 +90,7 @@ class Signinup extends React.Component {
             sessionStorage.setItem("verify", true)
             return <Redirect to='/osm/dashboard' />
         }
-        if(sessionStorage.length !== 0)
+        if (sessionStorage.length !== 0)
             return <Redirect to='/osm/dashboard' />
         return (
             <div className="form sign-in">

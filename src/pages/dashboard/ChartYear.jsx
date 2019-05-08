@@ -35,7 +35,7 @@ const ChartYear = memo(
                   <Bar
                     height={295}
                     title='Tổng hàng bán được năm 2019'
-                    data={yearData}
+                    data={yearData !== [] ? yearData : []}
                   />
                 </div>
               </Col>

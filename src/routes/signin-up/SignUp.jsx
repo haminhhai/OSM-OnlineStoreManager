@@ -12,6 +12,7 @@ class Signinup extends React.Component {
             username: '',
             email: '',
             password: '',
+            fullname: '',
             code: '',
             message: ''
         }
@@ -28,60 +29,64 @@ class Signinup extends React.Component {
     changePW = (e) => {
         this.setState({ password: e.target.value })
     }
+    changeFullname = (e) => {
+        this.setState({ fullname: e.target.value })
+    }
     onSubmit = (e) => {
         var notify = ''
-        const { username, email, password } = this.state
+        const { username, email, password, fullname } = this.state
         e.preventDefault()
-        if (username === '' || email === '' || password === '')
+        if (username === '' || email === '' || password === '' || fullname === '')
             notify = notification.open({
                 message: types.INCOMPLETE_INFORMATION,
                 description: types.BD_INCOMPLETE_INFORMATION,
                 icon: types.ICON_INCOMPLETE,
             })
         else {
-            let infoRequest = `/Outside/Signup?USERNAME=${username}&PASSWORD=${password}&EMAIL=${email}`
+            let infoRequest = `/Outside/Signup?USERNAME=${username}&PASSWORD=${password}&EMAIL=${email}&FULLNAME=${fullname}`
             callAPI(infoRequest, 'POST', null).then(res => {
-                console.log(res)
-                this.setState({ code: res.data.code, message: res.data.message })
-                let { code, message } = this.state
-                if (Number(code) === 200)
-                {
-                    notify = notification.open({
-                        message: types.MESSAGE_SUCCESS,
-                        description: types.BD_REGISTER_SUCCESS,
-                        icon: types.ICON_SUCCESS,
-                    })
-                    this.myFunction()
-                }
-                else if (Number(code) === 400) {
-                    if (message === "Tên đăng nhập đã tồn tại")
+                if (res !== undefined) {
+                    this.setState({ code: res.data.code, message: res.data.message })
+                    let { code, message } = this.state
+                    if (Number(code) === 200) {
                         notify = notification.open({
-                            message: types.MESSAGE_FAILED,
-                            description: types.BD_WRONG_FAILED_USER_EXIST,
-                            icon: types.ICON_FAILED,
+                            message: types.MESSAGE_SUCCESS,
+                            description: types.BD_REGISTER_SUCCESS,
+                            icon: types.ICON_SUCCESS,
                         })
-                    else if (message === types.BD_WRONG_TYPE_EMAIL)
-                    notify = notification.open({
-                        message: types.MESSAGE_FAILED,
-                        description: types.BD_WRONG_TYPE_EMAIL,
-                        icon: types.ICON_FAILED,
-                    }) 
-                    else if (message === "Email đã tồn tại")
-                        notify = notification.open({
-                            message: types.MESSAGE_FAILED,
-                            description: types.BD_EMAIL_EXISTED,
-                            icon: types.ICON_FAILED,
-                        })
-                    else if (message === "Mật khẩu không đủ độ dài")
-                    {
-                        notify = notification.open({
-                            message: types.MESSAGE_FAILED,
-                            description: types.BD_MESSAGE_FAILED_CHAR_PASSWORD,
-                            icon: types.ICON_FAILED,
-                        })
-                        this.setState({password: ''})
+                        this.myFunction()
+                    }
+                    else if (Number(code) === 400) {
+                        if (message === "Tên đăng nhập đã tồn tại")
+                            notify = notification.open({
+                                message: types.MESSAGE_FAILED,
+                                description: types.BD_WRONG_FAILED_USER_EXIST,
+                                icon: types.ICON_FAILED,
+                            })
+                        else if (message === types.BD_WRONG_TYPE_EMAIL)
+                            notify = notification.open({
+                                message: types.MESSAGE_FAILED,
+                                description: types.BD_WRONG_TYPE_EMAIL,
+                                icon: types.ICON_FAILED,
+                            })
+                        else if (message === "Email đã tồn tại")
+                            notify = notification.open({
+                                message: types.MESSAGE_FAILED,
+                                description: types.BD_EMAIL_EXISTED,
+                                icon: types.ICON_FAILED,
+                            })
+                        else if (message === "Mật khẩu không đủ độ dài") {
+                            notify = notification.open({
+                                message: types.MESSAGE_FAILED,
+                                description: types.BD_MESSAGE_FAILED_CHAR_PASSWORD,
+                                icon: types.ICON_FAILED,
+                            })
+                            this.setState({ password: '' })
+                        }
                     }
                 }
+                else console.log(res)
+
             })
 
         }
@@ -119,11 +124,17 @@ class Signinup extends React.Component {
                         <Input className='input-up' type="email" value={this.state.email}
                             onChange={this.changeMail} placeholder='example@gmail.com' onPressEnter={this.onSubmit} />
                     </label>
+                    <h4>Họ và tên</h4>
+                    <label >
+                        <Input className='input-up' type="text" value={this.state.fullname}
+                            onChange={this.changeFullname} placeholder='Tên đầy đủ' onPressEnter={this.onSubmit} />
+                    </label>
                     <h4>Mật khẩu</h4>
                     <label >
                         <Input className='input-up' type="password" value={this.state.password}
                             onChange={this.changePW} placeholder='Mật khẩu' onPressEnter={this.onSubmit} />
                     </label>
+
                     <Button type="button" className="submit1" onClick={this.onSubmit}>Đăng ký</Button>
                 </div>
             </div>

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import { Table, Card, Input, Button, Icon } from 'antd';
 import Highlighter from 'react-highlight-words'
 import callAPI from '../../utils/apiCaller'
- 
-const header = () => <div style={{color: 'rgba(0,0,0,0.85)', fontSize: '16px', fontWeight: '600'}}>Lịch sử giao dịch</div>;
+
+const header = () => <div style={{ color: 'rgba(0,0,0,0.85)', fontSize: '16px', fontWeight: '600' }}>Lịch sử giao dịch</div>;
 
 class TradingHistory extends Component {
   constructor(props) {
@@ -15,16 +14,23 @@ class TradingHistory extends Component {
     }
   }
   componentDidMount() {
-    const ID  = localStorage.getItem('ID')
+    const ID = localStorage.getItem('ID')
     let infoRequest = `/Payments/LichSuThanhToan?ID_Employee=${ID}`
     callAPI(infoRequest, 'POST', null).then(res => {
-      console.log(res)
-      var data = []
-      const getData = res.data.data
-      for(let i = 0; i < getData.length; i++)
-        data.push(getData[i])
-      this.setState({dataSource: data})
-  })
+      if (res !== undefined) {
+        if(res.data.code !== 400)
+        {
+          var data = []
+          let getData = res.data.data
+          for (let i = 0; i < getData.length; i++)
+          data.push(getData[i])
+          this.setState({ dataSource: data })
+          console.log(res)
+        }
+      }
+      else console.log(res)
+
+    })
   }
   handleToString = (value) => {
     var num = 0
@@ -65,8 +71,8 @@ class TradingHistory extends Component {
         </Button>
         </div>
       ),
-    filterIcon: filtered => <Icon type="search" 
-      style={{ 
+    filterIcon: filtered => <Icon type="search"
+      style={{
         color: filtered ? '#0077ff' : undefined,
         fontSize: filtered ? '15px' : '12px',
         textAlign: 'center'
@@ -98,7 +104,7 @@ class TradingHistory extends Component {
     this.setState({ searchText: '' });
   }
   render() {
-    const columns = [ {
+    const columns = [{
       align: 'center',
       title: 'Tên sản phẩm',
       dataIndex: 'productName',
@@ -109,7 +115,7 @@ class TradingHistory extends Component {
       dataIndex: 'amount',
       sorter: (a, b) => a.amount - b.amount, sortDirections: ['ascend', 'descend'],
       ...this.getColumnSearchProps('amount'),
-    }, 
+    },
     {
       align: 'center',
       title: 'Tiền',
@@ -124,14 +130,14 @@ class TradingHistory extends Component {
       ...this.getColumnSearchProps('paymentDate'),
     }, {
       align: 'center',
-      title: 'Thu ngân',
+      title: 'Tài khoản',
       dataIndex: 'fullname',
       ...this.getColumnSearchProps('fullname'),
     },
     ]
     return (
       <div>
-        <Card loading={this.props.loading} style={{margin: 15}}>
+        <Card loading={this.props.loading} style={{ margin: 15 }}>
           <div className='salesCard'>
             <Table title={header}
               dataSource={this.state.dataSource}

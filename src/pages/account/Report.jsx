@@ -58,14 +58,17 @@ class Report extends React.Component {
             })
             let infoRequest = `/Inside/ReportToBoss?ID_Employee=${id}&TEXTREPORT=${value}`
             callAPI(infoRequest, 'POST', null).then(res => {
-                console.log(res)
-                
+                if(res !== undefined)
+                { 
                 setTimeout(() => {
                     message.success('Gửi thành công!')
                     this.setState({
                         submitting: false,
                     })
                 }, 2000);
+                }
+                else console.log(res)
+                
             })
             
         }

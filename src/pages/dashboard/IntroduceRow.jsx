@@ -24,7 +24,7 @@ const IntroduceRow = memo(({ loading, sumDay, sumMon, profitDay, profitMon }) =>
           </Tooltip>
         }
         loading={loading}
-        total= {sumDay}
+        total= {sumDay !== 0 ? sumDay : 0}
         
         contentHeight={30}
       >
@@ -44,7 +44,7 @@ const IntroduceRow = memo(({ loading, sumDay, sumMon, profitDay, profitMon }) =>
           </Tooltip>
         }
         loading={loading}
-        total={sumMon}
+        total={sumMon !== 0 ? sumMon : 0}
         contentHeight={30}
       >
         
@@ -63,7 +63,7 @@ const IntroduceRow = memo(({ loading, sumDay, sumMon, profitDay, profitMon }) =>
             <Icon type="pie-chart" theme="filled" style={{ color: '#ccabd8' }} />
           </Tooltip>
         }
-        total={`${profitDay} đ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+        total={`${profitDay !== 0 ? profitDay : 0} đ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
         contentHeight={30}
       >
       </ChartCard>
@@ -80,7 +80,7 @@ const IntroduceRow = memo(({ loading, sumDay, sumMon, profitDay, profitMon }) =>
             <Icon type="pie-chart" theme="filled" style={{ color: '#a72f1d' }} />
           </Tooltip>
         }
-        total={`${profitMon} đ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+        total={`${profitMon !== 0 ? profitMon : 0} đ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
         contentHeight={30}
       >
       </ChartCard>

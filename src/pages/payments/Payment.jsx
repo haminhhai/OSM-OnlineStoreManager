@@ -28,30 +28,39 @@ class Payment extends React.Component {
             id: localStorage.getItem("ID"),
             cashiers: []
         }
-        
+
 
     }
     componentDidMount() {
         let infoRequest = `/Products/KiemHangTrongKho?ID_Employee=${this.state.id}`
         callAPI(infoRequest, 'POST', null).then(res => {
-            if(res.data.code === 200){
-                products = res.data.data
-                let listpros = []
-                for (let i = 0; i < products.length; i++)
-                    listpros.push(products[i].productName)
-                this.setState({availableProducts: listpros})
-            }
-        })
-        let infoRequest2 = `/Inside/DanhSachNhanVien?ID_Boss=1`
-        callAPI(infoRequest2, 'POST', null).then(res => {
-            if(res.data.code === 200){
-                var staff = res.data.data
-                cashiers = []
-                for (let i = 0; i < staff.length; i++){
-                    cashiers.push(staff[i].fullname)
+            if (res !== undefined) {
+                if (res.data.code === 200) {
+                    products = res.data.data
+                    let listpros = []
+                    for (let i = 0; i < products.length; i++)
+                        listpros.push(products[i].productName)
+                    this.setState({ availableProducts: listpros })
                 }
-                this.setState({cashiers: cashiers})
             }
+            else console.log(res)
+
+        })
+        infoRequest = `/Inside/DanhSachNhanVien?ID_Boss=${this.state.id}`
+        callAPI(infoRequest, 'POST', null).then(res => {
+            if (res !== undefined) {
+                if (res.data.code === 200) {
+                    var staff = res.data.data
+                    cashiers = []
+                    for (let i = 0; i < staff.length; i++) {
+                        cashiers.push(staff[i].fullname)
+                    }
+                    this.setState({ cashiers: cashiers })
+                    
+                }
+            }
+            else console.log(res)
+
         })
     }
     getName = (value) => {
@@ -59,45 +68,51 @@ class Payment extends React.Component {
     }
     onSelect = (value) => {
         info[1] = value
-        
+
         for (let i = 0; i < products.length; i++)
-            if (value === products[i].productName){
-                this.setState({prodPrice: Number(products[i].buyPrice),
-                    availableQuantity: products[i].quantityInStock})
+            if (value === products[i].productName) {
+                this.setState({
+                    prodPrice: Number(products[i].buyPrice),
+                    availableQuantity: products[i].quantityInStock
+                })
             }
-                
+
 
     }
     changeNum = (value) => {
         info[2] = value
-        this.setState({quantity: Number(value)})
+        this.setState({ quantity: Number(value) })
     }
     onTranfer = () => {
-        const {prodPrice, quantity} = this.state
+        const { prodPrice, quantity } = this.state
         var count = 0
         for (let i = 0; i < info.length - 3; i++)
             if (info[i] === '')
                 count = Number(count) + 1
-        
+
         if (count === 0) {
             info[3] = prodPrice * quantity
-            this.setState({ isCompleting: true, tranfer: info[3]})
+            this.setState({ isCompleting: true, tranfer: info[3] })
         }
         else message.warn('Thiếu thông tin không thể tính tiền!')
     }
     onSubmit = () => {
         let infoRequest = `/Payments/NhapHoaDon?ID_Employee=${this.state.id}&PRODUCTNAME=${info[1]}&AMOUNT=${info[2]}`
         callAPI(infoRequest, 'POST', null).then(res => {
-            if(res.data.code === 200){
-                message.success('Tạo hóa đơn thành công!')
-                idBill = Math.floor((Math.random() * 89999) + 10000)
-                this.setState({ data: info })
+            if (res !== undefined) {
+                if (res.data.code === 200) {
+                    message.success('Tạo hóa đơn thành công!')
+                    idBill = Math.floor((Math.random() * 89999) + 10000)
+                    this.setState({ data: info })
+                }
             }
+            else console.log(res)
+
         })
     }
     render() {
         const { isCompleting } = this.state
-        
+        console.log(cashiers)
         return (
             <Card className='payment-card'>
                 <Row gutter={24} >
@@ -144,31 +159,31 @@ class Payment extends React.Component {
                                 <div>
                                     Số lượng:
                         <br />
-                                    <InputNumber min={0} max={this.state.availableQuantity} onChange={this.changeNum} placeholder={this.state.availableQuantity}/>
+                                    <InputNumber min={0} max={this.state.availableQuantity} onChange={this.changeNum} placeholder={this.state.availableQuantity} />
                                 </div>
                                 <br />
                                 <span>Thành tiền: <small>{`${this.state.tranfer} đ`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</small></span>
                                 <br />
                                 <Button onClick={this.onTranfer}>Thành tiền</Button>
                                 <Tooltip title={!isCompleting ? 'Hãy nhập đầy đủ thông tin!' : ''}>
-                                    {!isCompleting ? 
+                                    {!isCompleting ?
                                         <Button disabled>Hoàn tất</Button> :
-                                        <Popconfirm title='Bạn có chắc muốn hoàn tất?' 
+                                        <Popconfirm title='Bạn có chắc muốn hoàn tất?'
                                             onConfirm={this.onSubmit}
                                             okText='Có'
                                             cancelText='Không'
-                                            icon={<Icon type="loading" style={{color: '#5bb2ff'}}/>}>
-                                                <Button>Hoàn tất</Button>
+                                            icon={<Icon type="loading" style={{ color: '#5bb2ff' }} />}>
+                                            <Button>Hoàn tất</Button>
                                         </Popconfirm>
                                     }
-                                    
+
                                 </Tooltip>
                             </Card>
                         </Card>
                     </Col>
                     <Col lg={12} md={24}>
                         <Card>
-                            <Fulfill info={this.state.data}/>
+                            <Fulfill info={this.state.data} />
                         </Card>
                     </Col>
                 </Row>

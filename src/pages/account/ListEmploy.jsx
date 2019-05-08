@@ -28,12 +28,16 @@ class ListEmploy extends Component {
         let rights = localStorage.getItem('rights')
         let infoRequest = `/Inside/DanhSachNhanVien?ID_Boss=${rights}`
         callAPI(infoRequest, 'POST', null).then(res => {
-            var data = []
+            if(res !== undefined)
+            {
+                var data = []
             const arr = res.data.data
             for(let i = 0; i < arr.length; i++)
                 data.push(arr[i])
             
             this.setState({dataSource: data})
+            }
+            else console.log(res)
         })
     }
     getColumnSearchProps = (dataIndex) => ({
@@ -108,15 +112,18 @@ class ListEmploy extends Component {
         this.setState({loading: true})
         let infoRequest = `/Inside/DeleteEmployee?ID_Employee=${ID_Employee}`
         callAPI(infoRequest, 'POST', null).then(res => {
-            
-            setTimeout(() => {
-                message.success('Xóa tài khoản thành công!')
-                this.setState({ 
-                    dataSource: dataSource.filter(item => item.ID_Employee !== ID_Employee),
-                    loading: false
-                });
-                this.componentDidMount()
-            }, 1000);
+            if(res !== undefined)
+            {
+                setTimeout(() => {
+                    message.success('Xóa tài khoản thành công!')
+                    this.setState({ 
+                        dataSource: dataSource.filter(item => item.ID_Employee !== ID_Employee),
+                        loading: false
+                    });
+                    this.componentDidMount()
+                }, 1000);
+            }
+            else console.log(res)
         })
         
         
