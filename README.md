@@ -1,1 +1,1 @@
-npm install sau đó npm start ez 
+npm install then npm start ez 
