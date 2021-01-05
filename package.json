@@ -5,7 +5,7 @@
   "dependencies": {
     "ant-design-pro": "^2.3.1",
     "antd": "^3.15.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "dva": "^2.4.1",
     "file-saver": "^2.0.1",
     "html2canvas": "^1.0.0-rc.1",
